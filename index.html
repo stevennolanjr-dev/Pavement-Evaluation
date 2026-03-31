@@ -215,8 +215,192 @@ a.ref-link{color:var(–amber);text-decoration:none;border-bottom:1px solid var(
 .hidden{display:none !important}
 @media(max-width:400px){.fg,.fg.tri{grid-template-columns:1fr}.rnum{font-size:42px}.hdr-title{font-size:34px}}
 @media(min-width:600px){.app{padding:0 24px 120px}.hdr-title{font-size:46px}}
-</style>
 
+/* ── SAFARI / iOS FORM OVERRIDE FIX ── */
+/* Kill ALL native iOS styling on interactive elements */
+input, select, textarea, button {
+-webkit-appearance: none !important;
+-moz-appearance: none !important;
+appearance: none !important;
+}
+
+/* Force dark bg on ALL input types – Safari overrides these */
+input[type=“text”],
+input[type=“number”],
+input[type=“search”],
+select {
+background-color: var(–black) !important;
+background: var(–black) !important;
+color: var(–text) !important;
+border: 1px solid var(–border) !important;
+border-radius: var(–r) !important;
+-webkit-text-fill-color: var(–text) !important;
+/* Prevent iOS zoom on focus (requires font-size >= 16px equiv) */
+font-size: 16px !important;
+}
+
+/* Placeholder stays dim */
+input::placeholder {
+color: var(–muted) !important;
+-webkit-text-fill-color: var(–muted) !important;
+opacity: 1 !important;
+}
+
+/* Decode input – larger font, amber */
+.decode-input {
+background-color: var(–black) !important;
+background: var(–black) !important;
+color: var(–amber2) !important;
+-webkit-text-fill-color: var(–amber2) !important;
+font-size: 20px !important;
+letter-spacing: 3px !important;
+}
+.decode-input::placeholder {
+color: var(–muted) !important;
+-webkit-text-fill-color: var(–muted) !important;
+font-size: 13px !important;
+letter-spacing: 1px !important;
+}
+
+/* Select arrow – custom, kill native iOS blue */
+select {
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘6’ fill=’%235a4400’ viewBox=‘0 0 10 6’%3E%3Cpath d=‘M5 6L0 0h10z’/%3E%3C/svg%3E”) !important;
+background-repeat: no-repeat !important;
+background-position: right 12px center !important;
+padding-right: 30px !important;
+cursor: pointer;
+}
+
+/* Focus states */
+input[type=“text”]:focus,
+input[type=“number”]:focus,
+select:focus {
+border-color: var(–amber) !important;
+box-shadow: 0 0 0 2px var(–glow) !important;
+outline: none !important;
+}
+
+/* Mode bar – force dark bg on all buttons */
+.mode-btn {
+background-color: transparent !important;
+background: transparent !important;
+color: var(–muted) !important;
+border-radius: 0 !important;
+-webkit-text-fill-color: var(–muted) !important;
+}
+.mode-btn.active {
+background-color: var(–s3) !important;
+background: var(–s3) !important;
+color: var(–amber2) !important;
+-webkit-text-fill-color: var(–amber2) !important;
+}
+
+/* Sys buttons */
+.sys-btn {
+background-color: var(–s1) !important;
+background: var(–s1) !important;
+color: var(–muted) !important;
+-webkit-text-fill-color: var(–muted) !important;
+}
+.sys-btn.active {
+background-color: var(–s3) !important;
+background: var(–s3) !important;
+color: var(–amber2) !important;
+-webkit-text-fill-color: var(–amber2) !important;
+border-color: var(–amber) !important;
+}
+
+/* Surface tabs */
+.stab {
+background-color: var(–s1) !important;
+background: var(–s1) !important;
+color: var(–muted) !important;
+-webkit-text-fill-color: var(–muted) !important;
+}
+.stab.active {
+background-color: var(–s3) !important;
+background: var(–s3) !important;
+color: var(–amber2) !important;
+-webkit-text-fill-color: var(–amber2) !important;
+border-color: var(–amber) !important;
+}
+.add-s {
+background-color: transparent !important;
+background: transparent !important;
+color: var(–muted) !important;
+-webkit-text-fill-color: var(–muted) !important;
+}
+
+/* Toggle switch – force Safari to render it */
+.ttrack {
+background-color: var(–s3) !important;
+background: var(–s3) !important;
+}
+.tsw input:checked + .ttrack {
+background-color: var(–s3) !important;
+background: var(–s3) !important;
+border-color: var(–amber) !important;
+box-shadow: 0 0 8px rgba(232,148,10,0.3) !important;
+}
+.tknob {
+background-color: var(–adim) !important;
+background: var(–adim) !important;
+}
+.tsw input:checked ~ .tknob {
+background-color: var(–amber) !important;
+background: var(–amber) !important;
+}
+
+/* Cards – make border visible on iOS */
+.card {
+background-color: var(–s1) !important;
+background: var(–s1) !important;
+border: 1px solid var(–border) !important;
+}
+
+/* Copy button */
+.cpbtn {
+background-color: var(–s2) !important;
+background: var(–s2) !important;
+color: var(–adim) !important;
+-webkit-text-fill-color: var(–adim) !important;
+}
+
+/* Collapsible panels */
+.cpanel {
+background-color: var(–s1) !important;
+background: var(–s1) !important;
+}
+.ctoggle {
+background-color: transparent !important;
+background: transparent !important;
+color: var(–adim) !important;
+-webkit-text-fill-color: var(–adim) !important;
+}
+
+/* Notes panel */
+.npanel {
+background-color: var(–s1) !important;
+background: var(–s1) !important;
+}
+
+/* Reduce gap between header rule and mode bar */
+.hdr {
+margin-bottom: 12px !important;
+padding-bottom: 12px !important;
+}
+
+/* Tighten spacing between cards */
+.card {
+margin-bottom: 8px !important;
+}
+
+/* Remove excessive space after header */
+.hdr-rule-sub {
+margin-bottom: 0 !important;
+}
+
+</style>
 </head>
 <body>
 

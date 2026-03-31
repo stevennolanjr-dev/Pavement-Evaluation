@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="C-17 PAVT">
+<meta name="theme-color" content="#060a10">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>C-17 Pavement Stress</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04080f;
+  --surface: rgba(10,18,32,0.92);
+  --s2: rgba(14,24,42,0.88);
+  --s3: rgba(20,32,54,0.80);
+  --border: rgba(42,72,110,0.6);
+  --bhi: rgba(58,100,160,0.7);
+  --text: #cdd8e8;
+  --dim: #6b80a0;
+  --muted: #344a66;
+  --accent: #1a6fd4;
+  --abright: #4d8fe0;
+  --aglow: rgba(26,111,212,0.1);
+  --aglow2: rgba(26,111,212,0.22);
+  --green: #00c87a;
+  --gbg: rgba(0,200,122,0.08);
+  --gbr: rgba(0,200,122,0.28);
+  --amber: #f0a020;
+  --abg: rgba(240,160,32,0.08);
+  --abr: rgba(240,160,32,0.28);
+  --red: #e03a3a;
+  --rbg: rgba(224,58,58,0.08);
+  --rbr: rgba(224,58,58,0.28);
+  --cyan: #18c8e8;
+  --cbg: rgba(24,200,232,0.08);
+  --cbr2: rgba(24,200,232,0.28);
+  --mono: 'Share Tech Mono', monospace;
+  --cond: 'Barlow Condensed', sans-serif;
+  --body: 'Barlow', sans-serif;
+  --r: 6px;
+  --scan: rgba(4,16,32,0.04);
+}
+
+- { margin:0; padding:0; box-sizing:border-box; }
+  html { font-size:16px; }
+
+/* ── BACKGROUND LAYERS ── */
+body {
+font-family: var(–body);
+background: var(–bg);
+color: var(–text);
+min-height: 100dvh;
+-webkit-font-smoothing: antialiased;
+position: relative;
+overflow-x: hidden;
+}
+
+/* Runway SVG background */
+.bg-runway {
+position: fixed;
+inset: 0;
+z-index: 0;
+pointer-events: none;
+opacity: 0.07;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘800’ height=‘600’ viewBox=‘0 0 800 600’%3E%3Crect width=‘800’ height=‘600’ fill=’%23000d1a’/%3E%3C!– Runway surface –%3E%3Crect x=‘260’ y=‘0’ width=‘280’ height=‘600’ fill=’%231a2a3a’/%3E%3C!– Runway edge lines –%3E%3Crect x=‘262’ y=‘0’ width=‘4’ height=‘600’ fill=’%23ffffff’ opacity=‘0.6’/%3E%3Crect x=‘534’ y=‘0’ width=‘4’ height=‘600’ fill=’%23ffffff’ opacity=‘0.6’/%3E%3C!– Centerline dashes –%3E%3Crect x=‘398’ y=‘20’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘80’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘140’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘200’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘260’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘320’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘380’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘440’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘500’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3Crect x=‘398’ y=‘560’ width=‘4’ height=‘40’ fill=’%23ffffff’ opacity=‘0.8’/%3E%3C!– Threshold bars –%3E%3Crect x=‘270’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘300’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘330’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘360’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘420’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘450’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘480’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘510’ y=‘30’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3C!– Threshold bars bottom –%3E%3Crect x=‘270’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘300’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘330’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘360’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘420’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘450’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘480’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3Crect x=‘510’ y=‘562’ width=‘20’ height=‘8’ fill=’%23ffffff’ opacity=‘0.7’/%3E%3C!– Taxiway left –%3E%3Crect x=‘100’ y=‘200’ width=‘140’ height=‘80’ fill=’%23111e2e’ opacity=‘0.8’/%3E%3Crect x=‘100’ y=‘202’ width=‘140’ height=‘3’ fill=’%23ffdd00’ opacity=‘0.5’/%3E%3Crect x=‘100’ y=‘275’ width=‘140’ height=‘3’ fill=’%23ffdd00’ opacity=‘0.5’/%3E%3C!– Taxiway right –%3E%3Crect x=‘560’ y=‘300’ width=‘140’ height=‘80’ fill=’%23111e2e’ opacity=‘0.8’/%3E%3Crect x=‘560’ y=‘302’ width=‘140’ height=‘3’ fill=’%23ffdd00’ opacity=‘0.5’/%3E%3Crect x=‘560’ y=‘375’ width=‘140’ height=‘3’ fill=’%23ffdd00’ opacity=‘0.5’/%3E%3C!– Pavement cracks/texture –%3E%3Cline x1=‘280’ y1=‘100’ x2=‘310’ y2=‘180’ stroke=’%23ffffff’ stroke-width=‘0.5’ opacity=‘0.15’/%3E%3Cline x1=‘480’ y1=‘250’ x2=‘520’ y2=‘310’ stroke=’%23ffffff’ stroke-width=‘0.5’ opacity=‘0.15’/%3E%3Cline x1=‘300’ y1=‘400’ x2=‘340’ y2=‘450’ stroke=’%23ffffff’ stroke-width=‘0.5’ opacity=‘0.15’/%3E%3C/svg%3E”);
+background-size: cover;
+background-position: center;
+}
+
+/* C-17 silhouette background */
+.bg-c17 {
+position: fixed;
+bottom: 0;
+right: -5%;
+z-index: 0;
+pointer-events: none;
+opacity: 0.055;
+width: 85vw;
+max-width: 700px;
+}
+
+/* Scanline overlay */
+.bg-scan {
+position: fixed;
+inset: 0;
+z-index: 1;
+pointer-events: none;
+background: repeating-linear-gradient(
+0deg,
+transparent,
+transparent 2px,
+var(–scan) 2px,
+var(–scan) 4px
+);
+}
+
+/* Vignette */
+.bg-vignette {
+position: fixed;
+inset: 0;
+z-index: 1;
+pointer-events: none;
+background: radial-gradient(ellipse at center, transparent 40%, rgba(2,6,12,0.75) 100%);
+}
+
+/* ── LAYOUT ── */
+.app {
+position: relative;
+z-index: 2;
+max-width: 600px;
+margin: 0 auto;
+padding: 0 14px 120px;
+}
+
+/* ── HEADER ── */
+.hdr {
+padding: 20px 0 14px;
+margin-bottom: 16px;
+position: relative;
+}
+.hdr-top {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 6px;
+}
+.hdr-callsign {
+font-family: var(–cond);
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 3px;
+color: var(–accent);
+text-transform: uppercase;
+margin-bottom: 2px;
+}
+.hdr-title {
+font-family: var(–cond);
+font-size: 32px;
+font-weight: 800;
+letter-spacing: 1px;
+line-height: 1;
+color: var(–text);
+text-transform: uppercase;
+}
+.hdr-title span { color: var(–accent); }
+.hdr-sub {
+font-family: var(–mono);
+font-size: 9px;
+color: var(–dim);
+margin-top: 4px;
+letter-spacing: .5px;
+}
+.hdr-badge {
+text-align: right;
+}
+.hdr-badge-inner {
+display: inline-block;
+font-family: var(–mono);
+font-size: 9px;
+color: var(–dim);
+border: 1px solid var(–border);
+border-radius: 4px;
+padding: 4px 8px;
+line-height: 1.6;
+background: var(–surface);
+}
+.hdr-line {
+height: 1px;
+background: linear-gradient(90deg, var(–accent) 0%, var(–border) 40%, transparent 100%);
+margin-top: 12px;
+}
+
+/* HUD corner accents */
+.hdr::before {
+content: ‘’;
+position: absolute;
+top: 18px;
+left: -2px;
+width: 16px;
+height: 16px;
+border-top: 2px solid var(–accent);
+border-left: 2px solid var(–accent);
+opacity: 0.6;
+}
+
+/* ── MODE BAR ── */
+.mode-bar {
+display: flex;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–r);
+padding: 3px;
+margin-bottom: 10px;
+backdrop-filter: blur(8px);
+}
+.mode-btn {
+flex: 1;
+padding: 10px 8px;
+font-family: var(–mono);
+font-size: 10px;
+font-weight: 600;
+letter-spacing: .5px;
+border: none;
+background: 0 0;
+color: var(–muted);
+cursor: pointer;
+border-radius: 4px;
+transition: all .15s;
+text-align: center;
+-webkit-tap-highlight-color: transparent;
+text-transform: uppercase;
+}
+.mode-btn.active {
+background: var(–accent);
+color: #fff;
+box-shadow: 0 0 16px rgba(26,111,212,.4), 0 2px 8px rgba(0,0,0,.4);
+}
+
+/* ── SYS BAR ── */
+.sys-bar {
+display: flex;
+gap: 6px;
+margin-bottom: 10px;
+}
+.sys-btn {
+flex: 1;
+padding: 9px 8px;
+font-family: var(–mono);
+font-size: 12px;
+font-weight: 600;
+letter-spacing: .8px;
+border: 1px solid var(–border);
+background: var(–surface);
+color: var(–muted);
+cursor: pointer;
+border-radius: var(–r);
+transition: all .15s;
+text-align: center;
+-webkit-tap-highlight-color: transparent;
+backdrop-filter: blur(8px);
+}
+.sys-btn.active {
+border-color: var(–accent);
+background: var(–aglow);
+color: var(–abright);
+box-shadow: 0 0 12px rgba(26,111,212,.2);
+}
+
+/* ── CARD ── */
+.card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–r);
+padding: 14px;
+margin-bottom: 10px;
+backdrop-filter: blur(12px);
+position: relative;
+}
+/* HUD corner on cards */
+.card::before {
+content: ‘’;
+position: absolute;
+top: -1px;
+left: -1px;
+width: 10px;
+height: 10px;
+border-top: 1px solid var(–abright);
+border-left: 1px solid var(–abright);
+border-radius: 2px 0 0 0;
+opacity: 0.5;
+}
+.card-label {
+font-family: var(–mono);
+font-size: 9px;
+font-weight: 700;
+color: var(–dim);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+margin-bottom: 10px;
+}
+
+/* ── DECODE ── */
+.decode-input {
+width: 100%;
+font-family: var(–mono);
+font-size: 20px;
+font-weight: 600;
+padding: 12px 14px;
+background: rgba(4,12,22,0.8);
+border: 1px solid var(–border);
+border-radius: var(–r);
+color: var(–abright);
+outline: none;
+letter-spacing: 2px;
+transition: border-color .15s, box-shadow .15s;
+text-transform: uppercase;
+}
+.decode-input::placeholder { color: var(–muted); font-weight: 400; font-size: 13px; letter-spacing: 0; text-transform: none; }
+.decode-input:focus { border-color: var(–accent); box-shadow: 0 0 0 3px var(–aglow), 0 0 20px rgba(26,111,212,.15); }
+.decode-parsed { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; min-height: 26px; }
+.chip { font-family: var(–mono); font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 3px; letter-spacing: .4px; }
+.chip-pcn { background: var(–aglow2); color: var(–abright); border: 1px solid rgba(77,143,224,0.3); }
+.chip-surf { background: var(–s3); color: var(–dim); }
+.chip-sub { background: var(–s3); color: var(–dim); }
+.chip-tok { background: var(–gbg); color: var(–green); border: 1px solid var(–gbr); }
+.chip-twarn { background: var(–abg); color: var(–amber); border: 1px solid var(–abr); }
+.chip-tfail { background: var(–rbg); color: var(–red); border: 1px solid var(–rbr); }
+.chip-eval { background: var(–s3); color: var(–muted); }
+.or-div { display: flex; align-items: center; gap: 10px; margin: 12px 0; font-family: var(–mono); font-size: 9px; color: var(–muted); letter-spacing: 1.5px; }
+.or-div::before, .or-div::after { content: ‘’; flex: 1; height: 1px; background: var(–border); }
+
+/* ── FIELDS ── */
+.fg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fg.tri { grid-template-columns: 1fr 1fr 1fr; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field.full { grid-column: 1/-1; }
+.field label {
+font-family: var(–mono);
+font-size: 9px;
+font-weight: 600;
+color: var(–dim);
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+select, input[type=“number”], input[type=“text”] {
+font-family: var(–mono);
+font-size: 14px;
+font-weight: 500;
+padding: 10px 12px;
+background: rgba(4,12,22,0.8);
+border: 1px solid var(–border);
+border-radius: 4px;
+color: var(–text);
+outline: none;
+transition: border-color .15s, box-shadow .15s;
+-moz-appearance: textfield;
+-webkit-tap-highlight-color: transparent;
+min-height: 44px;
+}
+select:focus, input:focus {
+border-color: var(–accent);
+box-shadow: 0 0 0 3px var(–aglow);
+}
+input[type=“number”]::-webkit-inner-spin-button,
+input[type=“number”]::-webkit-outer-spin-button { -webkit-appearance: none; }
+select {
+cursor: pointer;
+-webkit-appearance: none;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘10’ fill=’%233d5070’ viewBox=‘0 0 16 16’%3E%3Cpath d=‘M8 11L3 6h10z’/%3E%3C/svg%3E”);
+background-repeat: no-repeat;
+background-position: right 12px center;
+padding-right: 28px;
+}
+
+/* ── TOGGLE ── */
+.trow { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(–border); }
+.tsw { position: relative; width: 38px; height: 22px; flex-shrink: 0; cursor: pointer; }
+.tsw input { opacity: 0; width: 0; height: 0; position: absolute; }
+.ttrack { position: absolute; inset: 0; background: var(–border); border-radius: 11px; transition: background .2s; }
+.tsw input:checked + .ttrack { background: var(–accent); box-shadow: 0 0 8px rgba(26,111,212,.4); }
+.tknob { position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: transform .2s; pointer-events: none; }
+.tsw input:checked ~ .tknob { transform: translateX(16px); }
+.ttxt { font-family: var(–mono); font-size: 10px; color: var(–muted); line-height: 1.4; }
+.ttxt strong { color: var(–amber); }
+
+/* ── RESULT STRIP ── */
+.rstrip {
+position: sticky;
+top: 0;
+z-index: 100;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–r);
+margin-bottom: 10px;
+overflow: hidden;
+display: none;
+backdrop-filter: blur(20px);
+}
+.rstrip.show { display: block; }
+.rstrip.sok { border-color: var(–gbr); box-shadow: 0 0 20px rgba(0,200,122,.1); }
+.rstrip.swarn { border-color: var(–abr); box-shadow: 0 0 20px rgba(240,160,32,.1); }
+.rstrip.sfail { border-color: var(–rbr); box-shadow: 0 0 20px rgba(224,58,58,.1); }
+.rmain { padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.rleft { flex: 1; min-width: 0; }
+.rtag { font-family: var(–mono); font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+.rtag.ok { color: var(–green); }
+.rtag.warn { color: var(–amber); }
+.rtag.fail { color: var(–red); }
+.rtag.info { color: var(–abright); }
+.rnum {
+font-family: var(–cond);
+font-size: 42px;
+font-weight: 800;
+line-height: 1;
+letter-spacing: -1px;
+}
+.rnum.ok { color: var(–green); text-shadow: 0 0 20px rgba(0,200,122,.3); }
+.rnum.warn { color: var(–amber); text-shadow: 0 0 20px rgba(240,160,32,.3); }
+.rnum.fail { color: var(–red); text-shadow: 0 0 20px rgba(224,58,58,.3); }
+.rnum.info { color: var(–abright); text-shadow: 0 0 20px rgba(77,143,224,.3); }
+.runit { font-size: 14px; font-weight: 500; color: var(–dim); margin-left: 4px; letter-spacing: 0; font-family: var(–mono); }
+.rsub { font-family: var(–mono); font-size: 10px; color: var(–muted); margin-top: 3px; line-height: 1.4; }
+.racn { font-family: var(–mono); font-size: 10px; padding: 3px 8px; border-radius: 3px; white-space: nowrap; display: inline-block; margin-top: 4px; }
+.acn-ok { background: var(–gbg); color: var(–green); border: 1px solid var(–gbr); }
+.acn-warn { background: var(–abg); color: var(–amber); }
+.acn-fail { background: var(–rbg); color: var(–red); }
+.rfoot { padding: 8px 14px; background: rgba(8,16,28,0.6); border-top: 1px solid var(–border); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.rinterp { font-family: var(–mono); font-size: 9px; color: var(–muted); flex: 1; }
+.cpbtn {
+font-family: var(–mono);
+font-size: 10px;
+font-weight: 600;
+padding: 6px 14px;
+background: var(–s3);
+border: 1px solid var(–border);
+border-radius: 4px;
+color: var(–dim);
+cursor: pointer;
+white-space: nowrap;
+transition: all .15s;
+-webkit-tap-highlight-color: transparent;
+letter-spacing: .5px;
+}
+.cpbtn:active { background: var(–accent); color: #fff; border-color: var(–accent); box-shadow: 0 0 12px rgba(26,111,212,.4); }
+
+/* ── WARNINGS ── */
+.wstrip {
+display: none;
+padding: 8px 14px;
+border-radius: var(–r);
+font-family: var(–mono);
+font-size: 10px;
+font-weight: 500;
+margin-bottom: 10px;
+line-height: 1.5;
+align-items: flex-start;
+gap: 8px;
+backdrop-filter: blur(8px);
+}
+.wstrip.show { display: flex; }
+.wstrip.amber { background: var(–abg); border: 1px solid var(–abr); color: var(–amber); }
+.wstrip.red { background: var(–rbg); border: 1px solid var(–rbr); color: var(–red); }
+.wstrip.cyan { background: var(–cbg); border: 1px solid var(–cbr2); color: var(–cyan); }
+.wicon { font-size: 14px; flex-shrink: 0; margin-top: -1px; }
+
+/* ── SURFACE TABS ── */
+.stabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.stab {
+flex: 1;
+padding: 8px;
+font-family: var(–mono);
+font-size: 10px;
+font-weight: 600;
+border: 1px solid var(–border);
+background: var(–surface);
+color: var(–muted);
+cursor: pointer;
+border-radius: 4px;
+text-align: center;
+transition: all .15s;
+-webkit-tap-highlight-color: transparent;
+position: relative;
+backdrop-filter: blur(8px);
+letter-spacing: .5px;
+}
+.stab.active { border-color: var(–accent); background: var(–aglow); color: var(–abright); }
+.stab.limiting { border-color: var(–abr); }
+.stab .lim-dot { display: none; position: absolute; top: 3px; right: 5px; width: 5px; height: 5px; background: var(–amber); border-radius: 50%; box-shadow: 0 0 4px var(–amber); }
+.stab.limiting .lim-dot { display: block; }
+.add-s {
+padding: 8px;
+font-family: var(–mono);
+font-size: 14px;
+font-weight: 600;
+border: 1px dashed var(–border);
+background: 0 0;
+color: var(–muted);
+cursor: pointer;
+border-radius: 4px;
+text-align: center;
+width: 36px;
+flex-shrink: 0;
+-webkit-tap-highlight-color: transparent;
+}
+
+/* ── COLLAPSIBLE ── */
+.cpanel {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–r);
+margin-top: 10px;
+overflow: hidden;
+backdrop-filter: blur(12px);
+}
+.ctoggle {
+width: 100%;
+padding: 12px 14px;
+font-family: var(–mono);
+font-size: 10px;
+font-weight: 600;
+color: var(–muted);
+background: 0 0;
+border: none;
+cursor: pointer;
+text-align: left;
+letter-spacing: .8px;
+text-transform: uppercase;
+display: flex;
+justify-content: space-between;
+align-items: center;
+-webkit-tap-highlight-color: transparent;
+}
+.ctoggle .arr { transition: transform .2s; font-size: 12px; }
+.ctoggle.open .arr { transform: rotate(180deg); }
+.cbody { display: none; padding: 0 14px 14px; }
+.cbody.open { display: block; }
+
+/* ── REF TABLES ── */
+.rtbl { width: 100%; border-collapse: collapse; font-family: var(–mono); font-size: 10px; }
+.rtbl th { text-align: left; padding: 4px 8px 4px 0; color: var(–muted); font-weight: 600; border-bottom: 1px solid var(–border); letter-spacing: .5px; }
+.rtbl td { padding: 4px 8px 4px 0; color: var(–dim); }
+.rtbl td:first-child { color: var(–abright); font-weight: 600; width: 30px; }
+.rsect { font-family: var(–mono); font-size: 9px; font-weight: 700; color: var(–muted); letter-spacing: 1px; text-transform: uppercase; margin: 10px 0 4px; }
+.rsect:first-child { margin-top: 0; }
+
+/* ── ACN DETAIL ── */
+.acn-detail {
+background: var(–s2);
+border: 1px solid var(–border);
+border-radius: var(–r);
+padding: 12px 14px;
+margin-bottom: 10px;
+display: none;
+backdrop-filter: blur(8px);
+}
+.acn-detail.show { display: block; }
+.acn-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; font-family: var(–mono); font-size: 11px; }
+.acn-label { color: var(–dim); }
+.acn-val { font-weight: 700; }
+.acn-bar { height: 4px; background: var(–border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.acn-fill { height: 100%; border-radius: 2px; transition: width .4s ease; }
+
+/* ── NOTES ── */
+.npanel {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–r);
+padding: 12px 14px;
+margin-top: 10px;
+backdrop-filter: blur(12px);
+}
+.npanel h3 { font-family: var(–mono); font-size: 9px; font-weight: 700; color: var(–muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+.npanel li { font-family: var(–mono); font-size: 10px; color: var(–muted); padding: 2px 0 2px 14px; position: relative; list-style: none; line-height: 1.6; }
+.npanel li::before { content: ‘>’; position: absolute; left: 0; color: var(–accent); opacity: 0.6; }
+a.ref-link { color: var(–abright); text-decoration: none; border-bottom: 1px dotted var(–bhi); font-family: var(–mono); font-size: 10px; }
+a.ref-link:hover { border-color: var(–abright); }
+
+/* ── PWA INSTALL BANNER ── */
+.install-banner {
+display: none;
+background: var(–aglow2);
+border: 1px solid rgba(77,143,224,0.35);
+border-radius: var(–r);
+padding: 10px 14px;
+margin-bottom: 10px;
+font-family: var(–mono);
+font-size: 10px;
+color: var(–abright);
+align-items: center;
+gap: 10px;
+backdrop-filter: blur(8px);
+}
+.install-banner.show { display: flex; }
+.install-btn {
+font-family: var(–mono);
+font-size: 10px;
+font-weight: 700;
+padding: 5px 12px;
+background: var(–accent);
+border: none;
+border-radius: 3px;
+color: #fff;
+cursor: pointer;
+white-space: nowrap;
+flex-shrink: 0;
+}
+.dismiss-btn {
+font-family: var(–mono);
+font-size: 10px;
+padding: 5px 8px;
+background: 0 0;
+border: 1px solid var(–border);
+border-radius: 3px;
+color: var(–muted);
+cursor: pointer;
+white-space: nowrap;
+flex-shrink: 0;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(–border); border-radius: 2px; }
+
+.hidden { display: none !important; }
+
+@media(max-width: 420px) {
+.fg, .fg.tri { grid-template-columns: 1fr; }
+.rnum { font-size: 34px; }
+.hdr-title { font-size: 26px; }
+.hdr { flex-direction: column; gap: 8px; }
+}
+
+@media(min-width: 600px) {
+.app { padding: 0 20px 120px; }
+.hdr-title { font-size: 38px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- Background layers -->
+
+<div class="bg-runway"></div>
+
+<!-- C-17 SVG silhouette (top-down plan view) -->
+
+<svg class="bg-c17" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" fill="white">
+  <!-- Fuselage -->
+  <ellipse cx="400" cy="170" rx="220" ry="28"/>
+  <!-- Main wings -->
+  <polygon points="320,162 480,162 580,240 560,244 400,178 240,244 220,240"/>
+  <!-- Wing sweep leading edge detail -->
+  <polygon points="330,162 470,162 550,225 540,228 400,172 260,228 250,225"/>
+  <!-- T-tail horizontal stabilizer -->
+  <polygon points="170,165 230,165 270,195 260,198 200,172 140,198 130,195"/>
+  <!-- Vertical tail -->
+  <polygon points="185,140 215,140 215,168 185,168"/>
+  <!-- Engine pods under wings - 4 engines -->
+  <ellipse cx="310" cy="195" rx="28" ry="9"/>
+  <ellipse cx="355" cy="200" rx="28" ry="9"/>
+  <ellipse cx="445" cy="200" rx="28" ry="9"/>
+  <ellipse cx="490" cy="195" rx="28" ry="9"/>
+  <!-- Nose -->
+  <ellipse cx="618" cy="170" rx="15" ry="12"/>
+  <!-- Cockpit windows hint -->
+  <ellipse cx="600" cy="166" rx="8" ry="5" fill="rgba(0,0,0,0.4)"/>
+</svg>
+
+<div class="bg-scan"></div>
+<div class="bg-vignette"></div>
+
+<div class="app">
+
+  <!-- PWA Install Banner -->
+
+  <div class="install-banner" id="installBanner">
+    <span style="flex:1">Add to Home Screen for offline access</span>
+    <button class="install-btn" id="installBtn">INSTALL</button>
+    <button class="dismiss-btn" id="dismissBtn">X</button>
+  </div>
+
+  <!-- Header -->
+
+  <div class="hdr">
+    <div class="hdr-top">
+      <div>
+        <div class="hdr-callsign">AMC // C-17 Globemaster III</div>
+        <div class="hdr-title">PAVEMENT <span>STRESS</span></div>
+        <div class="hdr-sub">AFTTP 3-3.C-17 TABLE 3.1 // 25 JUL 2025</div>
+      </div>
+      <div class="hdr-badge">
+        <div class="hdr-badge-inner">
+          1C-17A-1-1 Ch 10<br>
+          TIRE PSI 144/160
+        </div>
+      </div>
+    </div>
+    <div class="hdr-line"></div>
+  </div>
+
+  <div class="mode-bar">
+    <button class="mode-btn active" id="mf" onclick="setMode('fwd')">RATING &rarr; MAX GW</button>
+    <button class="mode-btn" id="mr" onclick="setMode('rev')">GROSS WT &rarr; MIN RATING</button>
+  </div>
+
+  <div class="sys-bar">
+    <button class="sys-btn active" data-s="pcn" onclick="setSys('pcn')">PCN</button>
+    <button class="sys-btn" data-s="lcn" onclick="setSys('lcn')">LCN</button>
+    <button class="sys-btn" data-s="cbr" onclick="setSys('cbr')">CBR</button>
+  </div>
+
+  <!-- Result Strip -->
+
+  <div class="rstrip" id="rs">
+    <div class="rmain">
+      <div class="rleft">
+        <div class="rtag" id="rt">---</div>
+        <div class="rnum" id="rn">---</div>
+        <div class="rsub" id="rsb"></div>
+        <div id="racn"></div>
+      </div>
+    </div>
+    <div class="rfoot">
+      <div class="rinterp" id="ri"></div>
+      <button class="cpbtn" id="cpb" onclick="copyResult()">COPY</button>
+    </div>
+  </div>
+
+  <!-- Warnings -->
+
+  <div class="wstrip" id="tw"><span class="wicon">&#9888;</span><span id="twt"></span></div>
+  <div class="wstrip" id="sw"><span class="wicon">&#9888;</span><span>Result exceeds 447K lbs. Check 1C-17A-1-1 Sec 5 for SPRO limits.</span></div>
+  <div class="wstrip" id="aw"><span class="wicon">&#9888;</span><span id="awt"></span></div>
+
+  <!-- ACN Detail -->
+
+  <div class="acn-detail" id="acnd">
+    <div class="card-label">ACN vs PCN COMPARISON</div>
+    <div class="acn-row"><span class="acn-label">C-17 ACN at planned GW</span><span class="acn-val" id="acnv">--</span></div>
+    <div class="acn-row"><span class="acn-label">Published PCN</span><span class="acn-val" id="pcnv">--</span></div>
+    <div class="acn-bar"><div class="acn-fill" id="acnbar"></div></div>
+    <div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:6px" id="acn-note"></div>
+  </div>
+
+  <!-- Multi-surface tabs -->
+
+  <div class="stabs" id="stabs">
+    <button class="stab active" onclick="selSurf(0)">RWY</button>
+    <button class="add-s" onclick="addSurf()" title="Add surface">+</button>
+  </div>
+
+  <!-- PCN Panel -->
+
+  <div id="pp">
+    <div class="card">
+      <div class="card-label">Quick Decode</div>
+      <input type="text" class="decode-input" id="pd" placeholder="e.g. 80 R/B/W/T" oninput="parseDecode()" autocapitalize="characters" autocomplete="off" spellcheck="false">
+      <div class="decode-parsed" id="dc"></div>
+      <div class="or-div">OR ENTER MANUALLY</div>
+    </div>
+    <div class="card">
+      <div class="fg">
+        <div class="field"><label>PCN VALUE</label><input type="number" id="pv" min="20" max="86" step="1" placeholder="20-86" oninput="manIn()"></div>
+        <div class="field"><label>SURFACE</label><select id="ps" onchange="manIn()"><option value="R">R - Rigid (Concrete)</option><option value="F">F - Flexible (Asphalt)</option></select></div>
+        <div class="field"><label>SUBGRADE</label><select id="pg" onchange="manIn()"><option value="A">A - High</option><option value="B">B - Medium</option><option value="C">C - Low</option><option value="D">D - Ultra-low</option></select></div>
+        <div class="field" id="pgw" style="display:none"><label>PLANNED GW (x1,000 lbs)</label><input type="number" id="pgwv" min="200" max="670" step="1" placeholder="e.g. 585" oninput="calc()"></div>
+      </div>
+      <div class="trow">
+        <label class="tsw"><input type="checkbox" id="po" onchange="calc()"><span class="ttrack"></span><span class="tknob"></span></label>
+        <span class="ttxt">Overload (<strong>&lt;5% annual</strong>): +10% asphalt / +5% concrete</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LCN Panel -->
+
+  <div id="lp" class="hidden">
+    <div class="card">
+      <div class="fg">
+        <div class="field"><label>LCN VALUE</label><input type="number" id="lv" min="42" max="100" step="1" placeholder="42-100" oninput="calc()"></div>
+        <div class="field"><label>SURFACE</label><select id="ls" onchange="updLCN();calc()"><option value="concrete">Concrete</option><option value="asphalt">Asphalt</option></select></div>
+        <div class="field" id="llf"><label>L-VALUE</label><select id="ll" onchange="calc()"><option value="30">30</option><option value="40" selected>40</option><option value="50">50</option></select></div>
+        <div class="field hidden" id="ltf"><label>THICKNESS</label><select id="lt" onchange="calc()"><option value="20">20</option><option value="30">30</option><option value="40">40</option></select></div>
+        <div class="field" id="lgw" style="display:none"><label>PLANNED GW (x1,000 lbs)</label><input type="number" id="lgwv" min="200" max="670" step="1" placeholder="e.g. 585" oninput="calc()"></div>
+      </div>
+      <div class="trow">
+        <label class="tsw"><input type="checkbox" id="lo" onchange="calc()"><span class="ttrack"></span><span class="tknob"></span></label>
+        <span class="ttxt">Overload (~1 flt/day): +25% allowable LCN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CBR Panel -->
+
+  <div id="cp" class="hidden">
+    <div class="card">
+      <div class="fg">
+        <div class="field"><label>CBR VALUE</label><input type="number" id="cv" min="10" max="20" step="1" placeholder="10-20" oninput="calc()"></div>
+        <div class="field"><label>PASSES</label><select id="cps" onchange="calc()"><option value="50">50</option><option value="100">100</option><option value="300">300</option></select></div>
+        <div class="field" id="cgw" style="display:none"><label>PLANNED GW (x1,000 lbs)</label><input type="number" id="cgwv" min="200" max="500" step="1" placeholder="e.g. 300" oninput="calc()"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decode Reference -->
+
+  <div class="cpanel">
+    <button class="ctoggle" id="reft" onclick="togRef()">PCN / LCN / CBR Decode Reference <span class="arr">&#9660;</span></button>
+    <div class="cbody" id="refb">
+      <div class="rsect">PCN CODED FORMAT: PCN ## X/X/X/X</div>
+      <table class="rtbl">
+        <tr><th>Pos</th><th>Code</th><th>Meaning</th></tr>
+        <tr><td>1</td><td>##</td><td>PCN value (strength number)</td></tr>
+        <tr><td>2</td><td>R / F</td><td>Rigid (concrete) / Flexible (asphalt)</td></tr>
+        <tr><td>3</td><td>A/B/C/D</td><td>Subgrade: High / Med / Low / Ultra-low</td></tr>
+        <tr><td>4</td><td>W/X/Y/Z</td><td>Tire pressure limit (see below)</td></tr>
+        <tr><td>5</td><td>T / U</td><td>Technical eval / Usage experience</td></tr>
+      </table>
+      <div class="rsect" style="margin-top:14px">TIRE PRESSURE CODES</div>
+      <table class="rtbl">
+        <tr><th>Code</th><th>AFTTP Limit</th><th>ICAO (MPa)</th><th>C-17 Status</th></tr>
+        <tr><td>W</td><td>No limit</td><td>Unlimited</td><td style="color:var(--green)">OK</td></tr>
+        <tr><td>X</td><td>217 psi</td><td>1.75 MPa (254 psi)</td><td style="color:var(--green)">OK</td></tr>
+        <tr><td>Y</td><td>145 psi</td><td>1.25 MPa (181 psi)</td><td style="color:var(--amber)">MARGINAL *</td></tr>
+        <tr><td>Z</td><td>73 psi</td><td>0.50 MPa (73 psi)</td><td style="color:var(--red)">NOT COMPAT</td></tr>
+      </table>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:6px;line-height:1.5">
+        * AFTTP lists Y = 145 psi; C-17 main tire is 144 psi. Per TO, marginal but operationally acceptable.<br>
+        ICAO Annex 14 defines Y = 1.25 MPa = 181 psi. Use AFTTP values for operational decisions.
+      </div>
+      <div class="rsect" style="margin-top:14px">C-17 ACN AT MAX RAMP WEIGHT (586K LBS)</div>
+      <table class="rtbl">
+        <tr><th></th><th>A (High)</th><th>B (Med)</th><th>C (Low)</th><th>D (Ultra)</th></tr>
+        <tr><td>Rigid</td><td>28</td><td>36</td><td>46</td><td>71</td></tr>
+        <tr><td>Flex</td><td>25</td><td>32</td><td>42</td><td>68</td></tr>
+      </table>
+      <div class="rsect" style="margin-top:14px">SUBGRADE CATEGORIES</div>
+      <table class="rtbl">
+        <tr><th>Code</th><th>Rigid (k MN/m&sup3;)</th><th>Flexible (CBR)</th></tr>
+        <tr><td>A</td><td>k &ge; 120</td><td>CBR &gt; 13</td></tr>
+        <tr><td>B</td><td>k = 60-120</td><td>CBR 8-13</td></tr>
+        <tr><td>C</td><td>k = 25-60</td><td>CBR 4-8</td></tr>
+        <tr><td>D</td><td>k &lt; 25</td><td>CBR &lt; 4</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ACR-PCR Info -->
+
+  <div class="cpanel">
+    <button class="ctoggle" id="acrt" onclick="togACR()">ACR-PCR Transition (Info) <span class="arr">&#9660;</span></button>
+    <div class="cbody" id="acrb">
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.6">
+        ICAO adopted ACR-PCR in 2020 as a replacement for ACN-PCN, with full applicability scheduled for 28 Nov 2024. It uses layered elastic analysis rather than simplified CBR/Westergaard methods. There is <strong style="color:var(--amber)">no mathematical conversion</strong> between PCN and PCR values. AFTTP 3-3.C-17 (Jul 2025) still uses ACN-PCN. This tool remains operationally valid for USAF mission planning.
+      </div>
+      <div class="rsect" style="margin-top:14px">REFERENCES</div>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:4px 0"><a class="ref-link" href="https://www.faa.gov/documentlibrary/media/advisory_circular/150-5335-5c.pdf" target="_blank" rel="noopener">FAA AC 150/5335-5C: ACN-PCN Method</a></li>
+        <li style="padding:4px 0"><a class="ref-link" href="https://skybrary.aero/articles/pavement-classification-number-pcn" target="_blank" rel="noopener">SKYbrary: Pavement Classification Number</a></li>
+        <li style="padding:4px 0"><a class="ref-link" href="https://code7700.com/acn_v_pcn.htm" target="_blank" rel="noopener">Code7700: ACN vs PCN</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Notes -->
+
+  <div class="npanel" style="margin-top:10px">
+    <h3>Operational Notes // AFTTP 3-3.C-17 Table 3.1</h3>
+    <ul>
+      <li>Data from 1C-17A-1-1, Ch 10 "Support Area Operations"</li>
+      <li>No CG limitations applied. FWD CG &lt;32% requires TO check</li>
+      <li>Normal tire PSI: 144 (main), 160 (nose)</li>
+      <li>Values &gt;447K: check 1C-17A-1-1 Sec 5 for SPRO limits</li>
+      <li>Note 1: Overload &lt;5% annual. Asphalt +10%, Concrete +5% PCN</li>
+      <li>Note 2: Use L=40/Thickness=20 if unknown. Overload +25%</li>
+      <li>Note 3: Prior permission required when ACN exceeds PCN</li>
+      <li>ACN interpolated linearly between OEW and MRW (ICAO method)</li>
+      <li>COMFAA anomaly: rigid ACN can invert on high subgrades. Use TO values.</li>
+    </ul>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+// ================================================================
+// DATA
+// ================================================================
+const PCN={20:{R:{A:285,B:279,C:265,D:245},F:{A:326,B:312,C:279,D:233}},22:{R:{A:312,B:303,C:285,D:262},F:{A:351,B:334,C:298,D:250}},24:{R:{A:338,B:326,C:305,D:278},F:{A:376,B:356,C:317,D:265}},26:{R:{A:364,B:349,C:324,D:294},F:{A:400,B:378,C:336,D:281}},28:{R:{A:390,B:372,C:343,D:310},F:{A:424,B:399,C:354,D:296}},30:{R:{A:416,B:394,C:362,D:325},F:{A:447,B:420,C:372,D:310}},32:{R:{A:442,B:417,C:380,D:340},F:{A:470,B:440,C:389,D:325}},34:{R:{A:467,B:439,C:398,D:355},F:{A:493,B:460,C:407,D:339}},36:{R:{A:493,B:460,C:416,D:369},F:{A:516,B:480,C:423,D:353}},38:{R:{A:518,B:482,C:434,D:383},F:{A:538,B:499,C:440,D:366}},40:{R:{A:544,B:504,C:451,D:397},F:{A:560,B:518,C:456,D:380}},42:{R:{A:569,B:525,C:469,D:411},F:{A:581,B:537,C:473,D:393}},44:{R:{A:594,B:546,C:486,D:425},F:{A:603,B:556,C:488,D:406}},46:{R:{A:619,B:567,C:503,D:438},F:{A:624,B:575,C:504,D:419}},48:{R:{A:644,B:588,C:519,D:451},F:{A:645,B:593,C:520,D:431}},50:{R:{A:null,B:609,C:536,D:464},F:{A:null,B:611,C:535,D:444}},52:{R:{A:null,B:630,C:552,D:477},F:{A:null,B:629,C:550,D:456}},54:{R:{A:null,B:650,C:569,D:490},F:{A:null,B:646,C:565,D:469}},56:{R:{A:null,B:null,C:585,D:503},F:{A:null,B:null,C:580,D:481}},58:{R:{A:null,B:null,C:601,D:515},F:{A:null,B:null,C:594,D:493}},60:{R:{A:null,B:null,C:617,D:527},F:{A:null,B:null,C:609,D:504}},62:{R:{A:null,B:null,C:632,D:539},F:{A:null,B:null,C:623,D:516}},64:{R:{A:null,B:null,C:648,D:552},F:{A:null,B:null,C:638,D:528}},66:{R:{A:null,B:null,C:null,D:564},F:{A:null,B:null,C:652,D:539}},68:{R:{A:null,B:null,C:null,D:575},F:{A:null,B:null,C:null,D:551}},70:{R:{A:null,B:null,C:null,D:587},F:{A:null,B:null,C:null,D:562}},72:{R:{A:null,B:null,C:null,D:599},F:{A:null,B:null,C:null,D:573}},74:{R:{A:null,B:null,C:null,D:610},F:{A:null,B:null,C:null,D:584}},76:{R:{A:null,B:null,C:null,D:622},F:{A:null,B:null,C:null,D:595}},78:{R:{A:null,B:null,C:null,D:633},F:{A:null,B:null,C:null,D:606}},80:{R:{A:null,B:null,C:null,D:644},F:{A:null,B:null,C:null,D:617}},82:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:628}},84:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:639}},86:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:649}}};
+const LCNC={42:{30:301,40:null,50:null},44:{30:318,40:301,50:null},46:{30:335,40:317,50:null},48:{30:352,40:333,50:305},50:{30:369,40:349,50:320},52:{30:386,40:365,50:334},54:{30:404,40:381,50:349},56:{30:421,40:397,50:364},58:{30:438,40:413,50:379},60:{30:455,40:429,50:394},62:{30:472,40:445,50:409},64:{30:489,40:461,50:424},66:{30:507,40:477,50:438},68:{30:524,40:493,50:453},70:{30:541,40:509,50:468},72:{30:558,40:525,50:483},74:{30:575,40:541,50:498},76:{30:593,40:557,50:513},78:{30:610,40:573,50:528},80:{30:627,40:589,50:543},82:{30:644,40:605,50:558},84:{30:661,40:621,50:573},86:{30:670,40:637,50:588},88:{30:670,40:653,50:603},90:{30:670,40:669,50:618},92:{30:670,40:670,50:633},94:{30:670,40:670,50:648},96:{30:670,40:670,50:663},98:{30:null,40:null,50:null},100:{30:null,40:null,50:null}};
+const LCNA={42:{20:314,30:null,40:null},44:{20:330,30:null,40:null},46:{20:347,30:null,40:null},48:{20:364,30:null,40:null},50:{20:381,30:304,40:null},52:{20:398,30:318,40:null},54:{20:415,30:332,40:null},56:{20:432,30:345,40:null},58:{20:449,30:359,40:308},60:{20:466,30:373,40:321},62:{20:483,30:387,40:334},64:{20:500,30:401,40:347},66:{20:517,30:415,40:361},68:{20:534,30:428,40:374},70:{20:551,30:442,40:387},72:{20:568,30:456,40:400},74:{20:584,30:470,40:413},76:{20:601,30:484,40:426},78:{20:618,30:498,40:439},80:{20:635,30:511,40:452},82:{20:652,30:525,40:465},84:{20:668,30:539,40:478},86:{20:670,30:553,40:491},88:{20:670,30:567,40:504},90:{20:670,30:580,40:517},92:{20:670,30:594,40:530},94:{20:670,30:608,40:543},96:{20:670,30:622,40:556},98:{20:670,30:635,40:569},100:{20:670,30:649,40:582}};
+const CBR={10:{50:300,100:null,300:null},11:{50:320,100:null,300:null},12:{50:360,100:300,300:null},13:{50:380,100:340,300:null},14:{50:420,100:360,300:300},15:{50:440,100:400,300:320},16:{50:null,100:420,300:360},17:{50:null,100:null,300:380},18:{50:null,100:null,300:400},19:{50:null,100:null,300:420},20:{50:null,100:null,300:440}};
+const C17_ACN={R:{A:{oew:11,mrw:28},B:{oew:14,mrw:36},C:{oew:19,mrw:46},D:{oew:29,mrw:71}},F:{A:{oew:10,mrw:25},B:{oew:13,mrw:32},C:{oew:17,mrw:42},D:{oew:28,mrw:68}}};
+const OEW=282,MRW=586;
+
+function getACN(surface,subgrade,gwK){
+  const d=C17_ACN[surface]?.[subgrade];
+  if(!d)return null;
+  if(gwK<=OEW)return d.oew;
+  if(gwK>=MRW)return d.mrw;
+  return Math.round(d.oew+((gwK-OEW)/(MRW-OEW))*(d.mrw-d.oew));
+}
+
+let mode='fwd',sys='pcn',tireCode=null,lastResult=null;
+let surfaces=[{id:0,label:'RWY',result:null}];
+let activeSurf=0,nextId=1;
+
+function setMode(m){
+  mode=m;
+  document.getElementById('mf').classList.toggle('active',m==='fwd');
+  document.getElementById('mr').classList.toggle('active',m==='rev');
+  const s=m==='rev';
+  ['pgw','lgw','cgw'].forEach(i=>{document.getElementById(i).style.display=s?'':'none'});
+  calc();
+}
+
+function setSys(s){
+  sys=s;
+  document.querySelectorAll('.sys-btn').forEach(b=>b.classList.toggle('active',b.dataset.s===s));
+  document.getElementById('pp').classList.toggle('hidden',s!=='pcn');
+  document.getElementById('lp').classList.toggle('hidden',s!=='lcn');
+  document.getElementById('cp').classList.toggle('hidden',s!=='cbr');
+  calc();
+}
+
+function updLCN(){
+  const s=document.getElementById('ls').value;
+  document.getElementById('llf').classList.toggle('hidden',s!=='concrete');
+  document.getElementById('ltf').classList.toggle('hidden',s!=='asphalt');
+}
+
+function renderSurfs(){
+  const c=document.getElementById('stabs');
+  c.innerHTML='';
+  surfaces.forEach((s,i)=>{
+    const b=document.createElement('button');
+    b.className='stab'+(i===activeSurf?' active':'')+(s.isLimiting?' limiting':'');
+    b.innerHTML=s.label+'<span class="lim-dot"></span>';
+    b.onclick=()=>selSurf(i);
+    c.appendChild(b);
+  });
+  if(surfaces.length<4){
+    const a=document.createElement('button');
+    a.className='add-s';a.textContent='+';a.title='Add surface';a.onclick=addSurf;
+    c.appendChild(a);
+  }
+}
+
+function selSurf(i){activeSurf=i;renderSurfs();}
+function addSurf(){
+  const labels=['RWY','TWY','RAMP','APRON'];
+  if(surfaces.length>=4)return;
+  surfaces.push({id:nextId++,label:labels[surfaces.length]||'SFC '+(surfaces.length+1),result:null,isLimiting:false});
+  activeSurf=surfaces.length-1;
+  renderSurfs();
+}
+
+function parseDecode(){
+  const raw=document.getElementById('pd').value.trim().toUpperCase();
+  const dc=document.getElementById('dc');
+  dc.innerHTML='';tireCode=null;
+  const m=raw.match(/^(?:PCN\s*)?(\d+)\s*[\/\s,]+([RF])\s*[\/\s,]+([ABCD])\s*[\/\s,]+([WXYZ])(?:\s*[\/\s,]+([TU]))?$/);
+  if(!m){if(raw.length>0)dc.innerHTML='<span class="chip chip-surf" style="color:var(--muted)">Parsing... (e.g. 80 R/B/W/T)</span>';return;}
+  const[,pv,sf,sg,tp,ev]=m;
+  document.getElementById('pv').value=parseInt(pv);
+  document.getElementById('ps').value=sf;
+  document.getElementById('pg').value=sg;
+  tireCode=tp;
+  const sn={R:'RIGID',F:'FLEX'},gn={A:'HIGH',B:'MED',C:'LOW',D:'ULTRA'};
+  const tn={W:'NO LIMIT',X:'<=217 PSI',Y:'<=145 PSI',Z:'<=73 PSI'};
+  const en={T:'TECH',U:'USAGE'};
+  let tc='chip-tok',ts=tp+' '+tn[tp]+' OK';
+  if(tp==='Y'){tc='chip-twarn';ts=tp+' '+tn[tp]+' MARGINAL';}
+  if(tp==='Z'){tc='chip-tfail';ts=tp+' '+tn[tp]+' NO';}
+  dc.innerHTML=`<span class="chip chip-pcn">PCN ${pv}</span><span class="chip chip-surf">${sf} ${sn[sf]}</span><span class="chip chip-sub">${sg} ${gn[sg]}</span><span class="chip ${tc}">${ts}</span>${ev?`<span class="chip chip-eval">${ev} ${en[ev]}</span>`:''}`;
+  calc();
+}
+
+function manIn(){
+  document.getElementById('pd').value='';
+  document.getElementById('dc').innerHTML='';
+  tireCode=null;calc();
+}
+
+function interp(data,val,getGW){
+  const keys=Object.keys(data).map(Number).filter(k=>getGW(data[k])!==null).sort((a,b)=>a-b);
+  if(!keys.length)return null;
+  if(val<=keys[0])return{gw:getGW(data[keys[0]]),exact:val===keys[0],lo:keys[0],hi:keys[0]};
+  if(val>=keys[keys.length-1])return{gw:getGW(data[keys[keys.length-1]]),exact:true,lo:keys[keys.length-1],hi:keys[keys.length-1]};
+  for(let i=0;i<keys.length-1;i++){
+    if(val>=keys[i]&&val<=keys[i+1]){
+      const a=getGW(data[keys[i]]),b=getGW(data[keys[i+1]]);
+      if(a===null||b===null)return null;
+      const f=(val-keys[i])/(keys[i+1]-keys[i]);
+      return{gw:Math.floor(a+f*(b-a)),exact:false,lo:keys[i],hi:keys[i+1]};
+    }
+  }
+  return null;
+}
+
+function revSearch(data,target,getGW){
+  const keys=Object.keys(data).map(Number).sort((a,b)=>a-b);
+  for(let i=0;i<keys.length;i++){
+    const gw=getGW(data[keys[i]]);
+    if(gw!==null&&gw>=target){
+      if(i>0){const prev=getGW(data[keys[i-1]]);if(prev!==null&&prev<target){const f=(target-prev)/(gw-prev);return{val:Math.ceil(keys[i-1]+f*(keys[i]-keys[i-1])),exact:false,lo:keys[i-1],hi:keys[i]};}}
+      return{val:keys[i],exact:true};
+    }
+  }
+  return null;
+}
+
+function calc(){
+  const rs=document.getElementById('rs'),rt=document.getElementById('rt'),rn=document.getElementById('rn'),rsb=document.getElementById('rsb'),ri=document.getElementById('ri');
+  const tw=document.getElementById('tw'),sw=document.getElementById('sw'),aw=document.getElementById('aw');
+  const acnd=document.getElementById('acnd');
+  tw.className='wstrip';sw.className='wstrip';aw.className='wstrip';
+  document.getElementById('racn').innerHTML='';
+  acnd.classList.remove('show');
+  lastResult=null;
+  if(sys==='pcn'&&tireCode){
+    if(tireCode==='Z'){tw.className='wstrip show red';document.getElementById('twt').innerHTML='TIRE PRESSURE: Z (73 psi max). C-17 main = 144 psi. <strong>NOT COMPATIBLE.</strong>';}
+    else if(tireCode==='Y'){tw.className='wstrip show amber';document.getElementById('twt').innerHTML='TIRE PRESSURE: Y (AFTTP: 145 psi). C-17 main = 144 psi. <strong>MARGINAL per AFTTP.</strong>';}
+  }
+  if(mode==='fwd')calcFwd(rs,rt,rn,rsb,ri,sw,aw,acnd);
+  else calcRev(rs,rt,rn,rsb,ri);
+}
+
+function calcFwd(rs,rt,rn,rsb,ri,sw,aw,acnd){
+  let result=null,desc='',surfType='',subgrade='',pcnVal=0;
+  if(sys==='pcn'){
+    pcnVal=parseFloat(document.getElementById('pv').value);
+    const sf=document.getElementById('ps').value,sg=document.getElementById('pg').value,ol=document.getElementById('po').checked;
+    if(isNaN(pcnVal)){rs.classList.remove('show');return;}
+    const eff=ol?(sf==='F'?pcnVal*1.10:pcnVal*1.05):pcnVal;
+    result=interp(PCN,eff,r=>r[sf]?r[sf][sg]:null);
+    surfType=sf;subgrade=sg;
+    desc=`PCN ${pcnVal} ${sf==='R'?'Rigid':'Flex'}/${sg}${ol?' +OVL':''}`;
+  }else if(sys==='lcn'){
+    const lcn=parseFloat(document.getElementById('lv').value),sf=document.getElementById('ls').value,ol=document.getElementById('lo').checked;
+    if(isNaN(lcn)){rs.classList.remove('show');return;}
+    const eff=ol?lcn*1.25:lcn;
+    if(sf==='concrete'){const lv=document.getElementById('ll').value;result=interp(LCNC,eff,r=>r[lv]||null);desc=`LCN ${lcn} Conc/L${lv}${ol?' +OVL':''}`;}
+    else{const th=document.getElementById('lt').value;result=interp(LCNA,eff,r=>r[th]||null);desc=`LCN ${lcn} Asph/T${th}${ol?' +OVL':''}`;}
+  }else{
+    const cbr=parseFloat(document.getElementById('cv').value),ps=document.getElementById('cps').value;
+    if(isNaN(cbr)){rs.classList.remove('show');return;}
+    result=interp(CBR,cbr,r=>r[ps]||null);desc=`CBR ${cbr} / ${ps}P`;
+  }
+  if(!result){
+    rs.className='rstrip show sfail';rt.className='rtag fail';rt.textContent='NOT COMPATIBLE';
+    rn.className='rnum fail';rn.innerHTML='N/C';rsb.textContent=desc;
+    ri.textContent='Exceeds table range or no data for this combination.';return;
+  }
+  const gwK=result.gw,gwLbs=gwK*1000;
+  const status=gwK>=580?'warn':'ok';
+  rs.className=`rstrip show s${status}`;
+  rt.className=`rtag ${status}`;
+  rt.textContent=status==='ok'?'MAX ALLOWABLE GROSS WEIGHT':'MAX GW // NEAR STRUCTURAL LIMIT';
+  rn.className=`rnum ${status}`;
+  rn.innerHTML=`${gwK.toLocaleString()}<span class="runit">x1K lbs</span>`;
+  rsb.textContent=`${gwLbs.toLocaleString()} lbs | ${desc}`;
+  if(gwK>447)sw.className='wstrip show amber';
+  if(sys==='pcn'&&surfType&&subgrade&&pcnVal){
+    const acn=getACN(surfType,subgrade,gwK);
+    if(acn!==null){
+      let cls='acn-ok',txt=`ACN ${acn} <= PCN ${pcnVal}`;
+      if(acn>pcnVal){cls='acn-fail';txt=`ACN ${acn} > PCN ${pcnVal}`;document.getElementById('awt').innerHTML=`C-17 ACN (${acn}) at ${gwK}K exceeds PCN (${pcnVal}). <strong>Prior permission required</strong> per Note 3.`;aw.className='wstrip show red';}
+      else if(acn>pcnVal*0.9){cls='acn-warn';txt=`ACN ${acn} ~ PCN ${pcnVal}`;}
+      document.getElementById('racn').innerHTML=`<span class="racn ${cls}">${txt} @ ${gwK}K</span>`;
+      acnd.classList.add('show');
+      document.getElementById('acnv').textContent=acn;
+      document.getElementById('pcnv').textContent=pcnVal;
+      const bar=document.getElementById('acnbar');
+      bar.style.width=Math.min((acn/pcnVal)*100,100)+'%';
+      bar.style.background=acn>pcnVal?'var(--red)':acn>pcnVal*0.9?'var(--amber)':'var(--green)';
+      document.getElementById('acn-note').textContent=`OEW (282K): ACN ${C17_ACN[surfType][subgrade].oew} | MRW (586K): ACN ${C17_ACN[surfType][subgrade].mrw} | At ${gwK}K: ACN ${acn}`;
+    }
+  }
+  if(!result.exact&&result.lo!==result.hi)ri.textContent=`Interpolated between ${result.lo} and ${result.hi}`;
+  else ri.textContent='';
+  lastResult={gwK,gwLbs,desc,sys,mode:'fwd'};
+}
+
+function calcRev(rs,rt,rn,rsb,ri){
+  let result=null,desc='',unit='';
+  if(sys==='pcn'){
+    const gw=parseFloat(document.getElementById('pgwv').value),sf=document.getElementById('ps').value,sg=document.getElementById('pg').value;
+    if(isNaN(gw)){rs.classList.remove('show');return;}
+    result=revSearch(PCN,gw,r=>r[sf]?r[sf][sg]:null);
+    desc=`for ${gw}K on ${sf==='R'?'Rigid':'Flex'}/${sg}`;unit='PCN';
+    if(result){
+      const acn=getACN(sf,sg,gw);
+      if(acn!==null){
+        document.getElementById('racn').innerHTML=`<span class="racn acn-ok">C-17 ACN at ${gw}K: ${acn}</span>`;
+        const acnd=document.getElementById('acnd');
+        acnd.classList.add('show');
+        document.getElementById('acnv').textContent=acn;
+        document.getElementById('pcnv').textContent=`${result.val}+ (min required)`;
+        const bar=document.getElementById('acnbar');
+        bar.style.width=Math.min((acn/result.val)*100,100)+'%';
+        bar.style.background='var(--green)';
+        document.getElementById('acn-note').textContent=`Need PCN >= ${result.val} to support ${gw}K without restriction`;
+      }
+    }
+  }else if(sys==='lcn'){
+    const gw=parseFloat(document.getElementById('lgwv').value),sf=document.getElementById('ls').value;
+    if(isNaN(gw)){rs.classList.remove('show');return;}
+    if(sf==='concrete'){const lv=document.getElementById('ll').value;result=revSearch(LCNC,gw,r=>r[lv]||null);desc=`for ${gw}K Conc/L${lv}`;}
+    else{const th=document.getElementById('lt').value;result=revSearch(LCNA,gw,r=>r[th]||null);desc=`for ${gw}K Asph/T${th}`;}
+    unit='LCN';
+  }else{
+    const gw=parseFloat(document.getElementById('cgwv').value),ps=document.getElementById('cps').value;
+    if(isNaN(gw)){rs.classList.remove('show');return;}
+    result=revSearch(CBR,gw,r=>r[ps]||null);desc=`for ${gw}K / ${ps}P`;unit='CBR';
+  }
+  if(!result){
+    rs.className='rstrip show sfail';rt.className='rtag fail';rt.textContent='EXCEEDS TABLE';
+    rn.className='rnum fail';rn.innerHTML='NO SOLUTION';rsb.textContent=desc;
+    ri.textContent='Required value exceeds table max. Check TO.';lastResult=null;return;
+  }
+  rs.className='rstrip show sok';
+  rt.className='rtag info';rt.textContent=`MINIMUM REQUIRED ${unit}`;
+  rn.className='rnum info';rn.innerHTML=`${result.val}+`;
+  rsb.textContent=desc;
+  if(!result.exact)ri.textContent=`Interpolated between ${result.lo} and ${result.hi}. Round up.`;
+  else ri.textContent='';
+  lastResult={val:result.val,unit,desc,sys,mode:'rev'};
+}
+
+function copyResult(){
+  if(!lastResult)return;
+  let t='';
+  if(lastResult.mode==='fwd')t=`C-17 PAVEMENT: ${lastResult.desc} -- Max GW ${lastResult.gwK.toLocaleString()}K (${lastResult.gwLbs.toLocaleString()} lbs). SUPPORTED.`;
+  else t=`C-17 PAVEMENT: Min ${lastResult.unit} ${lastResult.val}+ required ${lastResult.desc}.`;
+  if(tireCode){const ts={W:'OK',X:'OK',Y:'MARGINAL (AFTTP)',Z:'NOT COMPATIBLE'};t+=` Tire: ${tireCode} (${ts[tireCode]}).`;}
+  t+=' (Ref: AFTTP 3-3.C-17 Table 3.1)';
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.getElementById('cpb');
+    b.textContent='COPIED';b.style.background='var(--gbg)';b.style.color='var(--green)';b.style.borderColor='var(--gbr)';
+    setTimeout(()=>{b.textContent='COPY';b.style.background='';b.style.color='';b.style.borderColor='';},1500);
+  });
+}
+
+function togRef(){const b=document.getElementById('reft'),d=document.getElementById('refb');b.classList.toggle('open');d.classList.toggle('open');}
+function togACR(){const b=document.getElementById('acrt'),d=document.getElementById('acrb');b.classList.toggle('open');d.classList.toggle('open');}
+
+// PWA install prompt
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',(e)=>{
+  e.preventDefault();deferredPrompt=e;
+  document.getElementById('installBanner').classList.add('show');
+});
+document.getElementById('installBtn')?.addEventListener('click',async()=>{
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  const{outcome}=await deferredPrompt.userChoice;
+  deferredPrompt=null;
+  document.getElementById('installBanner').classList.remove('show');
+});
+document.getElementById('dismissBtn')?.addEventListener('click',()=>{
+  document.getElementById('installBanner').classList.remove('show');
+});
+
+// iOS install hint
+const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isStandalone=window.matchMedia('(display-mode: standalone)').matches;
+if(isIOS&&!isStandalone){
+  const b=document.getElementById('installBanner');
+  b.querySelector('span').textContent='Tap Share then "Add to Home Screen" for offline access';
+  b.classList.add('show');
+  document.getElementById('installBtn').style.display='none';
+}
+
+// Service worker registration
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+
+updLCN();renderSurfs();
+</script>
+
+</body>
+</html>

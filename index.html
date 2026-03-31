@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
+  color-scheme: dark;
   --black:   #06050a;
   --bg:      #0a0800;
   --s1:      #100e00;
@@ -251,7 +252,7 @@ a.ref-link{color:var(–amber);text-decoration:none;border-bottom:1px solid var(
 
 /* SAFARI / iOS FORM OVERRIDE */
 input,select,textarea,button{-webkit-appearance:none !important;-moz-appearance:none !important;appearance:none !important}
-input[type=“text”],input[type=“number”],select{background-color:var(–black) !important;background:var(–black) !important;color:var(–text) !important;border:1px solid var(–border) !important;border-radius:var(–r) !important;-webkit-text-fill-color:var(–text) !important;font-size:16px !important}
+input[type=“text”],input[type=“number”],select{background-color:transparent !important;background:transparent !important;color:#e0c060 !important;border:none !important;border-radius:0 !important;-webkit-text-fill-color:#e0c060 !important;font-size:16px !important}
 input::placeholder{color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important;opacity:1 !important}
 .decode-input{background-color:var(–black) !important;background:var(–black) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important;font-size:20px !important;letter-spacing:3px !important}
 .decode-input::placeholder{color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important;font-size:13px !important;letter-spacing:1px !important}
@@ -280,10 +281,50 @@ input[type=“text”]:focus,input[type=“number”]:focus,select:focus{border-
 .install-btn{background-color:var(–s3) !important;background:var(–s3) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important}
 .dismiss-btn{background-color:transparent !important;background:transparent !important;color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important}
 .help-toggle{background-color:transparent !important;background:transparent !important;-webkit-appearance:none !important}
-</style>
 
+/* SELECT WRAPPER - Safari-proof dark background on all dropdowns */
+.select-wrap {
+position: relative;
+background: #06050a !important;
+border: 1px solid #3a2c00 !important;
+border-radius: 4px !important;
+overflow: hidden;
+}
+.select-wrap select {
+background: transparent !important;
+background-color: transparent !important;
+border: none !important;
+border-radius: 0 !important;
+width: 100%;
+position: relative;
+z-index: 1;
+}
+.select-wrap::after {
+content: ‘’;
+position: absolute;
+right: 12px;
+top: 50%;
+transform: translateY(-50%);
+width: 10px;
+height: 6px;
+background: #5a4400;
+clip-path: polygon(0 0, 100% 0, 50% 100%);
+pointer-events: none;
+z-index: 2;
+}
+.select-wrap:focus-within {
+border-color: #e8940a !important;
+box-shadow: 0 0 0 2px rgba(232,148,10,0.12) !important;
+}
+/* Kill padding-right on select since wrapper handles the arrow */
+.select-wrap select {
+padding-right: 30px !important;
+background-image: none !important;
+}
+
+</style>
 </head>
-<body>
+<body style="-webkit-text-size-adjust:100%;background-color:#0a0800">
 
 <svg class="bg-c17" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" fill="#e8940a">
   <ellipse cx="400" cy="170" rx="220" ry="24"/>
@@ -403,20 +444,20 @@ input[type=“text”]:focus,input[type=“number”]:focus,select:focus{border-
         <div class="field">
           <label>Surface Type</label>
           <div class="help-text">R = concrete (rigid). F = asphalt (flexible).</div>
-          <select id="ps" onchange="manIn()">
+          <div class="select-wrap"><select id="ps" onchange="manIn()">
             <option value="R">R - Rigid (Concrete)</option>
             <option value="F">F - Flexible (Asphalt)</option>
-          </select>
+          </select></div>
         </div>
         <div class="field">
           <label>Subgrade</label>
           <div class="help-text">Underlying soil strength. Use B if unknown.</div>
-          <select id="pg" onchange="manIn()">
+          <div class="select-wrap"><select id="pg" onchange="manIn()">
             <option value="A">A - High</option>
             <option value="B">B - Medium</option>
             <option value="C">C - Low</option>
             <option value="D">D - Ultra-low</option>
-          </select>
+          </select></div>
         </div>
         <div class="field" id="pgw" style="display:none">
           <label>Planned GW (x1,000 lbs)</label>
@@ -448,28 +489,28 @@ input[type=“text”]:focus,input[type=“number”]:focus,select:focus{border-
         <div class="field">
           <label>Surface Type</label>
           <div class="help-text">Determines which sub-inputs appear below.</div>
-          <select id="ls" onchange="updLCN();calc()">
+          <div class="select-wrap"><select id="ls" onchange="updLCN();calc()">
             <option value="concrete">Concrete</option>
             <option value="asphalt">Asphalt</option>
-          </select>
+          </select></div>
         </div>
         <div class="field" id="llf">
           <label>L-Value</label>
           <div class="help-text">Concrete rigidity factor. Use 40 if unknown (TO Note 2).</div>
-          <select id="ll" onchange="calc()">
+          <div class="select-wrap"><select id="ll" onchange="calc()">
             <option value="30">30</option>
             <option value="40" selected>40</option>
             <option value="50">50</option>
-          </select>
+          </select></div>
         </div>
         <div class="field hidden" id="ltf">
           <label>Thickness (cm)</label>
           <div class="help-text">Asphalt layer depth. Use 20 if unknown (TO Note 2).</div>
-          <select id="lt" onchange="calc()">
+          <div class="select-wrap"><select id="lt" onchange="calc()">
             <option value="20">20</option>
             <option value="30">30</option>
             <option value="40">40</option>
-          </select>
+          </select></div>
         </div>
         <div class="field" id="lgw" style="display:none">
           <label>Planned GW (x1,000 lbs)</label>
@@ -501,11 +542,11 @@ input[type=“text”]:focus,input[type=“number”]:focus,select:focus{border-
         <div class="field">
           <label>Number of Passes</label>
           <div class="help-text">Total C-17 operations at this field. Each takeoff and each landing counts as one pass.</div>
-          <select id="cps" onchange="calc()">
+          <div class="select-wrap"><select id="cps" onchange="calc()">
             <option value="50">50 passes</option>
             <option value="100">100 passes</option>
             <option value="300">300 passes</option>
-          </select>
+          </select></div>
         </div>
         <div class="field" id="cgw" style="display:none">
           <label>Planned GW (x1,000 lbs)</label>

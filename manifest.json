@@ -1,0 +1,18 @@
+{
+  "name": "C-17 Pavement Stress Calculator",
+  "short_name": "C-17 PAVT",
+  "description": "AFTTP 3-3.C-17 pavement stress calculator for PCN, LCN, and CBR",
+  "start_url": "/Pavement-Evaluation/index.html",
+  "display": "standalone",
+  "background_color": "#04080f",
+  "theme_color": "#04080f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

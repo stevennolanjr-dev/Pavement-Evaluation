@@ -413,38 +413,421 @@ a.ref-link{color:var(–amber);text-decoration:none;border-bottom:1px solid var(
 
 <script>
 const PCN={20:{R:{A:285,B:279,C:265,D:245},F:{A:326,B:312,C:279,D:233}},22:{R:{A:312,B:303,C:285,D:262},F:{A:351,B:334,C:298,D:250}},24:{R:{A:338,B:326,C:305,D:278},F:{A:376,B:356,C:317,D:265}},26:{R:{A:364,B:349,C:324,D:294},F:{A:400,B:378,C:336,D:281}},28:{R:{A:390,B:372,C:343,D:310},F:{A:424,B:399,C:354,D:296}},30:{R:{A:416,B:394,C:362,D:325},F:{A:447,B:420,C:372,D:310}},32:{R:{A:442,B:417,C:380,D:340},F:{A:470,B:440,C:389,D:325}},34:{R:{A:467,B:439,C:398,D:355},F:{A:493,B:460,C:407,D:339}},36:{R:{A:493,B:460,C:416,D:369},F:{A:516,B:480,C:423,D:353}},38:{R:{A:518,B:482,C:434,D:383},F:{A:538,B:499,C:440,D:366}},40:{R:{A:544,B:504,C:451,D:397},F:{A:560,B:518,C:456,D:380}},42:{R:{A:569,B:525,C:469,D:411},F:{A:581,B:537,C:473,D:393}},44:{R:{A:594,B:546,C:486,D:425},F:{A:603,B:556,C:488,D:406}},46:{R:{A:619,B:567,C:503,D:438},F:{A:624,B:575,C:504,D:419}},48:{R:{A:644,B:588,C:519,D:451},F:{A:645,B:593,C:520,D:431}},50:{R:{A:null,B:609,C:536,D:464},F:{A:null,B:611,C:535,D:444}},52:{R:{A:null,B:630,C:552,D:477},F:{A:null,B:629,C:550,D:456}},54:{R:{A:null,B:650,C:569,D:490},F:{A:null,B:646,C:565,D:469}},56:{R:{A:null,B:null,C:585,D:503},F:{A:null,B:null,C:580,D:481}},58:{R:{A:null,B:null,C:601,D:515},F:{A:null,B:null,C:594,D:493}},60:{R:{A:null,B:null,C:617,D:527},F:{A:null,B:null,C:609,D:504}},62:{R:{A:null,B:null,C:632,D:539},F:{A:null,B:null,C:623,D:516}},64:{R:{A:null,B:null,C:648,D:552},F:{A:null,B:null,C:638,D:528}},66:{R:{A:null,B:null,C:null,D:564},F:{A:null,B:null,C:652,D:539}},68:{R:{A:null,B:null,C:null,D:575},F:{A:null,B:null,C:null,D:551}},70:{R:{A:null,B:null,C:null,D:587},F:{A:null,B:null,C:null,D:562}},72:{R:{A:null,B:null,C:null,D:599},F:{A:null,B:null,C:null,D:573}},74:{R:{A:null,B:null,C:null,D:610},F:{A:null,B:null,C:null,D:584}},76:{R:{A:null,B:null,C:null,D:622},F:{A:null,B:null,C:null,D:595}},78:{R:{A:null,B:null,C:null,D:633},F:{A:null,B:null,C:null,D:606}},80:{R:{A:null,B:null,C:null,D:644},F:{A:null,B:null,C:null,D:617}},82:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:628}},84:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:639}},86:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:649}}};
+
 const LCNC={42:{30:301,40:null,50:null},44:{30:318,40:301,50:null},46:{30:335,40:317,50:null},48:{30:352,40:333,50:305},50:{30:369,40:349,50:320},52:{30:386,40:365,50:334},54:{30:404,40:381,50:349},56:{30:421,40:397,50:364},58:{30:438,40:413,50:379},60:{30:455,40:429,50:394},62:{30:472,40:445,50:409},64:{30:489,40:461,50:424},66:{30:507,40:477,50:438},68:{30:524,40:493,50:453},70:{30:541,40:509,50:468},72:{30:558,40:525,50:483},74:{30:575,40:541,50:498},76:{30:593,40:557,50:513},78:{30:610,40:573,50:528},80:{30:627,40:589,50:543},82:{30:644,40:605,50:558},84:{30:661,40:621,50:573},86:{30:670,40:637,50:588},88:{30:670,40:653,50:603},90:{30:670,40:669,50:618},92:{30:670,40:670,50:633},94:{30:670,40:670,50:648},96:{30:670,40:670,50:663},98:{30:null,40:null,50:null},100:{30:null,40:null,50:null}};
+
 const LCNA={42:{20:314,30:null,40:null},44:{20:330,30:null,40:null},46:{20:347,30:null,40:null},48:{20:364,30:null,40:null},50:{20:381,30:304,40:null},52:{20:398,30:318,40:null},54:{20:415,30:332,40:null},56:{20:432,30:345,40:null},58:{20:449,30:359,40:308},60:{20:466,30:373,40:321},62:{20:483,30:387,40:334},64:{20:500,30:401,40:347},66:{20:517,30:415,40:361},68:{20:534,30:428,40:374},70:{20:551,30:442,40:387},72:{20:568,30:456,40:400},74:{20:584,30:470,40:413},76:{20:601,30:484,40:426},78:{20:618,30:498,40:439},80:{20:635,30:511,40:452},82:{20:652,30:525,40:465},84:{20:668,30:539,40:478},86:{20:670,30:553,40:491},88:{20:670,30:567,40:504},90:{20:670,30:580,40:517},92:{20:670,30:594,40:530},94:{20:670,30:608,40:543},96:{20:670,30:622,40:556},98:{20:670,30:635,40:569},100:{20:670,30:649,40:582}};
+
 const CBR={10:{50:300,100:null,300:null},11:{50:320,100:null,300:null},12:{50:360,100:300,300:null},13:{50:380,100:340,300:null},14:{50:420,100:360,300:300},15:{50:440,100:400,300:320},16:{50:null,100:420,300:360},17:{50:null,100:null,300:380},18:{50:null,100:null,300:400},19:{50:null,100:null,300:420},20:{50:null,100:null,300:440}};
-const C17_ACN={R:{A:{oew:11,mrw:28},B:{oew:14,mrw:36},C:{oew:19,mrw:46},D:{oew:29,mrw:71}},F:{A:{oew:10,mrw:25},B:{oew:13,mrw:32},C:{oew:17,mrw:42},D:{oew:28,mrw:68}}};
-const OEW=282,MRW=586;
-function getACN(sf,sg,gwK){const d=C17_ACN[sf]?.[sg];if(!d)return null;if(gwK<=OEW)return d.oew;if(gwK>=MRW)return d.mrw;return Math.round(d.oew+((gwK-OEW)/(MRW-OEW))*(d.mrw-d.oew));}
-let mode='fwd',sys='pcn',tireCode=null,lastResult=null;
-let surfaces=[{id:0,label:'RWY',result:null}],activeSurf=0,nextId=1;
-function setMode(m){mode=m;document.getElementById('mf').classList.toggle('active',m==='fwd');document.getElementById('mr').classList.toggle('active',m==='rev');['pgw','lgw','cgw'].forEach(i=>{document.getElementById(i).style.display=m==='rev'?'':'none';});calc();}
-function setSys(s){sys=s;document.querySelectorAll('.sys-btn').forEach(b=>b.classList.toggle('active',b.dataset.s===s));document.getElementById('pp').classList.toggle('hidden',s!=='pcn');document.getElementById('lp').classList.toggle('hidden',s!=='lcn');document.getElementById('cp').classList.toggle('hidden',s!=='cbr');calc();}
-function updLCN(){const s=document.getElementById('ls').value;document.getElementById('llf').classList.toggle('hidden',s!=='concrete');document.getElementById('ltf').classList.toggle('hidden',s!=='asphalt');}
-function renderSurfs(){const c=document.getElementById('stabs');c.innerHTML='';surfaces.forEach((s,i)=>{const b=document.createElement('button');b.className='stab'+(i===activeSurf?' active':'')+(s.isLimiting?' limiting':'');b.innerHTML=s.label+'<span class="lim-dot"></span>';b.onclick=()=>selSurf(i);c.appendChild(b);});if(surfaces.length<4){const a=document.createElement('button');a.className='add-s';a.textContent='+';a.onclick=addSurf;c.appendChild(a);}}
-function selSurf(i){activeSurf=i;renderSurfs();}
-function addSurf(){const labels=['RWY','TWY','RAMP','APRON'];if(surfaces.length>=4)return;surfaces.push({id:nextId++,label:labels[surfaces.length]||'SFC '+(surfaces.length+1),result:null,isLimiting:false});activeSurf=surfaces.length-1;renderSurfs();}
-function parseDecode(){const raw=document.getElementById('pd').value.trim().toUpperCase();const dc=document.getElementById('dc');dc.innerHTML='';tireCode=null;const m=raw.match(/^(?:PCN\s*)?(\d+)\s*[\/\s,]+([RF])\s*[\/\s,]+([ABCD])\s*[\/\s,]+([WXYZ])(?:\s*[\/\s,]+([TU]))?$/);if(!m){if(raw.length>0)dc.innerHTML='<span class="chip chip-surf">Parsing... e.g. 80 R/B/W/T</span>';return;}const[,pv,sf,sg,tp,ev]=m;document.getElementById('pv').value=parseInt(pv);document.getElementById('ps').value=sf;document.getElementById('pg').value=sg;tireCode=tp;const sn={R:'RIGID',F:'FLEX'},gn={A:'HIGH',B:'MED',C:'LOW',D:'ULTRA'};const tn={W:'NO LIMIT',X:'<=217 PSI',Y:'<=145 PSI',Z:'<=73 PSI'};let tc='chip-tok',ts=tp+' '+tn[tp];if(tp==='Y'){tc='chip-twarn';ts=tp+' MARGINAL';}if(tp==='Z'){tc='chip-tfail';ts=tp+' NOT COMPAT';}dc.innerHTML=`<span class="chip chip-pcn">PCN ${pv}</span><span class="chip chip-surf">${sf} ${sn[sf]}</span><span class="chip chip-sub">${sg} ${gn[sg]}</span><span class="chip ${tc}">${ts}</span>${ev?`<span class="chip chip-eval">${ev}</span>`:''}`;calc();}
-function manIn(){document.getElementById('pd').value='';document.getElementById('dc').innerHTML='';tireCode=null;calc();}
-function interp(data,val,getGW){const keys=Object.keys(data).map(Number).filter(k=>getGW(data[k])!==null).sort((a,b)=>a-b);if(!keys.length)return null;if(val<=keys[0])return{gw:getGW(data[keys[0]]),exact:val===keys[0],lo:keys[0],hi:keys[0]};if(val>=keys[keys.length-1])return{gw:getGW(data[keys[keys.length-1]]),exact:true,lo:keys[keys.length-1],hi:keys[keys.length-1]};for(let i=0;i<keys.length-1;i++){if(val>=keys[i]&&val<=keys[i+1]){const a=getGW(data[keys[i]]),b=getGW(data[keys[i+1]]);if(a===null||b===null)return null;const f=(val-keys[i])/(keys[i+1]-keys[i]);return{gw:Math.floor(a+f*(b-a)),exact:false,lo:keys[i],hi:keys[i+1]};}}return null;}
-function revSearch(data,target,getGW){const keys=Object.keys(data).map(Number).sort((a,b)=>a-b);for(let i=0;i<keys.length;i++){const gw=getGW(data[keys[i]]);if(gw!==null&&gw>=target){if(i>0){const prev=getGW(data[keys[i-1]]);if(prev!==null&&prev<target){return{val:Math.ceil(keys[i-1]+((target-prev)/(gw-prev))*(keys[i]-keys[i-1])),exact:false,lo:keys[i-1],hi:keys[i]};}}return{val:keys[i],exact:true};}}return null;}
-function calc(){const rs=document.getElementById('rs'),rt=document.getElementById('rt'),rn=document.getElementById('rn'),rsb=document.getElementById('rsb'),ri=document.getElementById('ri');const tw=document.getElementById('tw'),sw=document.getElementById('sw'),aw=document.getElementById('aw'),acnd=document.getElementById('acnd');tw.className='wstrip';sw.className='wstrip';aw.className='wstrip';document.getElementById('racn').innerHTML='';acnd.classList.remove('show');lastResult=null;if(sys==='pcn'&&tireCode){if(tireCode==='Z'){tw.className='wstrip show red';document.getElementById('twt').innerHTML='TIRE CODE Z (73 psi max). C-17 main = 144 psi. <strong>NOT COMPATIBLE.</strong>';}else if(tireCode==='Y'){tw.className='wstrip show amber';document.getElementById('twt').innerHTML='TIRE CODE Y (AFTTP 145 psi). C-17 main = 144 psi. <strong>MARGINAL per AFTTP.</strong>';}}if(mode==='fwd')calcFwd(rs,rt,rn,rsb,ri,sw,aw,acnd);else calcRev(rs,rt,rn,rsb,ri);}
-function calcFwd(rs,rt,rn,rsb,ri,sw,aw,acnd){let result=null,desc='',sf='',sg='',pcnVal=0;if(sys==='pcn'){pcnVal=parseFloat(document.getElementById('pv').value);sf=document.getElementById('ps').value;sg=document.getElementById('pg').value;const ol=document.getElementById('po').checked;if(isNaN(pcnVal)){rs.classList.remove('show');return;}const eff=ol?(sf==='F'?pcnVal*1.10:pcnVal*1.05):pcnVal;result=interp(PCN,eff,r=>r[sf]?r[sf][sg]:null);desc=`PCN ${pcnVal} ${sf==='R'?'Rigid':'Flex'}/${sg}${ol?' +OVL':''}`;}else if(sys==='lcn'){const lcn=parseFloat(document.getElementById('lv').value),s=document.getElementById('ls').value,ol=document.getElementById('lo').checked;if(isNaN(lcn)){rs.classList.remove('show');return;}const eff=ol?lcn*1.25:lcn;if(s==='concrete'){const lv=document.getElementById('ll').value;result=interp(LCNC,eff,r=>r[lv]||null);desc=`LCN ${lcn} Conc/L${lv}${ol?' +OVL':''}`;}else{const th=document.getElementById('lt').value;result=interp(LCNA,eff,r=>r[th]||null);desc=`LCN ${lcn} Asph/T${th}${ol?' +OVL':''}`;}else{const cbr=parseFloat(document.getElementById('cv').value),ps=document.getElementById('cps').value;if(isNaN(cbr)){rs.classList.remove('show');return;}result=interp(CBR,cbr,r=>r[ps]||null);desc=`CBR ${cbr} / ${ps}P`;}if(!result){rs.className='rstrip show sfail';rt.className='rtag fail';rt.textContent='NOT COMPATIBLE';rn.className='rnum fail';rn.innerHTML='N/C';rsb.textContent=desc;ri.textContent='Exceeds table range or no data for this combination.';return;}const gwK=result.gw,gwLbs=gwK*1000,status=gwK>=580?'warn':'ok';rs.className=`rstrip show s${status}`;rt.className=`rtag ${status}`;rt.textContent=status==='ok'?'MAX ALLOWABLE GROSS WEIGHT':'MAX GW // NEAR STRUCTURAL LIMIT';rn.className=`rnum ${status}`;rn.innerHTML=`${gwK.toLocaleString()}<span class="runit">x1K lbs</span>`;rsb.textContent=`${gwLbs.toLocaleString()} lbs | ${desc}`;if(gwK>447)sw.className='wstrip show amber';if(sys==='pcn'&&sf&&sg&&pcnVal){const acn=getACN(sf,sg,gwK);if(acn!==null){let cls='acn-ok',txt=`ACN ${acn} <= PCN ${pcnVal}`;if(acn>pcnVal){cls='acn-fail';txt=`ACN ${acn} > PCN ${pcnVal}`;document.getElementById('awt').innerHTML=`C-17 ACN (${acn}) at ${gwK}K exceeds PCN (${pcnVal}). <strong>Prior permission required.</strong>`;aw.className='wstrip show red';}else if(acn>pcnVal*0.9){cls='acn-warn';txt=`ACN ${acn} ~ PCN ${pcnVal}`;}document.getElementById('racn').innerHTML=`<span class="racn ${cls}">${txt} @ ${gwK}K</span>`;acnd.classList.add('show');document.getElementById('acnv').textContent=acn;document.getElementById('pcnv').textContent=pcnVal;const bar=document.getElementById('acnbar');bar.style.width=Math.min((acn/pcnVal)*100,100)+'%';bar.style.background=acn>pcnVal?'var(--red)':acn>pcnVal*0.9?'var(--warn)':'var(--green)';document.getElementById('acn-note').textContent=`OEW 282K: ACN ${C17_ACN[sf][sg].oew} | MRW 586K: ACN ${C17_ACN[sf][sg].mrw} | At ${gwK}K: ACN ${acn}`;}}if(!result.exact&&result.lo!==result.hi)ri.textContent=`Interpolated between PCN ${result.lo} and ${result.hi}`;else ri.textContent='';lastResult={gwK,gwLbs,desc,sys,mode:'fwd'};}}
-function calcRev(rs,rt,rn,rsb,ri){let result=null,desc='',unit='';if(sys==='pcn'){const gw=parseFloat(document.getElementById('pgwv').value),sf=document.getElementById('ps').value,sg=document.getElementById('pg').value;if(isNaN(gw)){rs.classList.remove('show');return;}result=revSearch(PCN,gw,r=>r[sf]?r[sf][sg]:null);desc=`for ${gw}K on ${sf==='R'?'Rigid':'Flex'}/${sg}`;unit='PCN';if(result){const acn=getACN(sf,sg,gw);if(acn!==null){document.getElementById('racn').innerHTML=`<span class="racn acn-ok">C-17 ACN at ${gw}K: ${acn}</span>`;document.getElementById('acnd').classList.add('show');document.getElementById('acnv').textContent=acn;document.getElementById('pcnv').textContent=`${result.val}+ (min)`;const bar=document.getElementById('acnbar');bar.style.width=Math.min((acn/result.val)*100,100)+'%';bar.style.background='var(--green)';document.getElementById('acn-note').textContent=`Need PCN >= ${result.val} to support ${gw}K without restriction`;}}}else if(sys==='lcn'){const gw=parseFloat(document.getElementById('lgwv').value),s=document.getElementById('ls').value;if(isNaN(gw)){rs.classList.remove('show');return;}if(s==='concrete'){const lv=document.getElementById('ll').value;result=revSearch(LCNC,gw,r=>r[lv]||null);desc=`for ${gw}K Conc/L${lv}`;}else{const th=document.getElementById('lt').value;result=revSearch(LCNA,gw,r=>r[th]||null);desc=`for ${gw}K Asph/T${th}`;}unit='LCN';}else{const gw=parseFloat(document.getElementById('cgwv').value),ps=document.getElementById('cps').value;if(isNaN(gw)){rs.classList.remove('show');return;}result=revSearch(CBR,gw,r=>r[ps]||null);desc=`for ${gw}K / ${ps}P`;unit='CBR';}if(!result){rs.className='rstrip show sfail';rt.className='rtag fail';rt.textContent='EXCEEDS TABLE';rn.className='rnum fail';rn.innerHTML='NO SOL';rsb.textContent=desc;ri.textContent='Required value exceeds table max. Check TO.';lastResult=null;return;}rs.className='rstrip show sok';rt.className='rtag info';rt.textContent=`MINIMUM REQUIRED ${unit}`;rn.className='rnum info';rn.innerHTML=`${result.val}<span class="runit">min</span>`;rsb.textContent=desc;if(!result.exact)ri.textContent=`Interpolated between ${result.lo} and ${result.hi}. Round up.`;else ri.textContent='';lastResult={val:result.val,unit,desc,sys,mode:'rev'};}
-function copyResult(){if(!lastResult)return;let t=lastResult.mode==='fwd'?`C-17 PAVEMENT: ${lastResult.desc} -- Max GW ${lastResult.gwK.toLocaleString()}K (${lastResult.gwLbs.toLocaleString()} lbs). SUPPORTED.`:`C-17 PAVEMENT: Min ${lastResult.unit} ${lastResult.val}+ required ${lastResult.desc}.`;if(tireCode){const ts={W:'OK',X:'OK',Y:'MARGINAL (AFTTP)',Z:'NOT COMPATIBLE'};t+=` Tire: ${tireCode} (${ts[tireCode]}).`;}t+=' (Ref: AFTTP 3-3.C-17 Table 3.1)';navigator.clipboard.writeText(t).then(()=>{const b=document.getElementById('cpb');b.textContent='COPIED';b.style.borderColor='var(--green)';b.style.color='var(--green)';setTimeout(()=>{b.textContent='COPY';b.style.borderColor='';b.style.color='';},1500);});}
-function togRef(){const b=document.getElementById('reft'),d=document.getElementById('refb');b.classList.toggle('open');d.classList.toggle('open');}
-function togACR(){const b=document.getElementById('acrt'),d=document.getElementById('acrb');b.classList.toggle('open');d.classList.toggle('open');}
-let deferredPrompt=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').classList.add('show');});
-document.getElementById('installBtn')?.addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;document.getElementById('installBanner').classList.remove('show');});
-document.getElementById('dismissBtn')?.addEventListener('click',()=>{document.getElementById('installBanner').classList.remove('show');});
-const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent),isStandalone=window.matchMedia('(display-mode: standalone)').matches;
-if(isIOS&&!isStandalone){const b=document.getElementById('installBanner');b.querySelector('span').textContent='Tap Share then "Add to Home Screen" for offline use';b.classList.add('show');document.getElementById('installBtn').style.display='none';}
-if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-updLCN();renderSurfs();
+
+const C17_ACN = {
+  R: { A:{oew:11,mrw:28}, B:{oew:14,mrw:36}, C:{oew:19,mrw:46}, D:{oew:29,mrw:71} },
+  F: { A:{oew:10,mrw:25}, B:{oew:13,mrw:32}, C:{oew:17,mrw:42}, D:{oew:28,mrw:68} }
+};
+const OEW = 282, MRW = 586;
+
+function getACN(sf, sg, gwK) {
+  const d = C17_ACN[sf] && C17_ACN[sf][sg];
+  if (!d) return null;
+  if (gwK <= OEW) return d.oew;
+  if (gwK >= MRW) return d.mrw;
+  return Math.round(d.oew + ((gwK - OEW) / (MRW - OEW)) * (d.mrw - d.oew));
+}
+
+let mode = 'fwd', sys = 'pcn', tireCode = null, lastResult = null;
+let surfaces = [{id:0, label:'RWY', result:null}], activeSurf = 0, nextId = 1;
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('mf').classList.toggle('active', m === 'fwd');
+  document.getElementById('mr').classList.toggle('active', m === 'rev');
+  ['pgw','lgw','cgw'].forEach(function(i) {
+    document.getElementById(i).style.display = m === 'rev' ? '' : 'none';
+  });
+  calc();
+}
+
+function setSys(s) {
+  sys = s;
+  document.querySelectorAll('.sys-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.s === s);
+  });
+  document.getElementById('pp').classList.toggle('hidden', s !== 'pcn');
+  document.getElementById('lp').classList.toggle('hidden', s !== 'lcn');
+  document.getElementById('cp').classList.toggle('hidden', s !== 'cbr');
+  calc();
+}
+
+function updLCN() {
+  var s = document.getElementById('ls').value;
+  document.getElementById('llf').classList.toggle('hidden', s !== 'concrete');
+  document.getElementById('ltf').classList.toggle('hidden', s !== 'asphalt');
+}
+
+function renderSurfs() {
+  var c = document.getElementById('stabs');
+  c.innerHTML = '';
+  surfaces.forEach(function(s, i) {
+    var b = document.createElement('button');
+    b.className = 'stab' + (i === activeSurf ? ' active' : '') + (s.isLimiting ? ' limiting' : '');
+    b.innerHTML = s.label + '<span class="lim-dot"></span>';
+    b.onclick = (function(idx) { return function() { selSurf(idx); }; })(i);
+    c.appendChild(b);
+  });
+  if (surfaces.length < 4) {
+    var a = document.createElement('button');
+    a.className = 'add-s';
+    a.textContent = '+';
+    a.onclick = addSurf;
+    c.appendChild(a);
+  }
+}
+
+function selSurf(i) { activeSurf = i; renderSurfs(); }
+
+function addSurf() {
+  var labels = ['RWY','TWY','RAMP','APRON'];
+  if (surfaces.length >= 4) return;
+  surfaces.push({id: nextId++, label: labels[surfaces.length] || ('SFC ' + (surfaces.length+1)), result: null, isLimiting: false});
+  activeSurf = surfaces.length - 1;
+  renderSurfs();
+}
+
+function parseDecode() {
+  var raw = document.getElementById('pd').value.trim().toUpperCase();
+  var dc = document.getElementById('dc');
+  dc.innerHTML = '';
+  tireCode = null;
+  var m = raw.match(/^(?:PCN\s*)?(\d+)\s*[\/\s,]+([RF])\s*[\/\s,]+([ABCD])\s*[\/\s,]+([WXYZ])(?:\s*[\/\s,]+([TU]))?$/);
+  if (!m) {
+    if (raw.length > 0) dc.innerHTML = '<span class="chip chip-surf">Parsing... e.g. 80 R/B/W/T</span>';
+    return;
+  }
+  var pv = m[1], sf = m[2], sg = m[3], tp = m[4], ev = m[5];
+  document.getElementById('pv').value = parseInt(pv);
+  document.getElementById('ps').value = sf;
+  document.getElementById('pg').value = sg;
+  tireCode = tp;
+  var sn = {R:'RIGID', F:'FLEX'}, gn = {A:'HIGH', B:'MED', C:'LOW', D:'ULTRA'};
+  var tn = {W:'NO LIMIT', X:'<=217 PSI', Y:'<=145 PSI', Z:'<=73 PSI'};
+  var tc = 'chip-tok', ts = tp + ' ' + tn[tp];
+  if (tp === 'Y') { tc = 'chip-twarn'; ts = tp + ' MARGINAL'; }
+  if (tp === 'Z') { tc = 'chip-tfail'; ts = tp + ' NOT COMPAT'; }
+  dc.innerHTML = '<span class="chip chip-pcn">PCN ' + pv + '</span>' +
+    '<span class="chip chip-surf">' + sf + ' ' + sn[sf] + '</span>' +
+    '<span class="chip chip-sub">' + sg + ' ' + gn[sg] + '</span>' +
+    '<span class="chip ' + tc + '">' + ts + '</span>' +
+    (ev ? '<span class="chip chip-eval">' + ev + '</span>' : '');
+  calc();
+}
+
+function manIn() {
+  document.getElementById('pd').value = '';
+  document.getElementById('dc').innerHTML = '';
+  tireCode = null;
+  calc();
+}
+
+function interp(data, val, getGW) {
+  var keys = Object.keys(data).map(Number).filter(function(k) { return getGW(data[k]) !== null; }).sort(function(a,b) { return a-b; });
+  if (!keys.length) return null;
+  if (val <= keys[0]) return {gw: getGW(data[keys[0]]), exact: val === keys[0], lo: keys[0], hi: keys[0]};
+  if (val >= keys[keys.length-1]) return {gw: getGW(data[keys[keys.length-1]]), exact: true, lo: keys[keys.length-1], hi: keys[keys.length-1]};
+  for (var i = 0; i < keys.length - 1; i++) {
+    if (val >= keys[i] && val <= keys[i+1]) {
+      var a = getGW(data[keys[i]]), b = getGW(data[keys[i+1]]);
+      if (a === null || b === null) return null;
+      var f = (val - keys[i]) / (keys[i+1] - keys[i]);
+      return {gw: Math.floor(a + f * (b - a)), exact: false, lo: keys[i], hi: keys[i+1]};
+    }
+  }
+  return null;
+}
+
+function revSearch(data, target, getGW) {
+  var keys = Object.keys(data).map(Number).sort(function(a,b) { return a-b; });
+  for (var i = 0; i < keys.length; i++) {
+    var gw = getGW(data[keys[i]]);
+    if (gw !== null && gw >= target) {
+      if (i > 0) {
+        var prev = getGW(data[keys[i-1]]);
+        if (prev !== null && prev < target) {
+          return {val: Math.ceil(keys[i-1] + ((target - prev) / (gw - prev)) * (keys[i] - keys[i-1])), exact: false, lo: keys[i-1], hi: keys[i]};
+        }
+      }
+      return {val: keys[i], exact: true};
+    }
+  }
+  return null;
+}
+
+function calc() {
+  var rs = document.getElementById('rs');
+  var rt = document.getElementById('rt');
+  var rn = document.getElementById('rn');
+  var rsb = document.getElementById('rsb');
+  var ri = document.getElementById('ri');
+  var tw = document.getElementById('tw');
+  var sw = document.getElementById('sw');
+  var aw = document.getElementById('aw');
+  var acnd = document.getElementById('acnd');
+
+  tw.className = 'wstrip';
+  sw.className = 'wstrip';
+  aw.className = 'wstrip';
+  document.getElementById('racn').innerHTML = '';
+  acnd.classList.remove('show');
+  lastResult = null;
+
+  if (sys === 'pcn' && tireCode) {
+    if (tireCode === 'Z') {
+      tw.className = 'wstrip show red';
+      document.getElementById('twt').innerHTML = 'TIRE CODE Z (73 psi max). C-17 main = 144 psi. <strong>NOT COMPATIBLE.</strong>';
+    } else if (tireCode === 'Y') {
+      tw.className = 'wstrip show amber';
+      document.getElementById('twt').innerHTML = 'TIRE CODE Y (AFTTP 145 psi). C-17 main = 144 psi. <strong>MARGINAL per AFTTP.</strong>';
+    }
+  }
+
+  if (mode === 'fwd') {
+    calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd);
+  } else {
+    calcRev(rs, rt, rn, rsb, ri);
+  }
+}
+
+function calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd) {
+  var result = null, desc = '', sf = '', sg = '', pcnVal = 0;
+
+  if (sys === 'pcn') {
+    pcnVal = parseFloat(document.getElementById('pv').value);
+    sf = document.getElementById('ps').value;
+    sg = document.getElementById('pg').value;
+    var ol = document.getElementById('po').checked;
+    if (isNaN(pcnVal)) { rs.classList.remove('show'); return; }
+    var eff = ol ? (sf === 'F' ? pcnVal * 1.10 : pcnVal * 1.05) : pcnVal;
+    result = interp(PCN, eff, function(r) { return r[sf] ? r[sf][sg] : null; });
+    desc = 'PCN ' + pcnVal + ' ' + (sf === 'R' ? 'Rigid' : 'Flex') + '/' + sg + (ol ? ' +OVL' : '');
+
+  } else if (sys === 'lcn') {
+    var lcn = parseFloat(document.getElementById('lv').value);
+    var lcnSurf = document.getElementById('ls').value;
+    var lcnOl = document.getElementById('lo').checked;
+    if (isNaN(lcn)) { rs.classList.remove('show'); return; }
+    var lcnEff = lcnOl ? lcn * 1.25 : lcn;
+    if (lcnSurf === 'concrete') {
+      var lv = document.getElementById('ll').value;
+      result = interp(LCNC, lcnEff, function(r) { return r[lv] || null; });
+      desc = 'LCN ' + lcn + ' Conc/L' + lv + (lcnOl ? ' +OVL' : '');
+    } else {
+      var th = document.getElementById('lt').value;
+      result = interp(LCNA, lcnEff, function(r) { return r[th] || null; });
+      desc = 'LCN ' + lcn + ' Asph/T' + th + (lcnOl ? ' +OVL' : '');
+    }
+
+  } else {
+    var cbr = parseFloat(document.getElementById('cv').value);
+    var ps = document.getElementById('cps').value;
+    if (isNaN(cbr)) { rs.classList.remove('show'); return; }
+    result = interp(CBR, cbr, function(r) { return r[ps] || null; });
+    desc = 'CBR ' + cbr + ' / ' + ps + 'P';
+  }
+
+  if (!result) {
+    rs.className = 'rstrip show sfail';
+    rt.className = 'rtag fail'; rt.textContent = 'NOT COMPATIBLE';
+    rn.className = 'rnum fail'; rn.innerHTML = 'N/C';
+    rsb.textContent = desc;
+    ri.textContent = 'Exceeds table range or no data for this combination.';
+    return;
+  }
+
+  var gwK = result.gw, gwLbs = gwK * 1000;
+  var status = gwK >= 580 ? 'warn' : 'ok';
+  rs.className = 'rstrip show s' + status;
+  rt.className = 'rtag ' + status;
+  rt.textContent = status === 'ok' ? 'MAX ALLOWABLE GROSS WEIGHT' : 'MAX GW // NEAR STRUCTURAL LIMIT';
+  rn.className = 'rnum ' + status;
+  rn.innerHTML = gwK.toLocaleString() + '<span class="runit">x1K lbs</span>';
+  rsb.textContent = gwLbs.toLocaleString() + ' lbs | ' + desc;
+
+  if (gwK > 447) sw.className = 'wstrip show amber';
+
+  if (sys === 'pcn' && sf && sg && pcnVal) {
+    var acn = getACN(sf, sg, gwK);
+    if (acn !== null) {
+      var cls = 'acn-ok', txt = 'ACN ' + acn + ' <= PCN ' + pcnVal;
+      if (acn > pcnVal) {
+        cls = 'acn-fail';
+        txt = 'ACN ' + acn + ' > PCN ' + pcnVal;
+        document.getElementById('awt').innerHTML = 'C-17 ACN (' + acn + ') at ' + gwK + 'K exceeds PCN (' + pcnVal + '). <strong>Prior permission required.</strong>';
+        aw.className = 'wstrip show red';
+      } else if (acn > pcnVal * 0.9) {
+        cls = 'acn-warn';
+        txt = 'ACN ' + acn + ' ~ PCN ' + pcnVal;
+      }
+      document.getElementById('racn').innerHTML = '<span class="racn ' + cls + '">' + txt + ' @ ' + gwK + 'K</span>';
+      acnd.classList.add('show');
+      document.getElementById('acnv').textContent = acn;
+      document.getElementById('pcnv').textContent = pcnVal;
+      var bar = document.getElementById('acnbar');
+      bar.style.width = Math.min((acn / pcnVal) * 100, 100) + '%';
+      bar.style.background = acn > pcnVal ? 'var(--red)' : acn > pcnVal * 0.9 ? 'var(--warn)' : 'var(--green)';
+      document.getElementById('acn-note').textContent = 'OEW 282K: ACN ' + C17_ACN[sf][sg].oew + ' | MRW 586K: ACN ' + C17_ACN[sf][sg].mrw + ' | At ' + gwK + 'K: ACN ' + acn;
+    }
+  }
+
+  if (!result.exact && result.lo !== result.hi) {
+    ri.textContent = 'Interpolated between PCN ' + result.lo + ' and ' + result.hi;
+  } else {
+    ri.textContent = '';
+  }
+  lastResult = {gwK: gwK, gwLbs: gwLbs, desc: desc, sys: sys, mode: 'fwd'};
+}
+
+function calcRev(rs, rt, rn, rsb, ri) {
+  var result = null, desc = '', unit = '';
+
+  if (sys === 'pcn') {
+    var gw = parseFloat(document.getElementById('pgwv').value);
+    var sf = document.getElementById('ps').value;
+    var sg = document.getElementById('pg').value;
+    if (isNaN(gw)) { rs.classList.remove('show'); return; }
+    result = revSearch(PCN, gw, function(r) { return r[sf] ? r[sf][sg] : null; });
+    desc = 'for ' + gw + 'K on ' + (sf === 'R' ? 'Rigid' : 'Flex') + '/' + sg;
+    unit = 'PCN';
+    if (result) {
+      var acn = getACN(sf, sg, gw);
+      if (acn !== null) {
+        document.getElementById('racn').innerHTML = '<span class="racn acn-ok">C-17 ACN at ' + gw + 'K: ' + acn + '</span>';
+        document.getElementById('acnd').classList.add('show');
+        document.getElementById('acnv').textContent = acn;
+        document.getElementById('pcnv').textContent = result.val + '+ (min)';
+        var bar = document.getElementById('acnbar');
+        bar.style.width = Math.min((acn / result.val) * 100, 100) + '%';
+        bar.style.background = 'var(--green)';
+        document.getElementById('acn-note').textContent = 'Need PCN >= ' + result.val + ' to support ' + gw + 'K without restriction';
+      }
+    }
+  } else if (sys === 'lcn') {
+    var gw2 = parseFloat(document.getElementById('lgwv').value);
+    var lcnSurf = document.getElementById('ls').value;
+    if (isNaN(gw2)) { rs.classList.remove('show'); return; }
+    if (lcnSurf === 'concrete') {
+      var lv = document.getElementById('ll').value;
+      result = revSearch(LCNC, gw2, function(r) { return r[lv] || null; });
+      desc = 'for ' + gw2 + 'K Conc/L' + lv;
+    } else {
+      var th = document.getElementById('lt').value;
+      result = revSearch(LCNA, gw2, function(r) { return r[th] || null; });
+      desc = 'for ' + gw2 + 'K Asph/T' + th;
+    }
+    unit = 'LCN';
+  } else {
+    var gw3 = parseFloat(document.getElementById('cgwv').value);
+    var ps = document.getElementById('cps').value;
+    if (isNaN(gw3)) { rs.classList.remove('show'); return; }
+    result = revSearch(CBR, gw3, function(r) { return r[ps] || null; });
+    desc = 'for ' + gw3 + 'K / ' + ps + 'P';
+    unit = 'CBR';
+  }
+
+  if (!result) {
+    rs.className = 'rstrip show sfail';
+    rt.className = 'rtag fail'; rt.textContent = 'EXCEEDS TABLE';
+    rn.className = 'rnum fail'; rn.innerHTML = 'NO SOL';
+    rsb.textContent = desc;
+    ri.textContent = 'Required value exceeds table max. Check TO.';
+    lastResult = null;
+    return;
+  }
+
+  rs.className = 'rstrip show sok';
+  rt.className = 'rtag info'; rt.textContent = 'MINIMUM REQUIRED ' + unit;
+  rn.className = 'rnum info'; rn.innerHTML = result.val + '<span class="runit">min</span>';
+  rsb.textContent = desc;
+  if (!result.exact) {
+    ri.textContent = 'Interpolated between ' + result.lo + ' and ' + result.hi + '. Round up.';
+  } else {
+    ri.textContent = '';
+  }
+  lastResult = {val: result.val, unit: unit, desc: desc, sys: sys, mode: 'rev'};
+}
+
+function copyResult() {
+  if (!lastResult) return;
+  var t;
+  if (lastResult.mode === 'fwd') {
+    t = 'C-17 PAVEMENT: ' + lastResult.desc + ' -- Max GW ' + lastResult.gwK.toLocaleString() + 'K (' + lastResult.gwLbs.toLocaleString() + ' lbs). SUPPORTED.';
+  } else {
+    t = 'C-17 PAVEMENT: Min ' + lastResult.unit + ' ' + lastResult.val + '+ required ' + lastResult.desc + '.';
+  }
+  if (tireCode) {
+    var ts = {W:'OK', X:'OK', Y:'MARGINAL (AFTTP)', Z:'NOT COMPATIBLE'};
+    t += ' Tire: ' + tireCode + ' (' + ts[tireCode] + ').';
+  }
+  t += ' (Ref: AFTTP 3-3.C-17 Table 3.1)';
+  navigator.clipboard.writeText(t).then(function() {
+    var b = document.getElementById('cpb');
+    b.textContent = 'COPIED';
+    b.style.borderColor = 'var(--green)';
+    b.style.color = 'var(--green)';
+    setTimeout(function() {
+      b.textContent = 'COPY';
+      b.style.borderColor = '';
+      b.style.color = '';
+    }, 1500);
+  });
+}
+
+function togRef() {
+  document.getElementById('reft').classList.toggle('open');
+  document.getElementById('refb').classList.toggle('open');
+}
+function togACR() {
+  document.getElementById('acrt').classList.toggle('open');
+  document.getElementById('acrb').classList.toggle('open');
+}
+
+var deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBanner').classList.add('show');
+});
+var installBtn = document.getElementById('installBtn');
+if (installBtn) {
+  installBtn.addEventListener('click', function() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function() {
+      deferredPrompt = null;
+      document.getElementById('installBanner').classList.remove('show');
+    });
+  });
+}
+var dismissBtn = document.getElementById('dismissBtn');
+if (dismissBtn) {
+  dismissBtn.addEventListener('click', function() {
+    document.getElementById('installBanner').classList.remove('show');
+  });
+}
+
+var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+var isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+if (isIOS && !isStandalone) {
+  var banner = document.getElementById('installBanner');
+  banner.querySelector('span').textContent = 'Tap Share then "Add to Home Screen" for offline use';
+  banner.classList.add('show');
+  document.getElementById('installBtn').style.display = 'none';
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function() {});
+}
+
+updLCN();
+renderSurfs();
 </script>
 
 </body>

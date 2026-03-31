@@ -13,7 +13,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  color-scheme: dark;
   --black:   #06050a;
   --bg:      #0a0800;
   --s1:      #100e00;
@@ -45,19 +44,17 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:16px}
+html{background-color:#0a0800}
 body{
   font-family:var(--mono);
-  background:var(--bg);
-  color:var(--text);
-  min-height:100dvh;
+  background-color:#0a0800;
+  color:#e0c060;
+  min-height:100vh;
+  min-height:100svh;
   -webkit-font-smoothing:antialiased;
-  background-image:
-    linear-gradient(rgba(232,148,10,0.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(232,148,10,0.025) 1px,transparent 1px);
-  background-size:44px 44px;
 }
-.bg-c17{position:fixed;bottom:-40px;right:-60px;width:72vw;max-width:520px;opacity:0.045;pointer-events:none;z-index:0;}
-.app{position:relative;z-index:1;max-width:580px;margin:0 auto;padding:0 16px 180px}
+.bg-c17{position:absolute;bottom:-40px;right:-60px;width:72vw;max-width:520px;opacity:0.045;pointer-events:none;z-index:0;}
+.app{position:relative;z-index:1;max-width:580px;margin:0 auto;padding:0 16px 100px}
 
 /* HEADER */
 .hdr{padding:20px 0 16px;margin-bottom:14px}
@@ -140,7 +137,7 @@ select{cursor:pointer;-webkit-appearance:none;background-image:url(“data:image
 .ttxt .help-text{margin-top:2px}
 
 /* RESULT STRIP */
-.rstrip{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:580px;z-index:200;background:var(–s1);border:1px solid var(–border);border-top:1px solid var(–border);border-radius:8px 8px 0 0;border-bottom:none;display:none;overflow:hidden;padding-bottom:env(safe-area-inset-bottom,0px)}
+.rstrip{position:sticky;top:0;z-index:200;background:var(–s1);border:1px solid var(–border);border-radius:var(–r);margin-bottom:10px;display:none;overflow:hidden}
 .rstrip.show{display:block}
 .rstrip.sok{border-color:var(–gbr);box-shadow:0 0 24px rgba(64,192,96,.08)}
 .rstrip.swarn{border-color:var(–wbr);box-shadow:0 0 24px rgba(192,120,32,.08)}
@@ -248,7 +245,7 @@ a.ref-link{color:var(–amber);text-decoration:none;border-bottom:1px solid var(
 ::-webkit-scrollbar-thumb{background:var(–border);border-radius:2px}
 .hidden{display:none !important}
 @media(max-width:400px){.fg,.fg.tri{grid-template-columns:1fr}.rnum{font-size:42px}.hdr-title{font-size:34px}}
-@media(min-width:600px){.app{padding:0 24px 180px}.hdr-title{font-size:46px}}
+@media(min-width:600px){.app{padding:0 24px 100px}.hdr-title{font-size:46px}}
 
 /* SAFARI / iOS FORM OVERRIDE */
 input,select,textarea,button{-webkit-appearance:none !important;-moz-appearance:none !important;appearance:none !important}
@@ -324,7 +321,7 @@ background-image: none !important;
 
 </style>
 </head>
-<body style="-webkit-text-size-adjust:100%;background-color:#0a0800">
+<body style="-webkit-text-size-adjust:100%;background:#0a0800;background-color:#0a0800;color:#e0c060">
 
 <svg class="bg-c17" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" fill="#e8940a">
   <ellipse cx="400" cy="170" rx="220" ry="24"/>
@@ -993,16 +990,7 @@ function calcPCR(rs, rt, rn, rsb, ri, sw, aw) {
 
   if (isNaN(pcrVal)) { rs.classList.remove('show'); return; }
 
-  // Tire code warning (same logic as PCN)
-  if (pcrTireCode) {
-    if (pcrTireCode === 'Z') {
-      document.getElementById('tw').className = 'wstrip show red';
-      document.getElementById('twt').innerHTML = 'TIRE CODE Z (73 psi max). C-17 main = 144 psi. NOT COMPATIBLE.';
-    } else if (pcrTireCode === 'Y') {
-      document.getElementById('tw').className = 'wstrip show amber';
-      document.getElementById('twt').innerHTML = 'TIRE CODE Y (AFTTP 145 psi). C-17 main = 144 psi. MARGINAL per AFTTP.';
-    }
-  }
+  // Tire warnings handled in main calc() dispatcher
 
   var effPCR = ol ? pcrVal * 1.10 : pcrVal;
   var olNote = ol ? ' +10% OVL' : '';
@@ -1043,7 +1031,6 @@ function calcPCR(rs, rt, rn, rsb, ri, sw, aw) {
     document.getElementById('acn-note').textContent = 'C-17 ACR at ' + gwK + 'K = ' + acr + ' vs PCR ' + pcrVal + '. Interpolated from TO Fig 10-2.';
     document.getElementById('acnDetailLabel').textContent = 'ACR vs PCR COMPARISON';
 
-    if (!result) ri.textContent = '';
     lastResult = { gwK: gwK, gwLbs: gwLbs, desc: desc, sys: 'pcr', mode: 'fwd', acr: acr, pcrVal: pcrVal };
 
   } else {
@@ -1337,11 +1324,10 @@ function calc() {
   ovlWrap.classList.add('hidden');
   lastResult = null;
 
-  if ((sys === 'pcn' || sys === 'pcr') && (tireCode || pcrTireCode)) {
-    var tc = tireCode || pcrTireCode;
-    if (!tireCode && pcrTireCode) tireCode = pcrTireCode;
-  }
-  if ((sys === 'pcn' || sys === 'pcr') && tireCode) {
+  // Unify tire codes for PCN and PCR
+  var activeTireCode = (sys === 'pcr') ? pcrTireCode : tireCode;
+  if ((sys === 'pcn' || sys === 'pcr') && activeTireCode) {
+    tireCode = activeTireCode;
     if (tireCode === 'Z') {
       tw.className = 'wstrip show red';
       document.getElementById('twt').innerHTML = 'TIRE CODE Z (73 psi max). C-17 main = 144 psi. NOT COMPATIBLE. See TO for reduced tire pressure ops.';
@@ -1614,7 +1600,7 @@ function copyResult() {
   if (lastResult.sys === 'pcr' && lastResult.mode === 'fwd') {
     t = 'C-17 ACR/PCR: ' + lastResult.desc + ' -- Max GW ' + lastResult.gwK.toLocaleString() + 'K (ACR ' + lastResult.acr + ' vs PCR ' + lastResult.pcrVal + '). SUPPORTED.';
   } else if (lastResult.sys === 'pcr' && lastResult.mode === 'rev') {
-    t = parseFloat(lastResult.excess) <= 0
+    t = !lastResult.excess || parseFloat(lastResult.excess) <= 0
       ? 'C-17 ACR/PCR: ACR ' + lastResult.acr + ' <= PCR ' + lastResult.pcrVal + ' at ' + lastResult.gw + 'K. UNRESTRICTED.'
       : 'C-17 ACR/PCR: ACR ' + lastResult.acr + ' exceeds PCR ' + lastResult.pcrVal + ' by ' + lastResult.excess + '% at ' + lastResult.gw + 'K. RESTRICTED - prior permission required.';
   } else if (lastResult.mode === 'fwd') {

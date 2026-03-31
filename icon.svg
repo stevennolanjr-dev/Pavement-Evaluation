@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#04080f"/>
+  <!-- Grid lines -->
+  <line x1="0" y1="256" x2="512" y2="256" stroke="#1a3050" stroke-width="1" opacity="0.5"/>
+  <line x1="256" y1="0" x2="256" y2="512" stroke="#1a3050" stroke-width="1" opacity="0.5"/>
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#1a3050" stroke-width="1" opacity="0.4"/>
+  <circle cx="256" cy="256" r="90" fill="none" stroke="#1a3050" stroke-width="1" opacity="0.4"/>
+  <!-- C-17 top-down silhouette, centered -->
+  <!-- Fuselage -->
+  <ellipse cx="256" cy="256" rx="140" ry="22" fill="#1a6fd4"/>
+  <!-- Main wings -->
+  <polygon points="200,248 312,248 380,300 364,304 256,262 148,304 132,300" fill="#1a6fd4"/>
+  <!-- Tail horizontal stabilizer -->
+  <polygon points="108,250 148,250 172,275 164,278 128,256 92,278 84,275" fill="#1a6fd4"/>
+  <!-- Vertical tail -->
+  <polygon points="118,232 138,232 138,252 118,252" fill="#2d7aed"/>
+  <!-- Engines x4 -->
+  <ellipse cx="196" cy="278" rx="20" ry="7" fill="#0d4a9a"/>
+  <ellipse cx="228" cy="283" rx="20" ry="7" fill="#0d4a9a"/>
+  <ellipse cx="284" cy="283" rx="20" ry="7" fill="#0d4a9a"/>
+  <ellipse cx="316" cy="278" rx="20" ry="7" fill="#0d4a9a"/>
+  <!-- Nose -->
+  <ellipse cx="394" cy="256" rx="12" ry="10" fill="#2d7aed"/>
+  <!-- Glow effect -->
+  <ellipse cx="256" cy="256" rx="140" ry="22" fill="none" stroke="#4d8fe0" stroke-width="1.5" opacity="0.4"/>
+  <!-- Corner HUD marks -->
+  <path d="M 30 30 L 30 60 M 30 30 L 60 30" stroke="#1a6fd4" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 482 30 L 482 60 M 482 30 L 452 30" stroke="#1a6fd4" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 30 482 L 30 452 M 30 482 L 60 482" stroke="#1a6fd4" stroke-width="3" fill="none" opacity="0.7"/>
+  <path d="M 482 482 L 482 452 M 482 482 L 452 482" stroke="#1a6fd4" stroke-width="3" fill="none" opacity="0.7"/>
+  <!-- Label -->
+  <text x="256" y="380" text-anchor="middle" font-family="monospace" font-size="36" font-weight="700" fill="#4d8fe0" letter-spacing="4">C-17</text>
+  <text x="256" y="408" text-anchor="middle" font-family="monospace" font-size="14" fill="#344a66" letter-spacing="3">PAVT CALC</text>
+</svg>

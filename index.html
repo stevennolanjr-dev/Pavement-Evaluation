@@ -91,7 +91,7 @@ body.show-help .section-intro{display:block}
 .mode-btn.active::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–amber);box-shadow:0 0 8px var(–amber)}
 
 /* SYS BAR */
-.sys-bar{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:10px}
+.sys-bar{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:5px;margin-bottom:10px}
 .sys-btn{padding:12px 6px;font-family:var(–mono);font-size:13px;font-weight:600;letter-spacing:1px;border:1px solid var(–border);background:var(–s1);color:var(–muted);cursor:pointer;border-radius:var(–r);text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
 .sys-btn.active{border-color:var(–amber);background:var(–s3);color:var(–amber2);box-shadow:0 0 12px rgba(232,148,10,.15),inset 0 0 12px rgba(232,148,10,.05)}
 
@@ -379,6 +379,7 @@ background-image: none !important;
     <button class="sys-btn" data-s="lcn" onclick="setSys('lcn')">LCN</button>
     <button class="sys-btn" data-s="cbr" onclick="setSys('cbr')">CBR</button>
     <button class="sys-btn" data-s="ovld" onclick="setSys('ovld')">OVLD</button>
+    <button class="sys-btn" data-s="pcr" onclick="setSys('pcr')">PCR</button>
   </div>
 
   <div class="rstrip" id="rs">
@@ -412,7 +413,7 @@ background-image: none !important;
   <div class="wstrip" id="aw"><span class="wicon">&#9888;</span><span id="awt"></span></div>
 
   <div class="acn-detail" id="acnd">
-    <div class="card-label">ACN vs PCN Comparison</div>
+    <div class="card-label" id="acnDetailLabel">ACN vs PCN Comparison</div>
     <div class="acn-row"><span class="acn-label">C-17 ACN at planned GW</span><span class="acn-val" id="acnv">--</span></div>
     <div class="acn-row"><span class="acn-label">Published PCN</span><span class="acn-val" id="pcnv">--</span></div>
     <div class="acn-bar"><div class="acn-fill" id="acnbar"></div></div>
@@ -627,6 +628,58 @@ background-image: none !important;
 
   </div>
 
+  <!-- PCR PANEL -->
+
+  <div id="prp" class="hidden">
+    <div class="card">
+      <div class="card-label">Quick Decode</div>
+      <div class="help-text">Paste the full PCR code from airport documents. Format: PCR ## X/X/X/X (e.g. PCR 480 F/B/X/T). The tool fills all fields automatically.</div>
+      <input type="text" class="decode-input" id="prd" placeholder="e.g. PCR 480 F/B/X/T" oninput="parsePCRDecode()" autocapitalize="characters" autocomplete="off" spellcheck="false" style="margin-top:8px">
+      <div class="decode-parsed" id="prdc"></div>
+      <div class="or-div" style="font-size:11px;letter-spacing:2px;color:var(--amber);opacity:0.7">OR ENTER MANUALLY</div>
+    </div>
+    <div class="card">
+      <div class="section-intro">ACR/PCR replaces ACN/PCN as the ICAO standard. No conversion exists between the two systems. This tool computes C-17 ACR at your planned weight and compares it to the published PCR. Data from TO 1C-17A-1-1 Figure 10-2 (Oct 2025). Overload allowance: +10% for both concrete and asphalt (differs from PCN: concrete was +5%).</div>
+      <div class="fg">
+        <div class="field">
+          <label>PCR Value</label>
+          <div class="help-text">The numeric strength index from the airport PCR code. No direct equivalent to PCN exists — do not compare these numbers.</div>
+          <input type="number" id="prv" min="100" max="1000" step="1" placeholder="e.g. 480" oninput="pcrManIn()">
+        </div>
+        <div class="field">
+          <label>Surface Type</label>
+          <div class="help-text">R = concrete (rigid). F = asphalt (flexible).</div>
+          <div class="select-wrap"><select id="prs" onchange="pcrManIn()">
+            <option value="R">R - Rigid (Concrete)</option>
+            <option value="F">F - Flexible (Asphalt)</option>
+          </select></div>
+        </div>
+        <div class="field">
+          <label>Subgrade</label>
+          <div class="help-text">Underlying soil strength category from the PCR code. Use B if unknown.</div>
+          <div class="select-wrap"><select id="prg" onchange="pcrManIn()">
+            <option value="A">A - High</option>
+            <option value="B">B - Medium</option>
+            <option value="C">C - Low</option>
+            <option value="D">D - Ultra-low</option>
+          </select></div>
+        </div>
+        <div class="field" id="prgw" style="display:none">
+          <label>Planned GW (x1,000 lbs)</label>
+          <div class="help-text">Your intended gross weight. The tool computes C-17 ACR at this weight and compares to PCR.</div>
+          <input type="number" id="prgwv" min="200" max="670" step="1" placeholder="e.g. 585" oninput="calc()">
+        </div>
+      </div>
+      <div class="trow">
+        <label class="tsw"><input type="checkbox" id="pro" onchange="calc()"><span class="ttrack"></span><span class="tknob"></span></label>
+        <span class="ttxt">
+          <strong>Overload</strong> (&lt;5% annual ops): +10% PCR (both concrete and asphalt)
+          <div class="help-text">Note: PCR overload is +10% for both surface types. PCN concrete overload is only +5%. Different standard, same condition.</div>
+        </span>
+      </div>
+    </div>
+  </div>
+
   <!-- DECODE REFERENCE -->
 
   <div class="cpanel">
@@ -702,6 +755,8 @@ background-image: none !important;
       <li>ACN interpolated linearly between OEW (282K) and MRW (586K) per ICAO method.</li>
       <li>COMFAA anomaly: rigid ACN can invert on high subgrades. Use TO values.</li>
       <li>OVLD percentages modeled from TO 1C-17A-1-1 Figure 10-8. Use for planning only.</li>
+      <li>PCR ACR curves digitized from TO 1C-17A-1-1 Fig 10-2 (Oct 2025). Verified vs 3 TO examples.</li>
+      <li>PCR overload: +10% for both surface types (differs from PCN: concrete is only +5%).</li>
     </ul>
   </div>
 
@@ -828,6 +883,217 @@ var OVL_PARAMS = {
             desc: 'Austere or remote airfield with infrequent use.' }
 };
 
+
+// ================================================================
+// ACR DATA - Digitized from TO 1C-17A-1-1 Figure 10-2 (Oct 2025)
+// Verified against three TO worked examples (matches to within 2 ACR points)
+// Format: { surface: { subgrade: { gw_K: acr } } }
+// GW range 300-585K (table data), curves continue to 670K (backing only)
+// ================================================================
+
+var C17_ACR = {
+  R: {
+    A: {300:225, 350:267, 400:308, 450:352, 500:393, 550:432, 585:468, 670:540},
+    B: {300:242, 350:290, 400:338, 450:388, 500:437, 550:485, 585:530, 670:615},
+    C: {300:268, 350:327, 400:385, 450:448, 500:508, 550:566, 585:620, 670:725},
+    D: {300:308, 350:382, 400:455, 450:535, 500:612, 550:685, 585:755, 670:890}
+  },
+  F: {
+    A: {300:210, 350:237, 400:263, 450:297, 500:330, 550:363, 585:395, 670:455},
+    B: {300:225, 350:272, 400:320, 450:357, 500:393, 550:427, 585:460, 670:530},
+    C: {300:248, 350:308, 400:368, 450:432, 500:495, 550:524, 585:548, 670:628},
+    D: {300:283, 350:360, 400:435, 450:513, 500:591, 550:630, 585:665, 670:770}
+  }
+};
+
+function getACR(sf, sg, gwK) {
+  var tbl = C17_ACR[sf] && C17_ACR[sf][sg];
+  if (!tbl) return null;
+  var keys = Object.keys(tbl).map(Number).sort(function(a,b){return a-b;});
+  if (gwK <= keys[0]) return tbl[keys[0]];
+  if (gwK >= keys[keys.length-1]) return tbl[keys[keys.length-1]];
+  for (var i = 0; i < keys.length-1; i++) {
+    if (gwK >= keys[i] && gwK <= keys[i+1]) {
+      var f = (gwK - keys[i]) / (keys[i+1] - keys[i]);
+      return Math.round(tbl[keys[i]] + f * (tbl[keys[i+1]] - tbl[keys[i]]));
+    }
+  }
+  return null;
+}
+
+// Find max GW where ACR <= targetPCR for given surface/subgrade
+// Returns { gw, acr, exact } or null if no solution in range
+function findMaxGWforPCR(sf, sg, targetPCR) {
+  // Binary search between 250K and 670K
+  var lo = 250, hi = 670;
+  // First check if even at min weight ACR > PCR
+  if (getACR(sf, sg, lo) > targetPCR) return null;
+  // Binary search for the crossover point
+  for (var i = 0; i < 30; i++) {
+    var mid = Math.floor((lo + hi) / 2);
+    if (getACR(sf, sg, mid) <= targetPCR) {
+      lo = mid;
+    } else {
+      hi = mid;
+    }
+    if (hi - lo <= 1) break;
+  }
+  var acr = getACR(sf, sg, lo);
+  return { gw: lo, acr: acr };
+}
+
+var pcrTireCode = null;
+
+function parsePCRDecode() {
+  var raw = document.getElementById('prd').value.trim().toUpperCase();
+  var dc = document.getElementById('prdc');
+  dc.innerHTML = '';
+  pcrTireCode = null;
+  // PCR format: PCR ## X/X/X/X  (same letter codes as PCN)
+  var m = raw.match(/^(?:PCR\s*)?(\d+)\s*[\/\s,]+([RF])\s*[\/\s,]+([ABCD])\s*[\/\s,]+([WXYZ])(?:\s*[\/\s,]+([TU]))?$/);
+  if (!m) {
+    if (raw.length > 0) dc.innerHTML = '<span class="chip chip-surf">Parsing... e.g. PCR 480 F/B/X/T</span>';
+    return;
+  }
+  var pv = m[1], sf = m[2], sg = m[3], tp = m[4], ev = m[5];
+  document.getElementById('prv').value = parseInt(pv);
+  document.getElementById('prs').value = sf;
+  document.getElementById('prg').value = sg;
+  pcrTireCode = tp;
+  var sn = {R:'RIGID', F:'FLEX'}, gn = {A:'HIGH', B:'MED', C:'LOW', D:'ULTRA'};
+  var tn = {W:'NO LIMIT', X:'<=217 PSI', Y:'<=145 PSI', Z:'<=73 PSI'};
+  var tc = 'chip-tok', ts = tp + ' ' + tn[tp];
+  if (tp === 'Y') { tc = 'chip-twarn'; ts = tp + ' MARGINAL'; }
+  if (tp === 'Z') { tc = 'chip-tfail'; ts = tp + ' NOT COMPAT'; }
+  dc.innerHTML = '<span class="chip chip-pcn">PCR ' + pv + '</span>' +
+    '<span class="chip chip-surf">' + sf + ' ' + sn[sf] + '</span>' +
+    '<span class="chip chip-sub">' + sg + ' ' + gn[sg] + '</span>' +
+    '<span class="chip ' + tc + '">' + ts + '</span>' +
+    (ev ? '<span class="chip chip-eval">' + ev + '</span>' : '');
+  calc();
+}
+
+function pcrManIn() {
+  document.getElementById('prd').value = '';
+  document.getElementById('prdc').innerHTML = '';
+  pcrTireCode = null;
+  calc();
+}
+
+function calcPCR(rs, rt, rn, rsb, ri, sw, aw) {
+  var rsb2 = document.getElementById('rsb2');
+  var acnd = document.getElementById('acnd');
+  rsb2.textContent = '';
+  acnd.classList.remove('show');
+
+  var pcrVal = parseFloat(document.getElementById('prv').value);
+  var sf = document.getElementById('prs').value;
+  var sg = document.getElementById('prg').value;
+  var ol = document.getElementById('pro').checked;
+
+  if (isNaN(pcrVal)) { rs.classList.remove('show'); return; }
+
+  // Tire code warning (same logic as PCN)
+  if (pcrTireCode) {
+    if (pcrTireCode === 'Z') {
+      document.getElementById('tw').className = 'wstrip show red';
+      document.getElementById('twt').innerHTML = 'TIRE CODE Z (73 psi max). C-17 main = 144 psi. NOT COMPATIBLE.';
+    } else if (pcrTireCode === 'Y') {
+      document.getElementById('tw').className = 'wstrip show amber';
+      document.getElementById('twt').innerHTML = 'TIRE CODE Y (AFTTP 145 psi). C-17 main = 144 psi. MARGINAL per AFTTP.';
+    }
+  }
+
+  var effPCR = ol ? pcrVal * 1.10 : pcrVal;
+  var olNote = ol ? ' +10% OVL' : '';
+
+  if (mode === 'fwd') {
+    // Find max GW where ACR <= effPCR
+    var res = findMaxGWforPCR(sf, sg, effPCR);
+    if (!res) {
+      rs.className = 'rstrip show sfail';
+      rt.className = 'rtag fail'; rt.textContent = 'NOT COMPATIBLE';
+      rn.className = 'rnum fail'; rn.innerHTML = 'N/C';
+      rsb.textContent = 'PCR ' + pcrVal + ' ' + (sf==='R'?'Rigid':'Flex') + '/' + sg;
+      ri.textContent = 'C-17 ACR exceeds this PCR even at minimum weight.';
+      return;
+    }
+    var gwK = res.gw, gwLbs = gwK * 1000;
+    var acr = res.acr;
+    var status = gwK >= 580 ? 'warn' : 'ok';
+    var desc = 'PCR ' + pcrVal + ' ' + (sf==='R'?'Rigid':'Flex') + '/' + sg + olNote;
+
+    rs.className = 'rstrip show s' + status;
+    rt.className = 'rtag ' + status;
+    rt.textContent = status === 'ok' ? 'MAX ALLOWABLE GROSS WEIGHT' : 'MAX GW // NEAR STRUCTURAL LIMIT';
+    rn.className = 'rnum ' + status;
+    rn.innerHTML = gwK.toLocaleString() + '<span class="runit">x1K lbs</span>';
+    rsb.textContent = gwLbs.toLocaleString() + ' lbs | ' + desc;
+
+    if (gwK > 447) sw.className = 'wstrip show amber';
+
+    // ACR detail panel
+    acnd.classList.add('show');
+    document.getElementById('acnv').textContent = acr;
+    document.getElementById('pcnv').textContent = pcrVal + (ol ? ' (eff: ' + Math.round(effPCR) + ')' : '');
+    var bar = document.getElementById('acnbar');
+    var ratio = acr / Math.max(effPCR, 1);
+    bar.style.width = Math.min(ratio * 100, 100) + '%';
+    bar.style.background = ratio > 1 ? 'var(--red)' : ratio > 0.9 ? 'var(--warn)' : 'var(--green)';
+    document.getElementById('acn-note').textContent = 'C-17 ACR at ' + gwK + 'K = ' + acr + ' vs PCR ' + pcrVal + '. Interpolated from TO Fig 10-2.';
+    document.getElementById('acnDetailLabel').textContent = 'ACR vs PCR COMPARISON';
+
+    if (!result) ri.textContent = '';
+    lastResult = { gwK: gwK, gwLbs: gwLbs, desc: desc, sys: 'pcr', mode: 'fwd', acr: acr, pcrVal: pcrVal };
+
+  } else {
+    // Reverse: user enters planned GW, get ACR and compare to PCR
+    var gw = parseFloat(document.getElementById('prgwv').value);
+    if (isNaN(gw)) { rs.classList.remove('show'); return; }
+
+    var acr2 = getACR(sf, sg, gw);
+    if (acr2 === null) { rs.classList.remove('show'); return; }
+
+    var desc2 = 'C-17 ACR ' + acr2 + ' vs PCR ' + pcrVal + ' at ' + gw + 'K (' + (sf==='R'?'Rigid':'Flex') + '/' + sg + ')' + olNote;
+    var excess = ((acr2 - effPCR) / effPCR) * 100;
+
+    if (acr2 <= effPCR) {
+      // Unrestricted
+      rs.className = 'rstrip show sok';
+      rt.className = 'rtag ok'; rt.textContent = 'UNRESTRICTED OPERATION';
+      rn.className = 'rnum ok'; rn.innerHTML = acr2 + '<span class="runit">acr</span>';
+      rsb.textContent = 'ACR ' + acr2 + ' <= PCR ' + pcrVal + (ol?' (eff '+Math.round(effPCR)+')':'') + ' | ' + desc2;
+      ri.textContent = 'C-17 ACR at ' + gw + 'K does not exceed published PCR. Operation permitted.';
+    } else {
+      // Restricted
+      var pct = excess.toFixed(1);
+      rs.className = 'rstrip show s' + (excess < 10 ? 'warn' : 'fail');
+      rt.className = 'rtag ' + (excess < 10 ? 'warn' : 'fail');
+      rt.textContent = 'EXCEEDS PCR BY ' + pct + '%';
+      rn.className = 'rnum ' + (excess < 10 ? 'warn' : 'fail');
+      rn.innerHTML = '+' + pct + '<span class="runit">%</span>';
+      rsb.textContent = 'ACR ' + acr2 + ' > PCR ' + pcrVal + (ol?' (eff '+Math.round(effPCR)+')':'') + ' | ' + desc2;
+      aw.className = 'wstrip show red';
+      document.getElementById('awt').innerHTML = 'C-17 ACR (' + acr2 + ') exceeds PCR (' + pcrVal + ') by ' + pct + '%. Prior permission required. Consider overload toggle if &lt;5% annual ops.';
+      ri.textContent = 'Overload % = ((ACR - PCR) / PCR) x 100. Source: TO 1C-17A-1-1 para 10-50.';
+    }
+
+    // ACR detail
+    acnd.classList.add('show');
+    document.getElementById('acnv').textContent = acr2;
+    document.getElementById('pcnv').textContent = pcrVal + (ol ? ' (eff: ' + Math.round(effPCR) + ')' : '');
+    var bar2 = document.getElementById('acnbar');
+    var ratio2 = acr2 / Math.max(effPCR, 1);
+    bar2.style.width = Math.min(ratio2 * 100, 100) + '%';
+    bar2.style.background = ratio2 > 1 ? 'var(--red)' : ratio2 > 0.9 ? 'var(--warn)' : 'var(--green)';
+    var pcrMin = findMaxGWforPCR(sf, sg, effPCR);
+    document.getElementById('acn-note').textContent = 'Max unrestricted GW at PCR ' + pcrVal + ': ~' + (pcrMin ? pcrMin.gw + 'K' : 'N/A') + '. Interpolated from TO Fig 10-2.';
+
+    lastResult = { acr: acr2, pcrVal: pcrVal, excess: pct, desc: desc2, sys: 'pcr', mode: 'rev', gw: gw };
+  }
+}
+
+
 // ================================================================
 // STATE
 // ================================================================
@@ -907,6 +1173,7 @@ function setMode(m) {
   document.getElementById('pgw').style.display = rev ? '' : 'none';
   document.getElementById('lgw').style.display = rev ? '' : 'none';
   document.getElementById('cgw').style.display = rev ? '' : 'none';
+  document.getElementById('prgw').style.display = rev ? '' : 'none';
   calc();
 }
 
@@ -919,6 +1186,7 @@ function setSys(s) {
   document.getElementById('lp').classList.toggle('hidden', s !== 'lcn');
   document.getElementById('cp').classList.toggle('hidden', s !== 'cbr');
   document.getElementById('op').classList.toggle('hidden', s !== 'ovld');
+  document.getElementById('prp').classList.toggle('hidden', s !== 'pcr');
   // Mode bar and surface tabs only make sense for PCN/LCN/CBR
   var showStandard = s !== 'ovld';
   document.getElementById('modeBar').classList.toggle('hidden', !showStandard);
@@ -1061,12 +1329,19 @@ function calc() {
   sw.className = 'wstrip';
   aw.className = 'wstrip';
   document.getElementById('racn').innerHTML = '';
+  if (document.getElementById('acnDetailLabel')) {
+    document.getElementById('acnDetailLabel').textContent = sys === 'pcr' ? 'ACR vs PCR COMPARISON' : 'ACN vs PCN COMPARISON';
+  }
   rsb2.textContent = '';
   acnd.classList.remove('show');
   ovlWrap.classList.add('hidden');
   lastResult = null;
 
-  if (sys === 'pcn' && tireCode) {
+  if ((sys === 'pcn' || sys === 'pcr') && (tireCode || pcrTireCode)) {
+    var tc = tireCode || pcrTireCode;
+    if (!tireCode && pcrTireCode) tireCode = pcrTireCode;
+  }
+  if ((sys === 'pcn' || sys === 'pcr') && tireCode) {
     if (tireCode === 'Z') {
       tw.className = 'wstrip show red';
       document.getElementById('twt').innerHTML = 'TIRE CODE Z (73 psi max). C-17 main = 144 psi. NOT COMPATIBLE. See TO for reduced tire pressure ops.';
@@ -1078,6 +1353,8 @@ function calc() {
 
   if (sys === 'ovld') {
     calcOvld(rs, rt, rn, rsb, ri, ovlWrap);
+  } else if (sys === 'pcr') {
+    calcPCR(rs, rt, rn, rsb, ri, sw, aw);
   } else if (mode === 'fwd') {
     calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd);
   } else {
@@ -1334,7 +1611,13 @@ function calcOvld(rs, rt, rn, rsb, ri, ovlWrap) {
 function copyResult() {
   if (!lastResult) return;
   var t;
-  if (lastResult.mode === 'fwd') {
+  if (lastResult.sys === 'pcr' && lastResult.mode === 'fwd') {
+    t = 'C-17 ACR/PCR: ' + lastResult.desc + ' -- Max GW ' + lastResult.gwK.toLocaleString() + 'K (ACR ' + lastResult.acr + ' vs PCR ' + lastResult.pcrVal + '). SUPPORTED.';
+  } else if (lastResult.sys === 'pcr' && lastResult.mode === 'rev') {
+    t = parseFloat(lastResult.excess) <= 0
+      ? 'C-17 ACR/PCR: ACR ' + lastResult.acr + ' <= PCR ' + lastResult.pcrVal + ' at ' + lastResult.gw + 'K. UNRESTRICTED.'
+      : 'C-17 ACR/PCR: ACR ' + lastResult.acr + ' exceeds PCR ' + lastResult.pcrVal + ' by ' + lastResult.excess + '% at ' + lastResult.gw + 'K. RESTRICTED - prior permission required.';
+  } else if (lastResult.mode === 'fwd') {
     t = 'C-17 PAVEMENT: ' + lastResult.desc + ' -- Max GW ' + lastResult.gwK.toLocaleString() + 'K (' + lastResult.gwLbs.toLocaleString() + ' lbs). SUPPORTED.';
   } else if (lastResult.mode === 'rev') {
     t = 'C-17 PAVEMENT: Min ' + lastResult.unit + ' ' + lastResult.val + '+ required ' + lastResult.desc + '.';

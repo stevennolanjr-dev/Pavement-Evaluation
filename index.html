@@ -22,11 +22,11 @@
   --bhi:     #5a4400;
   --amber:   #e8940a;
   --amber2:  #f5a800;
-  --adim:    #7a5200;
-  --amuted:  #3a2800;
+  --adim:    #9a7820;
+  --amuted:  #6a4a10;
   --text:    #e0c060;
-  --dim:     #8a7040;
-  --muted:   #4a3820;
+  --dim:     #b09060;
+  --muted:   #7a6040;
   --green:   #40c060;
   --gbg:     rgba(64,192,96,0.08);
   --gbr:     rgba(64,192,96,0.3);
@@ -55,47 +55,56 @@ body{
     linear-gradient(90deg,rgba(232,148,10,0.025) 1px,transparent 1px);
   background-size:44px 44px;
 }
-.bg-c17{
-  position:fixed;bottom:-40px;right:-60px;
-  width:72vw;max-width:520px;
-  opacity:0.045;pointer-events:none;z-index:0;
-}
-.app{position:relative;z-index:1;max-width:580px;margin:0 auto;padding:0 16px 120px}
+.bg-c17{position:fixed;bottom:-40px;right:-60px;width:72vw;max-width:520px;opacity:0.045;pointer-events:none;z-index:0;}
+.app{position:relative;z-index:1;max-width:580px;margin:0 auto;padding:0 16px 180px}
 
 /* HEADER */
-.hdr{padding:20px 0 16px;margin-bottom:18px}
-.hdr-eyebrow{font-family:var(–mono);font-size:10px;letter-spacing:3px;color:var(–amber);text-transform:uppercase;margin-bottom:6px;opacity:.8}
+.hdr{padding:20px 0 16px;margin-bottom:14px}
+.hdr-eyebrow{font-family:var(–mono);font-size:12px;letter-spacing:3px;color:var(–amber);text-transform:uppercase;margin-bottom:6px;opacity:.8}
 .hdr-main{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .hdr-title{font-family:var(–head);font-size:40px;font-weight:700;letter-spacing:2px;line-height:.95;color:var(–amber2);text-transform:uppercase;text-shadow:0 0 40px rgba(232,148,10,.3)}
 .hdr-title span{color:var(–text);font-weight:300}
 .hdr-meta{text-align:right;flex-shrink:0}
-.hdr-meta-line{font-family:var(–mono);font-size:9px;color:var(–dim);line-height:1.8;letter-spacing:.5px}
+.hdr-meta-line{font-family:var(–mono);font-size:11px;color:var(–dim);line-height:1.8;letter-spacing:.5px}
 .hdr-rule{margin-top:14px;height:1px;background:linear-gradient(90deg,var(–amber) 0%,var(–border) 50%,transparent 100%)}
 .hdr-rule-sub{margin-top:4px;height:1px;background:linear-gradient(90deg,var(–bhi) 0%,transparent 60%);opacity:.5}
 
+/* TOOL INTRO */
+.tool-intro{background:var(–s1);border:1px solid var(–border);border-left:3px solid var(–amber);border-radius:var(–r);padding:10px 14px;margin-bottom:12px}
+.tool-intro p{font-family:var(–mono);font-size:12px;color:var(–dim);line-height:1.7;letter-spacing:.3px}
+
+/* HELP TEXT */
+.help-text{font-family:var(–mono);font-size:12px;color:var(–muted);line-height:1.5;margin-top:3px;letter-spacing:.2px;display:none}
+.section-intro{font-family:var(–mono);font-size:12px;color:var(–dim);line-height:1.6;margin-bottom:12px;letter-spacing:.3px;padding-bottom:10px;border-bottom:1px solid var(–border);display:none}
+body.show-help .help-text{display:block}
+body.show-help .section-intro{display:block}
+.help-toggle{font-family:var(–mono);font-size:10px;letter-spacing:1px;padding:5px 10px;background:transparent;border:1px solid var(–border);border-radius:var(–r);color:var(–muted);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all .15s;white-space:nowrap;-webkit-text-fill-color:var(–muted)}
+.help-toggle.active{border-color:var(–amber);color:var(–amber);-webkit-text-fill-color:var(–amber)}
+/* section-intro moved above */
+
 /* MODE BAR */
 .mode-bar{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(–border);border-radius:var(–r);overflow:hidden;margin-bottom:10px;background:var(–s1)}
-.mode-btn{padding:12px 8px;font-family:var(–mono);font-size:10px;letter-spacing:.8px;border:none;background:transparent;color:var(–muted);cursor:pointer;text-align:center;text-transform:uppercase;transition:all .15s;-webkit-tap-highlight-color:transparent;border-right:1px solid var(–border);position:relative}
+.mode-btn{padding:13px 8px;font-family:var(–mono);font-size:12px;letter-spacing:.8px;border:none;background:transparent;color:var(–muted);cursor:pointer;text-align:center;text-transform:uppercase;transition:all .15s;-webkit-tap-highlight-color:transparent;border-right:1px solid var(–border);position:relative}
 .mode-btn:last-child{border-right:none}
 .mode-btn.active{background:var(–s3);color:var(–amber2)}
 .mode-btn.active::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–amber);box-shadow:0 0 8px var(–amber)}
 
 /* SYS BAR */
-.sys-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px}
-.sys-btn{padding:10px;font-family:var(–mono);font-size:13px;font-weight:600;letter-spacing:1.5px;border:1px solid var(–border);background:var(–s1);color:var(–muted);cursor:pointer;border-radius:var(–r);text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.sys-bar{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;margin-bottom:10px}
+.sys-btn{padding:12px 6px;font-family:var(–mono);font-size:13px;font-weight:600;letter-spacing:1px;border:1px solid var(–border);background:var(–s1);color:var(–muted);cursor:pointer;border-radius:var(–r);text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
 .sys-btn.active{border-color:var(–amber);background:var(–s3);color:var(–amber2);box-shadow:0 0 12px rgba(232,148,10,.15),inset 0 0 12px rgba(232,148,10,.05)}
 
 /* CARD */
 .card{background:var(–s1);border:1px solid var(–border);border-radius:var(–r);padding:16px;margin-bottom:10px;position:relative}
 .card::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(–amber) 0%,transparent 60%);opacity:.35;border-radius:var(–r) var(–r) 0 0}
-.card-label{font-family:var(–mono);font-size:9px;letter-spacing:2px;color:var(–adim);text-transform:uppercase;margin-bottom:12px}
+.card-label{font-family:var(–mono);font-size:11px;letter-spacing:2px;color:var(–adim);text-transform:uppercase;margin-bottom:4px}
 
 /* DECODE */
 .decode-input{width:100%;font-family:var(–mono);font-size:22px;letter-spacing:3px;padding:12px 14px;background:var(–black);border:1px solid var(–border);border-radius:var(–r);color:var(–amber2);outline:none;text-transform:uppercase;transition:border-color .15s,box-shadow .15s;caret-color:var(–amber)}
 .decode-input::placeholder{color:var(–muted);font-size:13px;letter-spacing:1px;text-transform:none}
 .decode-input:focus{border-color:var(–amber);box-shadow:0 0 0 3px var(–glow)}
 .decode-parsed{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;min-height:24px}
-.chip{font-family:var(–mono);font-size:10px;padding:3px 8px;border-radius:2px;letter-spacing:.5px;text-transform:uppercase}
+.chip{font-family:var(–mono);font-size:11px;padding:3px 8px;border-radius:2px;letter-spacing:.5px;text-transform:uppercase}
 .chip-pcn{background:var(–glow2);color:var(–amber2);border:1px solid rgba(232,148,10,.3)}
 .chip-surf{background:var(–s3);color:var(–dim)}
 .chip-sub{background:var(–s3);color:var(–dim)}
@@ -103,15 +112,15 @@ body{
 .chip-twarn{background:var(–wbg);color:var(–warn);border:1px solid var(–wbr)}
 .chip-tfail{background:var(–rbg);color:var(–red);border:1px solid var(–rbr)}
 .chip-eval{background:var(–s3);color:var(–muted)}
-.or-div{display:flex;align-items:center;gap:12px;margin:14px 0;font-family:var(–mono);font-size:9px;color:var(–muted);letter-spacing:2px}
+.or-div{display:flex;align-items:center;gap:12px;margin:14px 0;font-family:var(–mono);font-size:11px;color:var(–muted);letter-spacing:2px}
 .or-div::before,.or-div::after{content:’’;flex:1;height:1px;background:var(–border)}
 
 /* FIELDS */
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fg.tri{grid-template-columns:1fr 1fr 1fr}
-.field{display:flex;flex-direction:column;gap:5px}
+.field{display:flex;flex-direction:column;gap:3px}
 .field.full{grid-column:1/-1}
-.field label{font-family:var(–mono);font-size:9px;letter-spacing:1.5px;color:var(–adim);text-transform:uppercase}
+.field label{font-family:var(–mono);font-size:11px;letter-spacing:1.5px;color:var(–adim);text-transform:uppercase}
 select,input[type=“number”],input[type=“text”]{font-family:var(–mono);font-size:15px;padding:11px 12px;background:var(–black);border:1px solid var(–border);border-radius:var(–r);color:var(–text);outline:none;transition:border-color .15s,box-shadow .15s;-moz-appearance:textfield;min-height:46px;-webkit-tap-highlight-color:transparent;caret-color:var(–amber)}
 select:focus,input:focus{border-color:var(–amber);box-shadow:0 0 0 2px var(–glow)}
 input[type=“number”]::-webkit-inner-spin-button,input[type=“number”]::-webkit-outer-spin-button{-webkit-appearance:none}
@@ -119,23 +128,26 @@ select{cursor:pointer;-webkit-appearance:none;background-image:url(“data:image
 
 /* TOGGLE */
 .trow{display:flex;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid var(–border)}
-.tsw{position:relative;width:40px;height:22px;flex-shrink:0;cursor:pointer}
+.tsw{position:relative;width:48px;height:44px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .tsw input{opacity:0;width:0;height:0;position:absolute}
-.ttrack{position:absolute;inset:0;background:var(–s3);border:1px solid var(–border);border-radius:11px;transition:all .2s}
+.ttrack{position:absolute;top:11px;left:4px;right:4px;bottom:11px;background:var(–s3);border:1px solid var(–border);border-radius:11px;transition:all .2s}
 .tsw input:checked+.ttrack{border-color:var(–amber);box-shadow:0 0 8px rgba(232,148,10,.3)}
-.tknob{position:absolute;top:3px;left:3px;width:16px;height:16px;background:var(–adim);border-radius:50%;transition:all .2s;pointer-events:none}
-.tsw input:checked~.tknob{transform:translateX(18px);background:var(–amber)}
-.ttxt{font-family:var(–mono);font-size:10px;color:var(–dim);line-height:1.5}
+.tknob{position:absolute;top:14px;left:7px;width:16px;height:16px;background:var(–adim);border-radius:50%;transition:all .2s;pointer-events:none}
+.tsw input:checked~.tknob{transform:translateX(20px);background:var(–amber)}
+.ttxt{font-family:var(–mono);font-size:10px;color:var(–dim);line-height:1.4}
 .ttxt strong{color:var(–amber)}
+.ttxt .help-text{margin-top:2px}
 
 /* RESULT STRIP */
-.rstrip{position:sticky;top:0;z-index:100;background:var(–s1);border:1px solid var(–border);border-radius:var(–r);margin-bottom:10px;display:none;overflow:hidden}
+.rstrip{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:580px;z-index:200;background:var(–s1);border:1px solid var(–border);border-top:1px solid var(–border);border-radius:8px 8px 0 0;border-bottom:none;display:none;overflow:hidden;padding-bottom:env(safe-area-inset-bottom,0px)}
 .rstrip.show{display:block}
 .rstrip.sok{border-color:var(–gbr);box-shadow:0 0 24px rgba(64,192,96,.08)}
 .rstrip.swarn{border-color:var(–wbr);box-shadow:0 0 24px rgba(192,120,32,.08)}
 .rstrip.sfail{border-color:var(–rbr);box-shadow:0 0 24px rgba(208,64,48,.08)}
-.rmain{padding:16px}
-.rtag{font-family:var(–mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.rmain{padding:12px 16px 10px}
+.rrow-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.rleft{flex:1;min-width:0}
+.rtag{font-family:var(–mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
 .rtag.ok{color:var(–green)}.rtag.warn{color:var(–warn)}.rtag.fail{color:var(–red)}.rtag.info{color:var(–amber)}
 .rnum{font-family:var(–head);font-size:52px;font-weight:700;line-height:1;letter-spacing:1px}
 .rnum.ok{color:var(–green);text-shadow:0 0 30px rgba(64,192,96,.4)}
@@ -143,19 +155,20 @@ select{cursor:pointer;-webkit-appearance:none;background-image:url(“data:image
 .rnum.fail{color:var(–red);text-shadow:0 0 30px rgba(208,64,48,.4)}
 .rnum.info{color:var(–amber2);text-shadow:0 0 30px rgba(232,148,10,.4)}
 .runit{font-family:var(–mono);font-size:12px;color:var(–dim);margin-left:6px;letter-spacing:.5px;vertical-align:middle}
-.rsub{font-family:var(–mono);font-size:10px;color:var(–dim);margin-top:4px;letter-spacing:.3px}
+.rsub{font-family:var(–mono);font-size:12px;color:var(–dim);margin-top:4px;letter-spacing:.3px}
+.rsub2{font-family:var(–mono);font-size:12px;color:var(–green);margin-top:2px;letter-spacing:.3px}
 .racn-wrap{margin-top:6px}
-.racn{font-family:var(–mono);font-size:10px;padding:3px 10px;border-radius:2px;display:inline-block;letter-spacing:.3px}
+.racn{font-family:var(–mono);font-size:12px;padding:3px 10px;border-radius:2px;display:inline-block;letter-spacing:.3px}
 .acn-ok{background:var(–gbg);color:var(–green);border:1px solid var(–gbr)}
 .acn-warn{background:var(–wbg);color:var(–warn);border:1px solid var(–wbr)}
 .acn-fail{background:var(–rbg);color:var(–red);border:1px solid var(–rbr)}
-.rfoot{padding:8px 16px;background:var(–black);border-top:1px solid var(–border);display:flex;justify-content:space-between;align-items:center;gap:8px}
-.rinterp{font-family:var(–mono);font-size:9px;color:var(–muted);flex:1;letter-spacing:.3px}
-.cpbtn{font-family:var(–mono);font-size:10px;letter-spacing:1px;padding:6px 14px;background:var(–s2);border:1px solid var(–border);border-radius:var(–r);color:var(–adim);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.rfoot{display:none}
+.rinterp{font-family:var(–mono);font-size:11px;color:var(–muted);margin-top:3px;letter-spacing:.3px}
+.cpbtn{font-family:var(–mono);font-size:12px;letter-spacing:1px;padding:6px 14px;background:var(–s2);border:1px solid var(–border);border-radius:var(–r);color:var(–adim);cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
 .cpbtn:active{border-color:var(–amber);color:var(–amber2)}
 
 /* WARNINGS */
-.wstrip{display:none;padding:10px 14px;border-radius:var(–r);font-family:var(–mono);font-size:10px;letter-spacing:.3px;margin-bottom:10px;line-height:1.6;align-items:flex-start;gap:10px}
+.wstrip{display:none;padding:10px 14px;border-radius:var(–r);font-family:var(–mono);font-size:12px;letter-spacing:.3px;margin-bottom:10px;line-height:1.6;align-items:flex-start;gap:10px}
 .wstrip.show{display:flex}
 .wstrip.amber{background:var(–wbg);border:1px solid var(–wbr);color:var(–warn)}
 .wstrip.red{background:var(–rbg);border:1px solid var(–rbr);color:var(–red)}
@@ -163,25 +176,45 @@ select{cursor:pointer;-webkit-appearance:none;background-image:url(“data:image
 
 /* SURFACE TABS */
 .stabs{display:flex;gap:6px;margin-bottom:10px}
-.stab{flex:1;padding:9px;font-family:var(–mono);font-size:11px;letter-spacing:1px;border:1px solid var(–border);background:var(–s1);color:var(–muted);cursor:pointer;border-radius:var(–r);text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent;position:relative}
+.stab{flex:1;padding:10px;font-family:var(–mono);font-size:13px;letter-spacing:1px;border:1px solid var(–border);background:var(–s1);color:var(–muted);cursor:pointer;border-radius:var(–r);text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent;position:relative}
 .stab.active{border-color:var(–amber);background:var(–s3);color:var(–amber2)}
 .stab.limiting{border-color:var(–wbr)}
 .stab .lim-dot{display:none;position:absolute;top:4px;right:6px;width:5px;height:5px;background:var(–warn);border-radius:50%}
 .stab.limiting .lim-dot{display:block}
-.add-s{padding:9px;font-family:var(–mono);font-size:16px;border:1px dashed var(–border);background:transparent;color:var(–muted);cursor:pointer;border-radius:var(–r);width:38px;flex-shrink:0;-webkit-tap-highlight-color:transparent;text-align:center}
+.add-s{padding:0;font-family:var(–mono);font-size:16px;border:1px dashed var(–border);background:transparent;color:var(–muted);cursor:pointer;border-radius:var(–r);width:44px;min-height:44px;flex-shrink:0;-webkit-tap-highlight-color:transparent;text-align:center;display:flex;align-items:center;justify-content:center}
 
 /* ACN DETAIL */
 .acn-detail{background:var(–black);border:1px solid var(–border);border-radius:var(–r);padding:12px 16px;margin-bottom:10px;display:none}
 .acn-detail.show{display:block}
-.acn-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-family:var(–mono);font-size:11px}
+.acn-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-family:var(–mono);font-size:13px}
 .acn-label{color:var(–dim)}.acn-val{font-weight:600;color:var(–text)}
 .acn-bar{height:3px;background:var(–s3);border-radius:2px;margin-top:8px;overflow:hidden}
 .acn-fill{height:100%;border-radius:2px;transition:width .4s ease}
-.acn-note{font-family:var(–mono);font-size:9px;color:var(–muted);margin-top:6px;letter-spacing:.3px;line-height:1.5}
+.acn-note{font-family:var(–mono);font-size:11px;color:var(–muted);margin-top:6px;letter-spacing:.3px;line-height:1.5}
+
+/* OVERLOAD PROGRESS BAR */
+.ovl-bar-wrap{margin-top:10px}
+.ovl-bar-label{display:flex;justify-content:space-between;font-family:var(–mono);font-size:11px;color:var(–muted);margin-bottom:4px}
+.ovl-bar{height:6px;background:var(–s3);border-radius:3px;overflow:visible;position:relative}
+.ovl-bar-fill{height:100%;border-radius:3px;transition:width .4s ease;position:relative}
+.ovl-bar-mark{position:absolute;top:-2px;width:2px;height:10px;background:var(–amber);opacity:0.6;transform:translateX(-1px)}
+.ovl-limits{display:flex;justify-content:space-between;font-family:var(–mono);font-size:10px;color:var(–muted);margin-top:4px}
+
+/* OVLD SUB-MODE */
+.sub-mode-bar{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(–border);border-radius:var(–r);overflow:hidden;margin-bottom:12px;background:var(–black)}
+.sub-mode-btn{padding:12px 6px;font-family:var(–mono);font-size:11px;letter-spacing:.5px;border:none;background:transparent;color:var(–muted);cursor:pointer;text-align:center;text-transform:uppercase;-webkit-tap-highlight-color:transparent;border-right:1px solid var(–border);position:relative}
+.sub-mode-btn:last-child{border-right:none}
+.sub-mode-btn.active{background:var(–s3);color:var(–amber2)}
+.sub-mode-btn.active::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;background:var(–amber)}
+
+/* TRAFFIC LEVEL SELECTOR */
+.traf-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px}
+.traf-btn{padding:12px 6px;font-family:var(–mono);font-size:12px;letter-spacing:.5px;border:1px solid var(–border);background:var(–black);color:var(–muted);cursor:pointer;border-radius:var(–r);text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.traf-btn.active{border-color:var(–amber);background:var(–s3);color:var(–amber2)}
 
 /* COLLAPSIBLE */
 .cpanel{background:var(–s1);border:1px solid var(–border);border-radius:var(–r);margin-top:10px;overflow:hidden}
-.ctoggle{width:100%;padding:13px 16px;font-family:var(–mono);font-size:10px;letter-spacing:1.5px;color:var(–adim);background:transparent;border:none;cursor:pointer;text-align:left;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;-webkit-tap-highlight-color:transparent;transition:color .15s}
+.ctoggle{width:100%;padding:14px 16px;font-family:var(–mono);font-size:12px;letter-spacing:1.5px;color:var(–adim);background:transparent;border:none;cursor:pointer;text-align:left;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;-webkit-tap-highlight-color:transparent;transition:color .15s}
 .ctoggle:active{color:var(–amber)}
 .ctoggle .arr{transition:transform .2s;font-size:10px;opacity:.6}
 .ctoggle.open .arr{transform:rotate(180deg)}
@@ -189,22 +222,22 @@ select{cursor:pointer;-webkit-appearance:none;background-image:url(“data:image
 .cbody.open{display:block}
 
 /* REF TABLES */
-.rtbl{width:100%;border-collapse:collapse;font-family:var(–mono);font-size:10px}
+.rtbl{width:100%;border-collapse:collapse;font-family:var(–mono);font-size:12px}
 .rtbl th{text-align:left;padding:5px 8px 5px 0;color:var(–adim);font-weight:400;letter-spacing:1px;border-bottom:1px solid var(–border)}
 .rtbl td{padding:4px 8px 4px 0;color:var(–dim)}
 .rtbl td:first-child{color:var(–amber);width:32px}
-.rsect{font-family:var(–mono);font-size:9px;letter-spacing:1.5px;color:var(–adim);text-transform:uppercase;margin:12px 0 5px}
+.rsect{font-family:var(–mono);font-size:11px;letter-spacing:1.5px;color:var(–adim);text-transform:uppercase;margin:12px 0 5px}
 .rsect:first-child{margin-top:0}
 
 /* NOTES */
 .npanel{background:var(–s1);border:1px solid var(–border);border-radius:var(–r);padding:14px 16px;margin-top:10px}
-.npanel h3{font-family:var(–mono);font-size:9px;letter-spacing:2px;color:var(–adim);text-transform:uppercase;margin-bottom:10px}
-.npanel li{font-family:var(–mono);font-size:10px;color:var(–muted);padding:3px 0 3px 16px;position:relative;list-style:none;line-height:1.5}
+.npanel h3{font-family:var(–mono);font-size:11px;letter-spacing:2px;color:var(–adim);text-transform:uppercase;margin-bottom:10px}
+.npanel li{font-family:var(–mono);font-size:12px;color:var(–muted);padding:3px 0 3px 16px;position:relative;list-style:none;line-height:1.5}
 .npanel li::before{content:’>’;position:absolute;left:0;color:var(–amber);opacity:.5}
 a.ref-link{color:var(–amber);text-decoration:none;border-bottom:1px solid var(–amuted);font-family:var(–mono);font-size:10px;opacity:.7}
 
 /* INSTALL BANNER */
-.install-banner{display:none;background:var(–s2);border:1px solid var(–border);border-radius:var(–r);padding:10px 14px;margin-bottom:12px;font-family:var(–mono);font-size:10px;color:var(–dim);align-items:center;gap:10px;letter-spacing:.3px}
+.install-banner{display:none;background:var(–s2);border:1px solid var(–border);border-radius:var(–r);padding:10px 14px;margin-bottom:12px;font-family:var(–mono);font-size:12px;color:var(–dim);align-items:center;gap:10px;letter-spacing:.3px}
 .install-banner.show{display:flex}
 .install-btn{font-family:var(–mono);font-size:10px;letter-spacing:1px;padding:5px 12px;background:var(–s3);border:1px solid var(–amber);border-radius:var(–r);color:var(–amber2);cursor:pointer;white-space:nowrap;flex-shrink:0}
 .dismiss-btn{font-family:var(–mono);font-size:11px;padding:4px 8px;background:transparent;border:1px solid var(–border);border-radius:var(–r);color:var(–muted);cursor:pointer;flex-shrink:0}
@@ -214,193 +247,41 @@ a.ref-link{color:var(–amber);text-decoration:none;border-bottom:1px solid var(
 ::-webkit-scrollbar-thumb{background:var(–border);border-radius:2px}
 .hidden{display:none !important}
 @media(max-width:400px){.fg,.fg.tri{grid-template-columns:1fr}.rnum{font-size:42px}.hdr-title{font-size:34px}}
-@media(min-width:600px){.app{padding:0 24px 120px}.hdr-title{font-size:46px}}
+@media(min-width:600px){.app{padding:0 24px 180px}.hdr-title{font-size:46px}}
 
-/* ── SAFARI / iOS FORM OVERRIDE FIX ── */
-/* Kill ALL native iOS styling on interactive elements */
-input, select, textarea, button {
--webkit-appearance: none !important;
--moz-appearance: none !important;
-appearance: none !important;
-}
-
-/* Force dark bg on ALL input types – Safari overrides these */
-input[type=“text”],
-input[type=“number”],
-input[type=“search”],
-select {
-background-color: var(–black) !important;
-background: var(–black) !important;
-color: var(–text) !important;
-border: 1px solid var(–border) !important;
-border-radius: var(–r) !important;
--webkit-text-fill-color: var(–text) !important;
-/* Prevent iOS zoom on focus (requires font-size >= 16px equiv) */
-font-size: 16px !important;
-}
-
-/* Placeholder stays dim */
-input::placeholder {
-color: var(–muted) !important;
--webkit-text-fill-color: var(–muted) !important;
-opacity: 1 !important;
-}
-
-/* Decode input – larger font, amber */
-.decode-input {
-background-color: var(–black) !important;
-background: var(–black) !important;
-color: var(–amber2) !important;
--webkit-text-fill-color: var(–amber2) !important;
-font-size: 20px !important;
-letter-spacing: 3px !important;
-}
-.decode-input::placeholder {
-color: var(–muted) !important;
--webkit-text-fill-color: var(–muted) !important;
-font-size: 13px !important;
-letter-spacing: 1px !important;
-}
-
-/* Select arrow – custom, kill native iOS blue */
-select {
-background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘6’ fill=’%235a4400’ viewBox=‘0 0 10 6’%3E%3Cpath d=‘M5 6L0 0h10z’/%3E%3C/svg%3E”) !important;
-background-repeat: no-repeat !important;
-background-position: right 12px center !important;
-padding-right: 30px !important;
-cursor: pointer;
-}
-
-/* Focus states */
-input[type=“text”]:focus,
-input[type=“number”]:focus,
-select:focus {
-border-color: var(–amber) !important;
-box-shadow: 0 0 0 2px var(–glow) !important;
-outline: none !important;
-}
-
-/* Mode bar – force dark bg on all buttons */
-.mode-btn {
-background-color: transparent !important;
-background: transparent !important;
-color: var(–muted) !important;
-border-radius: 0 !important;
--webkit-text-fill-color: var(–muted) !important;
-}
-.mode-btn.active {
-background-color: var(–s3) !important;
-background: var(–s3) !important;
-color: var(–amber2) !important;
--webkit-text-fill-color: var(–amber2) !important;
-}
-
-/* Sys buttons */
-.sys-btn {
-background-color: var(–s1) !important;
-background: var(–s1) !important;
-color: var(–muted) !important;
--webkit-text-fill-color: var(–muted) !important;
-}
-.sys-btn.active {
-background-color: var(–s3) !important;
-background: var(–s3) !important;
-color: var(–amber2) !important;
--webkit-text-fill-color: var(–amber2) !important;
-border-color: var(–amber) !important;
-}
-
-/* Surface tabs */
-.stab {
-background-color: var(–s1) !important;
-background: var(–s1) !important;
-color: var(–muted) !important;
--webkit-text-fill-color: var(–muted) !important;
-}
-.stab.active {
-background-color: var(–s3) !important;
-background: var(–s3) !important;
-color: var(–amber2) !important;
--webkit-text-fill-color: var(–amber2) !important;
-border-color: var(–amber) !important;
-}
-.add-s {
-background-color: transparent !important;
-background: transparent !important;
-color: var(–muted) !important;
--webkit-text-fill-color: var(–muted) !important;
-}
-
-/* Toggle switch – force Safari to render it */
-.ttrack {
-background-color: var(–s3) !important;
-background: var(–s3) !important;
-}
-.tsw input:checked + .ttrack {
-background-color: var(–s3) !important;
-background: var(–s3) !important;
-border-color: var(–amber) !important;
-box-shadow: 0 0 8px rgba(232,148,10,0.3) !important;
-}
-.tknob {
-background-color: var(–adim) !important;
-background: var(–adim) !important;
-}
-.tsw input:checked ~ .tknob {
-background-color: var(–amber) !important;
-background: var(–amber) !important;
-}
-
-/* Cards – make border visible on iOS */
-.card {
-background-color: var(–s1) !important;
-background: var(–s1) !important;
-border: 1px solid var(–border) !important;
-}
-
-/* Copy button */
-.cpbtn {
-background-color: var(–s2) !important;
-background: var(–s2) !important;
-color: var(–adim) !important;
--webkit-text-fill-color: var(–adim) !important;
-}
-
-/* Collapsible panels */
-.cpanel {
-background-color: var(–s1) !important;
-background: var(–s1) !important;
-}
-.ctoggle {
-background-color: transparent !important;
-background: transparent !important;
-color: var(–adim) !important;
--webkit-text-fill-color: var(–adim) !important;
-}
-
-/* Notes panel */
-.npanel {
-background-color: var(–s1) !important;
-background: var(–s1) !important;
-}
-
-/* Reduce gap between header rule and mode bar */
-.hdr {
-margin-bottom: 12px !important;
-padding-bottom: 12px !important;
-}
-
-/* Tighten spacing between cards */
-.card {
-margin-bottom: 8px !important;
-}
-
-/* Remove excessive space after header */
-.hdr-rule-sub {
-margin-bottom: 0 !important;
-}
-
+/* SAFARI / iOS FORM OVERRIDE */
+input,select,textarea,button{-webkit-appearance:none !important;-moz-appearance:none !important;appearance:none !important}
+input[type=“text”],input[type=“number”],select{background-color:var(–black) !important;background:var(–black) !important;color:var(–text) !important;border:1px solid var(–border) !important;border-radius:var(–r) !important;-webkit-text-fill-color:var(–text) !important;font-size:16px !important}
+input::placeholder{color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important;opacity:1 !important}
+.decode-input{background-color:var(–black) !important;background:var(–black) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important;font-size:20px !important;letter-spacing:3px !important}
+.decode-input::placeholder{color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important;font-size:13px !important;letter-spacing:1px !important}
+select{background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘10’ height=‘6’ fill=’%235a4400’ viewBox=‘0 0 10 6’%3E%3Cpath d=‘M5 6L0 0h10z’/%3E%3C/svg%3E”) !important;background-repeat:no-repeat !important;background-position:right 12px center !important;padding-right:30px !important;cursor:pointer}
+input[type=“text”]:focus,input[type=“number”]:focus,select:focus{border-color:var(–amber) !important;box-shadow:0 0 0 2px var(–glow) !important;outline:none !important}
+.mode-btn{background-color:transparent !important;background:transparent !important;color:var(–muted) !important;border-radius:0 !important;-webkit-text-fill-color:var(–muted) !important}
+.mode-btn.active{background-color:var(–s3) !important;background:var(–s3) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important}
+.sys-btn{background-color:var(–s1) !important;background:var(–s1) !important;color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important}
+.sys-btn.active{background-color:var(–s3) !important;background:var(–s3) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important;border-color:var(–amber) !important}
+.stab{background-color:var(–s1) !important;background:var(–s1) !important;color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important}
+.stab.active{background-color:var(–s3) !important;background:var(–s3) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important;border-color:var(–amber) !important}
+.add-s{background-color:transparent !important;background:transparent !important;color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important}
+.ttrack{background-color:var(–s3) !important;background:var(–s3) !important}
+.tsw input:checked+.ttrack{background-color:var(–s3) !important;background:var(–s3) !important;border-color:var(–amber) !important;box-shadow:0 0 8px rgba(232,148,10,.3) !important}
+.tknob{background-color:var(–adim) !important;background:var(–adim) !important}
+.tsw input:checked~.tknob{background-color:var(–amber) !important;background:var(–amber) !important}
+.card{background-color:var(–s1) !important;background:var(–s1) !important;border:1px solid var(–border) !important}
+.cpbtn{background-color:var(–s2) !important;background:var(–s2) !important;color:var(–adim) !important;-webkit-text-fill-color:var(–adim) !important}
+.cpanel{background-color:var(–s1) !important;background:var(–s1) !important}
+.ctoggle{background-color:transparent !important;background:transparent !important;color:var(–adim) !important;-webkit-text-fill-color:var(–adim) !important}
+.npanel{background-color:var(–s1) !important;background:var(–s1) !important}
+.sub-mode-btn{background-color:transparent !important;background:transparent !important;color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important;border-radius:0 !important}
+.sub-mode-btn.active{background-color:var(–s3) !important;background:var(–s3) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important}
+.traf-btn{background-color:var(–black) !important;background:var(–black) !important;color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important}
+.traf-btn.active{background-color:var(–s3) !important;background:var(–s3) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important;border-color:var(–amber) !important}
+.install-btn{background-color:var(–s3) !important;background:var(–s3) !important;color:var(–amber2) !important;-webkit-text-fill-color:var(–amber2) !important}
+.dismiss-btn{background-color:transparent !important;background:transparent !important;color:var(–muted) !important;-webkit-text-fill-color:var(–muted) !important}
+.help-toggle{background-color:transparent !important;background:transparent !important;-webkit-appearance:none !important}
 </style>
+
 </head>
 <body>
 
@@ -417,6 +298,7 @@ margin-bottom: 0 !important;
 </svg>
 
 <div class="app">
+
   <div class="install-banner" id="installBanner">
     <span style="flex:1">Add to Home Screen for offline use</span>
     <button class="install-btn" id="installBtn">INSTALL</button>
@@ -437,10 +319,16 @@ margin-bottom: 0 !important;
       </div>
     </div>
     <div class="hdr-rule"></div>
-    <div class="hdr-rule-sub"></div>
+    <div style="display:flex;justify-content:flex-end;margin-top:8px">
+      <button class="help-toggle" id="helpToggle" onclick="toggleHelp()">HELP</button>
+    </div>
   </div>
 
-  <div class="mode-bar">
+  <div class="tool-intro">
+    <p>Select a rating system (PCN, LCN, CBR, or OVLD). Choose a mode: enter a known pavement rating to find max allowable C-17 weight, or enter a planned weight to find the minimum rating required. For unpaved airfields with a CBR rating, use CBR. To assess pavement life impact of overload operations, use OVLD. All data from TO 1C-17A-1-1 Ch 10 and AFTTP 3-3.C-17 Table 3.1.</p>
+  </div>
+
+  <div class="mode-bar" id="modeBar">
     <button class="mode-btn active" id="mf" onclick="setMode('fwd')">RATING &rarr; MAX GW</button>
     <button class="mode-btn" id="mr" onclick="setMode('rev')">GROSS WT &rarr; MIN RATING</button>
   </div>
@@ -449,18 +337,32 @@ margin-bottom: 0 !important;
     <button class="sys-btn active" data-s="pcn" onclick="setSys('pcn')">PCN</button>
     <button class="sys-btn" data-s="lcn" onclick="setSys('lcn')">LCN</button>
     <button class="sys-btn" data-s="cbr" onclick="setSys('cbr')">CBR</button>
+    <button class="sys-btn" data-s="ovld" onclick="setSys('ovld')">OVLD</button>
   </div>
 
   <div class="rstrip" id="rs">
     <div class="rmain">
-      <div class="rtag" id="rt">---</div>
-      <div class="rnum" id="rn">---</div>
+      <div class="rrow-top">
+        <div class="rleft">
+          <div class="rtag" id="rt">---</div>
+          <div class="rnum" id="rn">---</div>
+        </div>
+        <button class="cpbtn" id="cpb" onclick="copyResult()">COPY</button>
+      </div>
       <div class="rsub" id="rsb"></div>
-      <div class="racn-wrap"><div id="racn"></div></div>
-    </div>
-    <div class="rfoot">
+      <div class="rsub2" id="rsb2"></div>
+      <div id="racn"></div>
       <div class="rinterp" id="ri"></div>
-      <button class="cpbtn" id="cpb" onclick="copyResult()">COPY</button>
+      <div class="ovl-bar-wrap hidden" id="ovlBarWrap">
+        <div class="ovl-bar-label">
+          <span>0%</span><span id="ovlBarPct">--</span><span>40%</span>
+        </div>
+        <div class="ovl-bar">
+          <div class="ovl-bar-fill" id="ovlBarFill"></div>
+          <div class="ovl-bar-mark" id="ovlBarMark10" style="left:25%"></div>
+        </div>
+        <div class="ovl-limits"><span>Peacetime limit: 10%</span><span id="ovlBarTypMax"></span></div>
+      </div>
     </div>
   </div>
 
@@ -481,52 +383,210 @@ margin-bottom: 0 !important;
     <button class="add-s" onclick="addSurf()">+</button>
   </div>
 
+  <!-- PCN PANEL -->
+
   <div id="pp">
     <div class="card">
       <div class="card-label">Quick Decode</div>
-      <input type="text" class="decode-input" id="pd" placeholder="e.g. 80 R/B/W/T" oninput="parseDecode()" autocapitalize="characters" autocomplete="off" spellcheck="false">
+      <div class="help-text">Paste the full PCN code from airport documents. The tool automatically fills all fields below.</div>
+      <input type="text" class="decode-input" id="pd" placeholder="e.g. 80 R/B/W/T" oninput="parseDecode()" autocapitalize="characters" autocomplete="off" spellcheck="false" style="margin-top:8px">
       <div class="decode-parsed" id="dc"></div>
-      <div class="or-div">OR ENTER MANUALLY</div>
+      <div class="or-div" style="font-size:11px;letter-spacing:2px;color:var(--amber);opacity:0.7">OR ENTER MANUALLY</div>
     </div>
     <div class="card">
       <div class="fg">
-        <div class="field"><label>PCN Value</label><input type="number" id="pv" min="20" max="86" step="1" placeholder="20-86" oninput="manIn()"></div>
-        <div class="field"><label>Surface</label><select id="ps" onchange="manIn()"><option value="R">R - Rigid (Concrete)</option><option value="F">F - Flexible (Asphalt)</option></select></div>
-        <div class="field"><label>Subgrade</label><select id="pg" onchange="manIn()"><option value="A">A - High</option><option value="B">B - Medium</option><option value="C">C - Low</option><option value="D">D - Ultra-low</option></select></div>
-        <div class="field" id="pgw" style="display:none"><label>Planned GW (x1,000 lbs)</label><input type="number" id="pgwv" min="200" max="670" step="1" placeholder="e.g. 585" oninput="calc()"></div>
+        <div class="field">
+          <label>PCN Value</label>
+          <div class="help-text">The numeric strength index published for this surface (20-86). Higher = stronger pavement.</div>
+          <input type="number" id="pv" min="20" max="86" step="1" placeholder="20-86" oninput="manIn()">
+        </div>
+        <div class="field">
+          <label>Surface Type</label>
+          <div class="help-text">R = concrete (rigid). F = asphalt (flexible).</div>
+          <select id="ps" onchange="manIn()">
+            <option value="R">R - Rigid (Concrete)</option>
+            <option value="F">F - Flexible (Asphalt)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Subgrade</label>
+          <div class="help-text">Underlying soil strength. Use B if unknown.</div>
+          <select id="pg" onchange="manIn()">
+            <option value="A">A - High</option>
+            <option value="B">B - Medium</option>
+            <option value="C">C - Low</option>
+            <option value="D">D - Ultra-low</option>
+          </select>
+        </div>
+        <div class="field" id="pgw" style="display:none">
+          <label>Planned GW (x1,000 lbs)</label>
+          <div class="help-text">Your intended takeoff or landing gross weight.</div>
+          <input type="number" id="pgwv" min="200" max="670" step="1" placeholder="e.g. 585" oninput="calc()">
+        </div>
       </div>
       <div class="trow">
         <label class="tsw"><input type="checkbox" id="po" onchange="calc()"><span class="ttrack"></span><span class="tknob"></span></label>
-        <span class="ttxt">Overload (<strong>&lt;5% annual</strong>): +10% asphalt / +5% concrete</span>
+        <span class="ttxt">
+          <strong>Overload</strong> (&lt;5% annual ops): +10% asphalt / +5% concrete
+          <div class="help-text">Applies ICAO overload allowance. Requires airfield authority approval. Use for occasional operations only.</div>
+        </span>
       </div>
     </div>
   </div>
+
+  <!-- LCN PANEL -->
 
   <div id="lp" class="hidden">
     <div class="card">
+      <div class="section-intro">LCN is an older rating system used by some civil airports (ICAO method) and military sources (USAF method). Two variants use different inputs: concrete uses L-Value, asphalt uses pavement thickness.</div>
       <div class="fg">
-        <div class="field"><label>LCN Value</label><input type="number" id="lv" min="42" max="100" step="1" placeholder="42-100" oninput="calc()"></div>
-        <div class="field"><label>Surface</label><select id="ls" onchange="updLCN();calc()"><option value="concrete">Concrete</option><option value="asphalt">Asphalt</option></select></div>
-        <div class="field" id="llf"><label>L-Value</label><select id="ll" onchange="calc()"><option value="30">30</option><option value="40" selected>40</option><option value="50">50</option></select></div>
-        <div class="field hidden" id="ltf"><label>Thickness</label><select id="lt" onchange="calc()"><option value="20">20</option><option value="30">30</option><option value="40">40</option></select></div>
-        <div class="field" id="lgw" style="display:none"><label>Planned GW (x1,000 lbs)</label><input type="number" id="lgwv" min="200" max="670" step="1" placeholder="e.g. 585" oninput="calc()"></div>
+        <div class="field">
+          <label>LCN Value</label>
+          <div class="help-text">Load Classification Number from airport documents (42-100).</div>
+          <input type="number" id="lv" min="42" max="100" step="1" placeholder="42-100" oninput="calc()">
+        </div>
+        <div class="field">
+          <label>Surface Type</label>
+          <div class="help-text">Determines which sub-inputs appear below.</div>
+          <select id="ls" onchange="updLCN();calc()">
+            <option value="concrete">Concrete</option>
+            <option value="asphalt">Asphalt</option>
+          </select>
+        </div>
+        <div class="field" id="llf">
+          <label>L-Value</label>
+          <div class="help-text">Concrete rigidity factor. Use 40 if unknown (TO Note 2).</div>
+          <select id="ll" onchange="calc()">
+            <option value="30">30</option>
+            <option value="40" selected>40</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+        <div class="field hidden" id="ltf">
+          <label>Thickness (cm)</label>
+          <div class="help-text">Asphalt layer depth. Use 20 if unknown (TO Note 2).</div>
+          <select id="lt" onchange="calc()">
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+          </select>
+        </div>
+        <div class="field" id="lgw" style="display:none">
+          <label>Planned GW (x1,000 lbs)</label>
+          <div class="help-text">Your intended gross weight.</div>
+          <input type="number" id="lgwv" min="200" max="670" step="1" placeholder="e.g. 585" oninput="calc()">
+        </div>
       </div>
       <div class="trow">
         <label class="tsw"><input type="checkbox" id="lo" onchange="calc()"><span class="ttrack"></span><span class="tknob"></span></label>
-        <span class="ttxt">Overload (~1 flt/day): +25% allowable LCN</span>
+        <span class="ttxt">
+          <strong>Overload</strong> (~1 flt/day): +25% allowable LCN
+          <div class="help-text">Permits occasional single daily operation above the rated weight. May cause minor pavement damage over time.</div>
+        </span>
       </div>
     </div>
   </div>
 
+  <!-- CBR PANEL -->
+
   <div id="cp" class="hidden">
     <div class="card">
+      <div class="section-intro">CBR (California Bearing Ratio) rates unpaved and semi-prepared airfield strength as a percentage of crushed rock bearing capacity. Used for dirt, gravel, and clay surfaces. Max C-17 weight on unpaved airfields: 435K lbs (no CG restriction) or 486K lbs (32% MAC FWD CG).</div>
       <div class="fg">
-        <div class="field"><label>CBR Value</label><input type="number" id="cv" min="10" max="20" step="1" placeholder="10-20" oninput="calc()"></div>
-        <div class="field"><label>Passes</label><select id="cps" onchange="calc()"><option value="50">50</option><option value="100">100</option><option value="300">300</option></select></div>
-        <div class="field" id="cgw" style="display:none"><label>Planned GW (x1,000 lbs)</label><input type="number" id="cgwv" min="200" max="500" step="1" placeholder="e.g. 300" oninput="calc()"></div>
+        <div class="field">
+          <label>CBR Rating</label>
+          <div class="help-text">Airfield bearing strength rating, typically 10-20 for C-17 ops. Obtain from airfield survey or FLIP.</div>
+          <input type="number" id="cv" min="8" max="20" step="1" placeholder="8-20" oninput="calc()">
+        </div>
+        <div class="field">
+          <label>Number of Passes</label>
+          <div class="help-text">Total C-17 operations at this field. Each takeoff and each landing counts as one pass.</div>
+          <select id="cps" onchange="calc()">
+            <option value="50">50 passes</option>
+            <option value="100">100 passes</option>
+            <option value="300">300 passes</option>
+          </select>
+        </div>
+        <div class="field" id="cgw" style="display:none">
+          <label>Planned GW (x1,000 lbs)</label>
+          <div class="help-text">Your intended gross weight (250-500K).</div>
+          <input type="number" id="cgwv" min="250" max="500" step="1" placeholder="e.g. 400" oninput="calc()">
+        </div>
+      </div>
+      <div class="trow">
+        <label class="tsw"><input type="checkbox" id="ccg" onchange="calc()"><span class="ttrack"></span><span class="tknob"></span></label>
+        <span class="ttxt">
+          <strong>32% MAC Forward CG Limit</strong>
+          <div class="help-text">Moving CG forward to 32% MAC reduces nose gear loading, unlocking higher allowable weights on soft surfaces. Requires mission planning coordination. Increases max from 435K to 486K lbs. (TO 1C-17A-1-1 Fig 10-5)</div>
+        </span>
       </div>
     </div>
   </div>
+
+  <!-- OVERLOAD ASSESSMENT PANEL -->
+
+  <div id="op" class="hidden">
+    <div class="card">
+      <div class="card-label">Overload Assessment</div>
+      <div class="section-intro">Estimates the fraction of a pavement's design life consumed by overload operations. Use when desired weight exceeds the rated allowable weight. All overload operations require airfield authority approval. Data: TO 1C-17A-1-1 Figure 10-8.</div>
+
+```
+  <div class="sub-mode-bar">
+    <button class="sub-mode-btn active" id="ovlDirect" onclick="setOvlMode('direct')">ENTER FACTOR DIRECTLY</button>
+    <button class="sub-mode-btn" id="ovlCalc" onclick="setOvlMode('calc')">CALCULATE FROM WEIGHTS</button>
+  </div>
+
+  <div id="ovlDirectPanel">
+    <div class="field full">
+      <label>Overload Factor</label>
+      <div class="help-text">Ratio of desired weight to allowable weight (or required rating to airfield rating). Enter a value between 1.01 and 1.60. Example: want to fly 500K but field allows 400K = factor 1.25.</div>
+      <input type="number" id="ovlFactor" min="1.01" max="1.60" step="0.01" placeholder="e.g. 1.25" oninput="calc()">
+    </div>
+  </div>
+
+  <div id="ovlCalcPanel" class="hidden" style="margin-top:0">
+    <div class="fg">
+      <div class="field">
+        <label>Desired GW (x1,000 lbs)</label>
+        <div class="help-text">Your planned gross weight.</div>
+        <input type="number" id="ovlDesired" min="200" max="670" step="1" placeholder="e.g. 500" oninput="calcOvlFactor()">
+      </div>
+      <div class="field">
+        <label>Allowable GW (x1,000 lbs)</label>
+        <div class="help-text">Max weight permitted by pavement rating.</div>
+        <input type="number" id="ovlAllowable" min="200" max="670" step="1" placeholder="e.g. 400" oninput="calcOvlFactor()">
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--amber);margin-top:8px;letter-spacing:.5px" id="ovlFactorDisplay">Factor: --</div>
+  </div>
+
+  <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+    <div class="field full">
+      <label>Traffic Level</label>
+      <div class="help-text">Characterizes how heavily the airfield is used overall, not just by C-17s. Determines how quickly overloads consume pavement design life.</div>
+      <div class="traf-bar">
+        <button class="traf-btn" data-t="high" onclick="setTraf('high')">HIGH</button>
+        <button class="traf-btn active" data-t="medium" onclick="setTraf('medium')">MEDIUM</button>
+        <button class="traf-btn" data-t="low" onclick="setTraf('low')">LOW</button>
+      </div>
+      <div class="help-text" id="trafHelp" style="margin-top:6px">Medium: typical military airfield with regular operations.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="field full">
+      <label>Number of Overload Passes</label>
+      <div class="help-text">How many times will the C-17 operate at the overload weight? Each takeoff and landing = 1 pass.</div>
+      <input type="number" id="ovlPasses" min="1" max="20000" step="1" placeholder="e.g. 50" oninput="calc()">
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <!-- DECODE REFERENCE -->
 
   <div class="cpanel">
     <button class="ctoggle" id="reft" onclick="togRef()">PCN / LCN / CBR Decode Reference <span class="arr">&#9660;</span></button>
@@ -534,7 +594,7 @@ margin-bottom: 0 !important;
       <div class="rsect">PCN Coded Format: PCN ## X/X/X/X</div>
       <table class="rtbl">
         <tr><th>Pos</th><th>Code</th><th>Meaning</th></tr>
-        <tr><td>1</td><td>##</td><td>PCN value (strength number)</td></tr>
+        <tr><td>1</td><td>##</td><td>PCN strength number</td></tr>
         <tr><td>2</td><td>R/F</td><td>Rigid (concrete) / Flexible (asphalt)</td></tr>
         <tr><td>3</td><td>A-D</td><td>Subgrade: High / Med / Low / Ultra-low</td></tr>
         <tr><td>4</td><td>W-Z</td><td>Tire pressure limit (see below)</td></tr>
@@ -542,13 +602,13 @@ margin-bottom: 0 !important;
       </table>
       <div class="rsect" style="margin-top:14px">Tire Pressure Codes</div>
       <table class="rtbl">
-        <tr><th>Code</th><th>AFTTP Limit</th><th>C-17 Status</th></tr>
+        <tr><th>Code</th><th>AFTTP Limit</th><th>C-17 (144 psi main)</th></tr>
         <tr><td>W</td><td>No limit</td><td style="color:var(--green)">OK</td></tr>
         <tr><td>X</td><td>217 psi</td><td style="color:var(--green)">OK (144 &lt; 217)</td></tr>
         <tr><td>Y</td><td>145 psi</td><td style="color:var(--warn)">MARGINAL *</td></tr>
         <tr><td>Z</td><td>73 psi</td><td style="color:var(--red)">NOT COMPAT</td></tr>
       </table>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:6px;line-height:1.6">* AFTTP Y = 145 psi; C-17 main = 144 psi. Marginal but operationally acceptable per TO.<br>ICAO Annex 14 Y = 1.25 MPa = 181 psi. Use AFTTP values for operational decisions.</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:6px;line-height:1.6">* AFTTP Y = 145 psi; C-17 main = 144 psi. Marginal but operationally acceptable per TO. ICAO defines Y = 181 psi. Use AFTTP values.</div>
       <div class="rsect" style="margin-top:14px">C-17 ACN at MRW (586K lbs)</div>
       <table class="rtbl">
         <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
@@ -563,13 +623,22 @@ margin-bottom: 0 !important;
         <tr><td>C</td><td>k = 25-60</td><td>CBR 4-8</td></tr>
         <tr><td>D</td><td>k &lt; 25</td><td>CBR &lt; 4</td></tr>
       </table>
+      <div class="rsect" style="margin-top:14px">Traffic Level Guide (OVLD)</div>
+      <table class="rtbl">
+        <tr><th>Level</th><th>Description</th><th>Typical Max OF</th></tr>
+        <tr><td>HIGH</td><td>Major airfield, heavy traffic</td><td>1.37</td></tr>
+        <tr><td>MED</td><td>Typical military base</td><td>1.37</td></tr>
+        <tr><td>LOW</td><td>Austere / remote field</td><td>1.25</td></tr>
+      </table>
     </div>
   </div>
+
+  <!-- ACR-PCR INFO -->
 
   <div class="cpanel">
     <button class="ctoggle" id="acrt" onclick="togACR()">ACR-PCR Transition (Info) <span class="arr">&#9660;</span></button>
     <div class="cbody" id="acrb">
-      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.7">ICAO adopted ACR-PCR in 2020 replacing ACN-PCN, with full applicability Nov 2024. Uses layered elastic analysis vs. CBR/Westergaard methods. <span style="color:var(--warn)">No mathematical conversion exists</span> between PCN and PCR. AFTTP 3-3.C-17 (Jul 2025) still uses ACN-PCN. This tool remains valid for USAF mission planning.</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.7">ICAO adopted ACR-PCR in 2020, replacing ACN-PCN, with full applicability Nov 2024. Uses layered elastic analysis vs. older CBR/Westergaard methods. <span style="color:var(--warn)">No mathematical conversion exists</span> between PCN and PCR values. AFTTP 3-3.C-17 (Jul 2025) still uses ACN-PCN. This tool remains valid for USAF mission planning. If an airfield publishes only PCR, contact the host nation for an equivalent PCN estimate or compare ACR at planned weight to PCR directly using TO 1C-17A-1-1 Figure 10-2.</div>
       <div class="rsect" style="margin-top:12px">References</div>
       <ul style="list-style:none;padding:0">
         <li style="padding:4px 0"><a class="ref-link" href="https://www.faa.gov/documentlibrary/media/advisory_circular/150-5335-5c.pdf" target="_blank" rel="noopener">FAA AC 150/5335-5C: ACN-PCN Method</a></li>
@@ -580,54 +649,223 @@ margin-bottom: 0 !important;
   </div>
 
   <div class="npanel">
-    <h3>Operational Notes // AFTTP 3-3.C-17 Table 3.1</h3>
+    <h3>Operational Notes // TO 1C-17A-1-1 Ch 10 / AFTTP 3-3.C-17</h3>
     <ul>
-      <li>Data from 1C-17A-1-1, Ch 10 "Support Area Operations"</li>
-      <li>No CG limitations applied. FWD CG &lt;32% requires TO check</li>
-      <li>Normal tire PSI: 144 (main), 160 (nose)</li>
-      <li>Values &gt;447K: check 1C-17A-1-1 Sec 5 for SPRO limits</li>
-      <li>Note 1: Overload &lt;5% annual. Asphalt +10%, Concrete +5% PCN</li>
-      <li>Note 2: Use L=40/Thickness=20 if unknown. Overload +25%</li>
-      <li>Note 3: Prior permission required when ACN exceeds PCN</li>
-      <li>ACN interpolated linearly between OEW and MRW (ICAO method)</li>
+      <li>PCN/LCN/CBR data from AFTTP 3-3.C-17 Table 3.1. CBR CG data from TO Fig 10-5.</li>
+      <li>No CG limitations applied to PCN/LCN. FWD CG &lt;32% MAC requires TO check.</li>
+      <li>Normal tire PSI: 144 psi main (138 unloaded), 160 psi nose (155 unloaded).</li>
+      <li>Values &gt;447K lbs: check 1C-17A-1-1 Sec 5 for SPRO limits.</li>
+      <li>Note 1: Overload &lt;5% annual. Asphalt +10%, Concrete +5% PCN.</li>
+      <li>Note 2: Use L=40 / Thickness=20 if unknown. LCN overload +25% (~1 flt/day).</li>
+      <li>Note 3: Prior permission required when ACN exceeds published PCN.</li>
+      <li>ACN interpolated linearly between OEW (282K) and MRW (586K) per ICAO method.</li>
       <li>COMFAA anomaly: rigid ACN can invert on high subgrades. Use TO values.</li>
+      <li>OVLD percentages modeled from TO 1C-17A-1-1 Figure 10-8. Use for planning only.</li>
     </ul>
   </div>
+
 </div>
 
 <script>
-const PCN={20:{R:{A:285,B:279,C:265,D:245},F:{A:326,B:312,C:279,D:233}},22:{R:{A:312,B:303,C:285,D:262},F:{A:351,B:334,C:298,D:250}},24:{R:{A:338,B:326,C:305,D:278},F:{A:376,B:356,C:317,D:265}},26:{R:{A:364,B:349,C:324,D:294},F:{A:400,B:378,C:336,D:281}},28:{R:{A:390,B:372,C:343,D:310},F:{A:424,B:399,C:354,D:296}},30:{R:{A:416,B:394,C:362,D:325},F:{A:447,B:420,C:372,D:310}},32:{R:{A:442,B:417,C:380,D:340},F:{A:470,B:440,C:389,D:325}},34:{R:{A:467,B:439,C:398,D:355},F:{A:493,B:460,C:407,D:339}},36:{R:{A:493,B:460,C:416,D:369},F:{A:516,B:480,C:423,D:353}},38:{R:{A:518,B:482,C:434,D:383},F:{A:538,B:499,C:440,D:366}},40:{R:{A:544,B:504,C:451,D:397},F:{A:560,B:518,C:456,D:380}},42:{R:{A:569,B:525,C:469,D:411},F:{A:581,B:537,C:473,D:393}},44:{R:{A:594,B:546,C:486,D:425},F:{A:603,B:556,C:488,D:406}},46:{R:{A:619,B:567,C:503,D:438},F:{A:624,B:575,C:504,D:419}},48:{R:{A:644,B:588,C:519,D:451},F:{A:645,B:593,C:520,D:431}},50:{R:{A:null,B:609,C:536,D:464},F:{A:null,B:611,C:535,D:444}},52:{R:{A:null,B:630,C:552,D:477},F:{A:null,B:629,C:550,D:456}},54:{R:{A:null,B:650,C:569,D:490},F:{A:null,B:646,C:565,D:469}},56:{R:{A:null,B:null,C:585,D:503},F:{A:null,B:null,C:580,D:481}},58:{R:{A:null,B:null,C:601,D:515},F:{A:null,B:null,C:594,D:493}},60:{R:{A:null,B:null,C:617,D:527},F:{A:null,B:null,C:609,D:504}},62:{R:{A:null,B:null,C:632,D:539},F:{A:null,B:null,C:623,D:516}},64:{R:{A:null,B:null,C:648,D:552},F:{A:null,B:null,C:638,D:528}},66:{R:{A:null,B:null,C:null,D:564},F:{A:null,B:null,C:652,D:539}},68:{R:{A:null,B:null,C:null,D:575},F:{A:null,B:null,C:null,D:551}},70:{R:{A:null,B:null,C:null,D:587},F:{A:null,B:null,C:null,D:562}},72:{R:{A:null,B:null,C:null,D:599},F:{A:null,B:null,C:null,D:573}},74:{R:{A:null,B:null,C:null,D:610},F:{A:null,B:null,C:null,D:584}},76:{R:{A:null,B:null,C:null,D:622},F:{A:null,B:null,C:null,D:595}},78:{R:{A:null,B:null,C:null,D:633},F:{A:null,B:null,C:null,D:606}},80:{R:{A:null,B:null,C:null,D:644},F:{A:null,B:null,C:null,D:617}},82:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:628}},84:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:639}},86:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:649}}};
+// ================================================================
+// DATA TABLES
+// ================================================================
 
-const LCNC={42:{30:301,40:null,50:null},44:{30:318,40:301,50:null},46:{30:335,40:317,50:null},48:{30:352,40:333,50:305},50:{30:369,40:349,50:320},52:{30:386,40:365,50:334},54:{30:404,40:381,50:349},56:{30:421,40:397,50:364},58:{30:438,40:413,50:379},60:{30:455,40:429,50:394},62:{30:472,40:445,50:409},64:{30:489,40:461,50:424},66:{30:507,40:477,50:438},68:{30:524,40:493,50:453},70:{30:541,40:509,50:468},72:{30:558,40:525,50:483},74:{30:575,40:541,50:498},76:{30:593,40:557,50:513},78:{30:610,40:573,50:528},80:{30:627,40:589,50:543},82:{30:644,40:605,50:558},84:{30:661,40:621,50:573},86:{30:670,40:637,50:588},88:{30:670,40:653,50:603},90:{30:670,40:669,50:618},92:{30:670,40:670,50:633},94:{30:670,40:670,50:648},96:{30:670,40:670,50:663},98:{30:null,40:null,50:null},100:{30:null,40:null,50:null}};
+const PCN = {
+  20:{R:{A:285,B:279,C:265,D:245},F:{A:326,B:312,C:279,D:233}},
+  22:{R:{A:312,B:303,C:285,D:262},F:{A:351,B:334,C:298,D:250}},
+  24:{R:{A:338,B:326,C:305,D:278},F:{A:376,B:356,C:317,D:265}},
+  26:{R:{A:364,B:349,C:324,D:294},F:{A:400,B:378,C:336,D:281}},
+  28:{R:{A:390,B:372,C:343,D:310},F:{A:424,B:399,C:354,D:296}},
+  30:{R:{A:416,B:394,C:362,D:325},F:{A:447,B:420,C:372,D:310}},
+  32:{R:{A:442,B:417,C:380,D:340},F:{A:470,B:440,C:389,D:325}},
+  34:{R:{A:467,B:439,C:398,D:355},F:{A:493,B:460,C:407,D:339}},
+  36:{R:{A:493,B:460,C:416,D:369},F:{A:516,B:480,C:423,D:353}},
+  38:{R:{A:518,B:482,C:434,D:383},F:{A:538,B:499,C:440,D:366}},
+  40:{R:{A:544,B:504,C:451,D:397},F:{A:560,B:518,C:456,D:380}},
+  42:{R:{A:569,B:525,C:469,D:411},F:{A:581,B:537,C:473,D:393}},
+  44:{R:{A:594,B:546,C:486,D:425},F:{A:603,B:556,C:488,D:406}},
+  46:{R:{A:619,B:567,C:503,D:438},F:{A:624,B:575,C:504,D:419}},
+  48:{R:{A:644,B:588,C:519,D:451},F:{A:645,B:593,C:520,D:431}},
+  50:{R:{A:null,B:609,C:536,D:464},F:{A:null,B:611,C:535,D:444}},
+  52:{R:{A:null,B:630,C:552,D:477},F:{A:null,B:629,C:550,D:456}},
+  54:{R:{A:null,B:650,C:569,D:490},F:{A:null,B:646,C:565,D:469}},
+  56:{R:{A:null,B:null,C:585,D:503},F:{A:null,B:null,C:580,D:481}},
+  58:{R:{A:null,B:null,C:601,D:515},F:{A:null,B:null,C:594,D:493}},
+  60:{R:{A:null,B:null,C:617,D:527},F:{A:null,B:null,C:609,D:504}},
+  62:{R:{A:null,B:null,C:632,D:539},F:{A:null,B:null,C:623,D:516}},
+  64:{R:{A:null,B:null,C:648,D:552},F:{A:null,B:null,C:638,D:528}},
+  66:{R:{A:null,B:null,C:null,D:564},F:{A:null,B:null,C:652,D:539}},
+  68:{R:{A:null,B:null,C:null,D:575},F:{A:null,B:null,C:null,D:551}},
+  70:{R:{A:null,B:null,C:null,D:587},F:{A:null,B:null,C:null,D:562}},
+  72:{R:{A:null,B:null,C:null,D:599},F:{A:null,B:null,C:null,D:573}},
+  74:{R:{A:null,B:null,C:null,D:610},F:{A:null,B:null,C:null,D:584}},
+  76:{R:{A:null,B:null,C:null,D:622},F:{A:null,B:null,C:null,D:595}},
+  78:{R:{A:null,B:null,C:null,D:633},F:{A:null,B:null,C:null,D:606}},
+  80:{R:{A:null,B:null,C:null,D:644},F:{A:null,B:null,C:null,D:617}},
+  82:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:628}},
+  84:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:639}},
+  86:{R:{A:null,B:null,C:null,D:null},F:{A:null,B:null,C:null,D:649}}
+};
 
-const LCNA={42:{20:314,30:null,40:null},44:{20:330,30:null,40:null},46:{20:347,30:null,40:null},48:{20:364,30:null,40:null},50:{20:381,30:304,40:null},52:{20:398,30:318,40:null},54:{20:415,30:332,40:null},56:{20:432,30:345,40:null},58:{20:449,30:359,40:308},60:{20:466,30:373,40:321},62:{20:483,30:387,40:334},64:{20:500,30:401,40:347},66:{20:517,30:415,40:361},68:{20:534,30:428,40:374},70:{20:551,30:442,40:387},72:{20:568,30:456,40:400},74:{20:584,30:470,40:413},76:{20:601,30:484,40:426},78:{20:618,30:498,40:439},80:{20:635,30:511,40:452},82:{20:652,30:525,40:465},84:{20:668,30:539,40:478},86:{20:670,30:553,40:491},88:{20:670,30:567,40:504},90:{20:670,30:580,40:517},92:{20:670,30:594,40:530},94:{20:670,30:608,40:543},96:{20:670,30:622,40:556},98:{20:670,30:635,40:569},100:{20:670,30:649,40:582}};
+const LCNC = {
+  42:{30:301,40:null,50:null},44:{30:318,40:301,50:null},46:{30:335,40:317,50:null},
+  48:{30:352,40:333,50:305},50:{30:369,40:349,50:320},52:{30:386,40:365,50:334},
+  54:{30:404,40:381,50:349},56:{30:421,40:397,50:364},58:{30:438,40:413,50:379},
+  60:{30:455,40:429,50:394},62:{30:472,40:445,50:409},64:{30:489,40:461,50:424},
+  66:{30:507,40:477,50:438},68:{30:524,40:493,50:453},70:{30:541,40:509,50:468},
+  72:{30:558,40:525,50:483},74:{30:575,40:541,50:498},76:{30:593,40:557,50:513},
+  78:{30:610,40:573,50:528},80:{30:627,40:589,50:543},82:{30:644,40:605,50:558},
+  84:{30:661,40:621,50:573},86:{30:670,40:637,50:588},88:{30:670,40:653,50:603},
+  90:{30:670,40:669,50:618},92:{30:670,40:670,50:633},94:{30:670,40:670,50:648},
+  96:{30:670,40:670,50:663},98:{30:null,40:null,50:null},100:{30:null,40:null,50:null}
+};
 
-const CBR={10:{50:300,100:null,300:null},11:{50:320,100:null,300:null},12:{50:360,100:300,300:null},13:{50:380,100:340,300:null},14:{50:420,100:360,300:300},15:{50:440,100:400,300:320},16:{50:null,100:420,300:360},17:{50:null,100:null,300:380},18:{50:null,100:null,300:400},19:{50:null,100:null,300:420},20:{50:null,100:null,300:440}};
+const LCNA = {
+  42:{20:314,30:null,40:null},44:{20:330,30:null,40:null},46:{20:347,30:null,40:null},
+  48:{20:364,30:null,40:null},50:{20:381,30:304,40:null},52:{20:398,30:318,40:null},
+  54:{20:415,30:332,40:null},56:{20:432,30:345,40:null},58:{20:449,30:359,40:308},
+  60:{20:466,30:373,40:321},62:{20:483,30:387,40:334},64:{20:500,30:401,40:347},
+  66:{20:517,30:415,40:361},68:{20:534,30:428,40:374},70:{20:551,30:442,40:387},
+  72:{20:568,30:456,40:400},74:{20:584,30:470,40:413},76:{20:601,30:484,40:426},
+  78:{20:618,30:498,40:439},80:{20:635,30:511,40:452},82:{20:652,30:525,40:465},
+  84:{20:668,30:539,40:478},86:{20:670,30:553,40:491},88:{20:670,30:567,40:504},
+  90:{20:670,30:580,40:517},92:{20:670,30:594,40:530},94:{20:670,30:608,40:543},
+  96:{20:670,30:622,40:556},98:{20:670,30:635,40:569},100:{20:670,30:649,40:582}
+};
 
+// CBR: No CG Restriction (max 435K lbs). TO 1C-17A-1-1 Figure 10-5 solid curves.
+const CBR_NOCG = {
+  8:{50:null,100:null,300:null},
+  9:{50:null,100:null,300:null},
+  10:{50:300,100:null,300:null},
+  11:{50:320,100:null,300:null},
+  12:{50:358,100:298,300:null},
+  13:{50:382,100:338,300:null},
+  14:{50:415,100:360,300:298},
+  15:{50:435,100:398,300:320},
+  16:{50:null,100:420,300:358},
+  17:{50:null,100:null,300:380},
+  18:{50:null,100:null,300:400},
+  19:{50:null,100:null,300:418},
+  20:{50:null,100:null,300:435}
+};
+
+// CBR: 32% MAC Forward CG Limit (max 486K lbs). TO 1C-17A-1-1 Figure 10-5 dashed curves.
+const CBR_CG = {
+  8:{50:null,100:null,300:null},
+  9:{50:null,100:null,300:null},
+  10:{50:345,100:null,300:null},
+  11:{50:370,100:null,300:null},
+  12:{50:412,100:344,300:null},
+  13:{50:445,100:386,300:null},
+  14:{50:474,100:418,300:344},
+  15:{50:486,100:450,300:370},
+  16:{50:null,100:476,300:410},
+  17:{50:null,100:null,300:435},
+  18:{50:null,100:null,300:460},
+  19:{50:null,100:null,300:478},
+  20:{50:null,100:null,300:486}
+};
+
+// C-17 ACN data at OEW (282K) and MRW (586K)
 const C17_ACN = {
   R: { A:{oew:11,mrw:28}, B:{oew:14,mrw:36}, C:{oew:19,mrw:46}, D:{oew:29,mrw:71} },
   F: { A:{oew:10,mrw:25}, B:{oew:13,mrw:32}, C:{oew:17,mrw:42}, D:{oew:28,mrw:68} }
 };
-const OEW = 282, MRW = 586;
+var OEW = 282, MRW = 586;
 
+// Overload assessment parameters fitted to TO 1C-17A-1-1 Figure 10-8.
+// Formula: % = A * passes^pb * (OF - 1)^fb, capped at 99.
+// maxOF: typical maximum overload factor for each traffic level.
+var OVL_PARAMS = {
+  high:   { A: 1.24, pb: 0.82, fb: 2.41, maxOF: 1.37,
+            desc: 'Major airfield with high sustained traffic volume.' },
+  medium: { A: 2.25, pb: 0.82, fb: 2.41, maxOF: 1.37,
+            desc: 'Typical military airfield with regular operations.' },
+  low:    { A: 4.50, pb: 0.75, fb: 2.10, maxOF: 1.25,
+            desc: 'Austere or remote airfield with infrequent use.' }
+};
+
+// ================================================================
+// STATE
+// ================================================================
+var mode = 'fwd';
+var sys = 'pcn';
+var ovlMode = 'direct';
+var ovlTraffic = 'medium';
+var tireCode = null;
+var lastResult = null;
+var surfaces = [{id:0, label:'RWY', result:null}];
+var activeSurf = 0;
+var nextId = 1;
+
+// ================================================================
+// HELPERS
+// ================================================================
 function getACN(sf, sg, gwK) {
-  const d = C17_ACN[sf] && C17_ACN[sf][sg];
+  var d = C17_ACN[sf] && C17_ACN[sf][sg];
   if (!d) return null;
   if (gwK <= OEW) return d.oew;
   if (gwK >= MRW) return d.mrw;
   return Math.round(d.oew + ((gwK - OEW) / (MRW - OEW)) * (d.mrw - d.oew));
 }
 
-let mode = 'fwd', sys = 'pcn', tireCode = null, lastResult = null;
-let surfaces = [{id:0, label:'RWY', result:null}], activeSurf = 0, nextId = 1;
+function interp(data, val, getGW) {
+  var keys = Object.keys(data).map(Number).filter(function(k) {
+    return getGW(data[k]) !== null;
+  }).sort(function(a, b) { return a - b; });
+  if (!keys.length) return null;
+  if (val <= keys[0]) return { gw: getGW(data[keys[0]]), exact: val === keys[0], lo: keys[0], hi: keys[0] };
+  if (val >= keys[keys.length - 1]) return { gw: getGW(data[keys[keys.length - 1]]), exact: true, lo: keys[keys.length - 1], hi: keys[keys.length - 1] };
+  for (var i = 0; i < keys.length - 1; i++) {
+    if (val >= keys[i] && val <= keys[i + 1]) {
+      var a = getGW(data[keys[i]]), b = getGW(data[keys[i + 1]]);
+      if (a === null || b === null) return null;
+      var f = (val - keys[i]) / (keys[i + 1] - keys[i]);
+      return { gw: Math.floor(a + f * (b - a)), exact: false, lo: keys[i], hi: keys[i + 1] };
+    }
+  }
+  return null;
+}
 
+function revSearch(data, target, getGW) {
+  var keys = Object.keys(data).map(Number).sort(function(a, b) { return a - b; });
+  for (var i = 0; i < keys.length; i++) {
+    var gw = getGW(data[keys[i]]);
+    if (gw !== null && gw >= target) {
+      if (i > 0) {
+        var prev = getGW(data[keys[i - 1]]);
+        if (prev !== null && prev < target) {
+          var f2 = (target - prev) / (gw - prev);
+          return { val: Math.ceil(keys[i - 1] + f2 * (keys[i] - keys[i - 1])), exact: false, lo: keys[i - 1], hi: keys[i] };
+        }
+      }
+      return { val: keys[i], exact: true };
+    }
+  }
+  return null;
+}
+
+function calcOverloadPct(traffic, passes, of) {
+  var p = OVL_PARAMS[traffic];
+  var f = of - 1.0;
+  if (f <= 0) return 0;
+  var pct = p.A * Math.pow(passes, p.pb) * Math.pow(f, p.fb);
+  return Math.min(pct, 99.9);
+}
+
+// ================================================================
+// UI CONTROL
+// ================================================================
 function setMode(m) {
   mode = m;
   document.getElementById('mf').classList.toggle('active', m === 'fwd');
   document.getElementById('mr').classList.toggle('active', m === 'rev');
-  ['pgw','lgw','cgw'].forEach(function(i) {
-    document.getElementById(i).style.display = m === 'rev' ? '' : 'none';
-  });
+  var rev = m === 'rev';
+  document.getElementById('pgw').style.display = rev ? '' : 'none';
+  document.getElementById('lgw').style.display = rev ? '' : 'none';
+  document.getElementById('cgw').style.display = rev ? '' : 'none';
   calc();
 }
 
@@ -639,6 +877,18 @@ function setSys(s) {
   document.getElementById('pp').classList.toggle('hidden', s !== 'pcn');
   document.getElementById('lp').classList.toggle('hidden', s !== 'lcn');
   document.getElementById('cp').classList.toggle('hidden', s !== 'cbr');
+  document.getElementById('op').classList.toggle('hidden', s !== 'ovld');
+  // Mode bar and surface tabs only make sense for PCN/LCN/CBR
+  var showStandard = s !== 'ovld';
+  document.getElementById('modeBar').classList.toggle('hidden', !showStandard);
+  document.getElementById('stabs').classList.toggle('hidden', !showStandard);
+  document.getElementById('acnd').classList.remove('show');
+  // Clear result
+  document.getElementById('rs').classList.remove('show');
+  document.getElementById('tw').className = 'wstrip';
+  document.getElementById('sw').className = 'wstrip';
+  document.getElementById('aw').className = 'wstrip';
+  lastResult = null;
   calc();
 }
 
@@ -646,6 +896,43 @@ function updLCN() {
   var s = document.getElementById('ls').value;
   document.getElementById('llf').classList.toggle('hidden', s !== 'concrete');
   document.getElementById('ltf').classList.toggle('hidden', s !== 'asphalt');
+}
+
+function setOvlMode(m) {
+  ovlMode = m;
+  document.getElementById('ovlDirect').classList.toggle('active', m === 'direct');
+  document.getElementById('ovlCalc').classList.toggle('active', m === 'calc');
+  document.getElementById('ovlDirectPanel').classList.toggle('hidden', m !== 'direct');
+  document.getElementById('ovlCalcPanel').classList.toggle('hidden', m !== 'calc');
+  calc();
+}
+
+function setTraf(t) {
+  ovlTraffic = t;
+  document.querySelectorAll('.traf-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.t === t);
+  });
+  var helps = {
+    high: 'High: major airfield with heavy sustained traffic volume.',
+    medium: 'Medium: typical military airfield with regular operations.',
+    low: 'Low: austere or remote airfield with infrequent use.'
+  };
+  document.getElementById('trafHelp').textContent = helps[t];
+  calc();
+}
+
+function calcOvlFactor() {
+  var desired = parseFloat(document.getElementById('ovlDesired').value);
+  var allowable = parseFloat(document.getElementById('ovlAllowable').value);
+  if (!isNaN(desired) && !isNaN(allowable) && allowable > 0) {
+    var factor = desired / allowable;
+    document.getElementById('ovlFactorDisplay').textContent = 'Factor: ' + factor.toFixed(3) + (factor > 1 ? '' : ' (no overload)');
+    document.getElementById('ovlFactor').value = factor.toFixed(3);
+  } else {
+    document.getElementById('ovlFactorDisplay').textContent = 'Factor: --';
+    document.getElementById('ovlFactor').value = '';
+  }
+  calc();
 }
 
 function renderSurfs() {
@@ -662,6 +949,7 @@ function renderSurfs() {
     var a = document.createElement('button');
     a.className = 'add-s';
     a.textContent = '+';
+    a.title = 'Add surface';
     a.onclick = addSurf;
     c.appendChild(a);
   }
@@ -670,9 +958,9 @@ function renderSurfs() {
 function selSurf(i) { activeSurf = i; renderSurfs(); }
 
 function addSurf() {
-  var labels = ['RWY','TWY','RAMP','APRON'];
+  var labels = ['RWY', 'TWY', 'RAMP', 'APRON'];
   if (surfaces.length >= 4) return;
-  surfaces.push({id: nextId++, label: labels[surfaces.length] || ('SFC ' + (surfaces.length+1)), result: null, isLimiting: false});
+  surfaces.push({ id: nextId++, label: labels[surfaces.length] || ('SFC ' + (surfaces.length + 1)), result: null, isLimiting: false });
   activeSurf = surfaces.length - 1;
   renderSurfs();
 }
@@ -692,8 +980,8 @@ function parseDecode() {
   document.getElementById('ps').value = sf;
   document.getElementById('pg').value = sg;
   tireCode = tp;
-  var sn = {R:'RIGID', F:'FLEX'}, gn = {A:'HIGH', B:'MED', C:'LOW', D:'ULTRA'};
-  var tn = {W:'NO LIMIT', X:'<=217 PSI', Y:'<=145 PSI', Z:'<=73 PSI'};
+  var sn = { R: 'RIGID', F: 'FLEX' }, gn = { A: 'HIGH', B: 'MED', C: 'LOW', D: 'ULTRA' };
+  var tn = { W: 'NO LIMIT', X: '<=217 PSI', Y: '<=145 PSI', Z: '<=73 PSI' };
   var tc = 'chip-tok', ts = tp + ' ' + tn[tp];
   if (tp === 'Y') { tc = 'chip-twarn'; ts = tp + ' MARGINAL'; }
   if (tp === 'Z') { tc = 'chip-tfail'; ts = tp + ' NOT COMPAT'; }
@@ -712,74 +1000,53 @@ function manIn() {
   calc();
 }
 
-function interp(data, val, getGW) {
-  var keys = Object.keys(data).map(Number).filter(function(k) { return getGW(data[k]) !== null; }).sort(function(a,b) { return a-b; });
-  if (!keys.length) return null;
-  if (val <= keys[0]) return {gw: getGW(data[keys[0]]), exact: val === keys[0], lo: keys[0], hi: keys[0]};
-  if (val >= keys[keys.length-1]) return {gw: getGW(data[keys[keys.length-1]]), exact: true, lo: keys[keys.length-1], hi: keys[keys.length-1]};
-  for (var i = 0; i < keys.length - 1; i++) {
-    if (val >= keys[i] && val <= keys[i+1]) {
-      var a = getGW(data[keys[i]]), b = getGW(data[keys[i+1]]);
-      if (a === null || b === null) return null;
-      var f = (val - keys[i]) / (keys[i+1] - keys[i]);
-      return {gw: Math.floor(a + f * (b - a)), exact: false, lo: keys[i], hi: keys[i+1]};
-    }
-  }
-  return null;
-}
-
-function revSearch(data, target, getGW) {
-  var keys = Object.keys(data).map(Number).sort(function(a,b) { return a-b; });
-  for (var i = 0; i < keys.length; i++) {
-    var gw = getGW(data[keys[i]]);
-    if (gw !== null && gw >= target) {
-      if (i > 0) {
-        var prev = getGW(data[keys[i-1]]);
-        if (prev !== null && prev < target) {
-          return {val: Math.ceil(keys[i-1] + ((target - prev) / (gw - prev)) * (keys[i] - keys[i-1])), exact: false, lo: keys[i-1], hi: keys[i]};
-        }
-      }
-      return {val: keys[i], exact: true};
-    }
-  }
-  return null;
-}
-
+// ================================================================
+// MAIN CALC DISPATCHER
+// ================================================================
 function calc() {
   var rs = document.getElementById('rs');
   var rt = document.getElementById('rt');
   var rn = document.getElementById('rn');
   var rsb = document.getElementById('rsb');
+  var rsb2 = document.getElementById('rsb2');
   var ri = document.getElementById('ri');
   var tw = document.getElementById('tw');
   var sw = document.getElementById('sw');
   var aw = document.getElementById('aw');
   var acnd = document.getElementById('acnd');
+  var ovlWrap = document.getElementById('ovlBarWrap');
 
   tw.className = 'wstrip';
   sw.className = 'wstrip';
   aw.className = 'wstrip';
   document.getElementById('racn').innerHTML = '';
+  rsb2.textContent = '';
   acnd.classList.remove('show');
+  ovlWrap.classList.add('hidden');
   lastResult = null;
 
   if (sys === 'pcn' && tireCode) {
     if (tireCode === 'Z') {
       tw.className = 'wstrip show red';
-      document.getElementById('twt').innerHTML = 'TIRE CODE Z (73 psi max). C-17 main = 144 psi. <strong>NOT COMPATIBLE.</strong>';
+      document.getElementById('twt').innerHTML = 'TIRE CODE Z (73 psi max). C-17 main = 144 psi. NOT COMPATIBLE. See TO for reduced tire pressure ops.';
     } else if (tireCode === 'Y') {
       tw.className = 'wstrip show amber';
-      document.getElementById('twt').innerHTML = 'TIRE CODE Y (AFTTP 145 psi). C-17 main = 144 psi. <strong>MARGINAL per AFTTP.</strong>';
+      document.getElementById('twt').innerHTML = 'TIRE CODE Y (AFTTP 145 psi). C-17 main = 144 psi. MARGINAL per AFTTP. Operationally acceptable per TO.';
     }
   }
 
-  if (mode === 'fwd') {
+  if (sys === 'ovld') {
+    calcOvld(rs, rt, rn, rsb, ri, ovlWrap);
+  } else if (mode === 'fwd') {
     calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd);
   } else {
     calcRev(rs, rt, rn, rsb, ri);
   }
 }
 
+// ================================================================
+// FORWARD CALC (rating -> max GW)
+// ================================================================
 function calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd) {
   var result = null, desc = '', sf = '', sg = '', pcnVal = 0;
 
@@ -809,12 +1076,22 @@ function calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd) {
       desc = 'LCN ' + lcn + ' Asph/T' + th + (lcnOl ? ' +OVL' : '');
     }
 
-  } else {
+  } else if (sys === 'cbr') {
     var cbr = parseFloat(document.getElementById('cv').value);
     var ps = document.getElementById('cps').value;
+    var useCG = document.getElementById('ccg').checked;
     if (isNaN(cbr)) { rs.classList.remove('show'); return; }
-    result = interp(CBR, cbr, function(r) { return r[ps] || null; });
-    desc = 'CBR ' + cbr + ' / ' + ps + 'P';
+    var tbl = useCG ? CBR_CG : CBR_NOCG;
+    result = interp(tbl, cbr, function(r) { return r[ps] || null; });
+    desc = 'CBR ' + cbr + ' / ' + ps + 'P' + (useCG ? ' / 32% MAC' : ' / No CG');
+
+    // Also compute the other CG option for comparison
+    var tblAlt = useCG ? CBR_NOCG : CBR_CG;
+    var resultAlt = interp(tblAlt, cbr, function(r) { return r[ps] || null; });
+    if (resultAlt) {
+      var altLabel = useCG ? 'Without CG restriction: ' : 'With 32% MAC FWD CG: ';
+      document.getElementById('rsb2').textContent = altLabel + resultAlt.gw.toLocaleString() + 'K lbs';
+    }
   }
 
   if (!result) {
@@ -837,6 +1114,7 @@ function calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd) {
 
   if (gwK > 447) sw.className = 'wstrip show amber';
 
+  // ACN comparison (PCN only)
   if (sys === 'pcn' && sf && sg && pcnVal) {
     var acn = getACN(sf, sg, gwK);
     if (acn !== null) {
@@ -844,7 +1122,7 @@ function calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd) {
       if (acn > pcnVal) {
         cls = 'acn-fail';
         txt = 'ACN ' + acn + ' > PCN ' + pcnVal;
-        document.getElementById('awt').innerHTML = 'C-17 ACN (' + acn + ') at ' + gwK + 'K exceeds PCN (' + pcnVal + '). <strong>Prior permission required.</strong>';
+        document.getElementById('awt').innerHTML = 'C-17 ACN (' + acn + ') at ' + gwK + 'K exceeds PCN (' + pcnVal + '). Prior permission required per Note 3.';
         aw.className = 'wstrip show red';
       } else if (acn > pcnVal * 0.9) {
         cls = 'acn-warn';
@@ -862,13 +1140,16 @@ function calcFwd(rs, rt, rn, rsb, ri, sw, aw, acnd) {
   }
 
   if (!result.exact && result.lo !== result.hi) {
-    ri.textContent = 'Interpolated between PCN ' + result.lo + ' and ' + result.hi;
+    ri.textContent = 'Interpolated between ' + result.lo + ' and ' + result.hi;
   } else {
     ri.textContent = '';
   }
-  lastResult = {gwK: gwK, gwLbs: gwLbs, desc: desc, sys: sys, mode: 'fwd'};
+  lastResult = { gwK: gwK, gwLbs: gwLbs, desc: desc, sys: sys, mode: 'fwd' };
 }
 
+// ================================================================
+// REVERSE CALC (GW -> min rating)
+// ================================================================
 function calcRev(rs, rt, rn, rsb, ri) {
   var result = null, desc = '', unit = '';
 
@@ -886,33 +1167,37 @@ function calcRev(rs, rt, rn, rsb, ri) {
         document.getElementById('racn').innerHTML = '<span class="racn acn-ok">C-17 ACN at ' + gw + 'K: ' + acn + '</span>';
         document.getElementById('acnd').classList.add('show');
         document.getElementById('acnv').textContent = acn;
-        document.getElementById('pcnv').textContent = result.val + '+ (min)';
+        document.getElementById('pcnv').textContent = result.val + '+ (min required)';
         var bar = document.getElementById('acnbar');
         bar.style.width = Math.min((acn / result.val) * 100, 100) + '%';
         bar.style.background = 'var(--green)';
         document.getElementById('acn-note').textContent = 'Need PCN >= ' + result.val + ' to support ' + gw + 'K without restriction';
       }
     }
+
   } else if (sys === 'lcn') {
     var gw2 = parseFloat(document.getElementById('lgwv').value);
     var lcnSurf = document.getElementById('ls').value;
     if (isNaN(gw2)) { rs.classList.remove('show'); return; }
     if (lcnSurf === 'concrete') {
-      var lv = document.getElementById('ll').value;
-      result = revSearch(LCNC, gw2, function(r) { return r[lv] || null; });
-      desc = 'for ' + gw2 + 'K Conc/L' + lv;
+      var lv2 = document.getElementById('ll').value;
+      result = revSearch(LCNC, gw2, function(r) { return r[lv2] || null; });
+      desc = 'for ' + gw2 + 'K Conc/L' + lv2;
     } else {
-      var th = document.getElementById('lt').value;
-      result = revSearch(LCNA, gw2, function(r) { return r[th] || null; });
-      desc = 'for ' + gw2 + 'K Asph/T' + th;
+      var th2 = document.getElementById('lt').value;
+      result = revSearch(LCNA, gw2, function(r) { return r[th2] || null; });
+      desc = 'for ' + gw2 + 'K Asph/T' + th2;
     }
     unit = 'LCN';
-  } else {
+
+  } else if (sys === 'cbr') {
     var gw3 = parseFloat(document.getElementById('cgwv').value);
-    var ps = document.getElementById('cps').value;
+    var ps2 = document.getElementById('cps').value;
+    var useCG2 = document.getElementById('ccg').checked;
     if (isNaN(gw3)) { rs.classList.remove('show'); return; }
-    result = revSearch(CBR, gw3, function(r) { return r[ps] || null; });
-    desc = 'for ' + gw3 + 'K / ' + ps + 'P';
+    var tbl2 = useCG2 ? CBR_CG : CBR_NOCG;
+    result = revSearch(tbl2, gw3, function(r) { return r[ps2] || null; });
+    desc = 'for ' + gw3 + 'K / ' + ps2 + 'P' + (useCG2 ? ' / 32% MAC' : '');
     unit = 'CBR';
   }
 
@@ -920,7 +1205,7 @@ function calcRev(rs, rt, rn, rsb, ri) {
     rs.className = 'rstrip show sfail';
     rt.className = 'rtag fail'; rt.textContent = 'EXCEEDS TABLE';
     rn.className = 'rnum fail'; rn.innerHTML = 'NO SOL';
-    rsb.textContent = desc;
+    document.getElementById('rsb').textContent = desc;
     ri.textContent = 'Required value exceeds table max. Check TO.';
     lastResult = null;
     return;
@@ -929,28 +1214,97 @@ function calcRev(rs, rt, rn, rsb, ri) {
   rs.className = 'rstrip show sok';
   rt.className = 'rtag info'; rt.textContent = 'MINIMUM REQUIRED ' + unit;
   rn.className = 'rnum info'; rn.innerHTML = result.val + '<span class="runit">min</span>';
-  rsb.textContent = desc;
+  document.getElementById('rsb').textContent = desc;
   if (!result.exact) {
     ri.textContent = 'Interpolated between ' + result.lo + ' and ' + result.hi + '. Round up.';
   } else {
     ri.textContent = '';
   }
-  lastResult = {val: result.val, unit: unit, desc: desc, sys: sys, mode: 'rev'};
+  lastResult = { val: result.val, unit: unit, desc: desc, sys: sys, mode: 'rev' };
 }
 
+// ================================================================
+// OVERLOAD ASSESSMENT CALC
+// ================================================================
+function calcOvld(rs, rt, rn, rsb, ri, ovlWrap) {
+  var of = parseFloat(document.getElementById('ovlFactor').value);
+  var passes = parseFloat(document.getElementById('ovlPasses').value);
+  var aw = document.getElementById('aw');
+
+  if (isNaN(of) || isNaN(passes) || passes < 1) {
+    rs.classList.remove('show');
+    return;
+  }
+
+  if (of <= 1.0) {
+    rs.className = 'rstrip show sok';
+    rt.className = 'rtag ok'; rt.textContent = 'NO OVERLOAD';
+    rn.className = 'rnum ok'; rn.innerHTML = '0<span class="runit">%</span>';
+    rsb.textContent = 'Factor ' + of.toFixed(2) + ' is not an overload condition';
+    ri.textContent = 'Overload factor must be > 1.0 to consume design life.';
+    return;
+  }
+
+  var p = OVL_PARAMS[ovlTraffic];
+  var pct = calcOverloadPct(ovlTraffic, passes, of);
+  var pctRounded = Math.round(pct * 10) / 10;
+
+  var status, tagText;
+  if (pct < 5) {
+    status = 'ok'; tagText = 'DESIGN LIFE IMPACT';
+  } else if (pct < 10) {
+    status = 'warn'; tagText = 'APPROACHING PEACETIME LIMIT';
+  } else {
+    status = 'fail'; tagText = 'EXCEEDS PEACETIME RECOMMENDED';
+  }
+
+  rs.className = 'rstrip show s' + status;
+  rt.className = 'rtag ' + status; rt.textContent = tagText;
+  rn.className = 'rnum ' + status;
+  rn.innerHTML = pctRounded.toFixed(1) + '<span class="runit">%</span>';
+  rsb.textContent = 'OF ' + of.toFixed(3) + ' / ' + passes + ' passes / ' + ovlTraffic.toUpperCase() + ' traffic';
+
+  if (of > p.maxOF) {
+    aw.className = 'wstrip show red';
+    document.getElementById('awt').innerHTML = 'OF ' + of.toFixed(2) + ' exceeds typical maximum of ' + p.maxOF + ' for ' + ovlTraffic + ' traffic level. Reserve for combat or emergency only.';
+  }
+
+  ri.textContent = 'Peacetime: stay below 10%. Operation requires airfield authority approval.';
+
+  // Progress bar
+  ovlWrap.classList.remove('hidden');
+  var barFill = document.getElementById('ovlBarFill');
+  var barPct = document.getElementById('ovlBarPct');
+  var barMark = document.getElementById('ovlBarMark10');
+  var barTypMax = document.getElementById('ovlBarTypMax');
+  var fillWidth = Math.min((pct / 40) * 100, 100);
+  barFill.style.width = fillWidth + '%';
+  barFill.style.background = pct < 5 ? 'var(--green)' : pct < 10 ? 'var(--warn)' : 'var(--red)';
+  barPct.textContent = pctRounded.toFixed(1) + '%';
+  barMark.style.left = ((10 / 40) * 100) + '%';
+  barTypMax.textContent = 'Typical max OF: ' + p.maxOF;
+
+  lastResult = { pct: pctRounded, of: of, passes: passes, traffic: ovlTraffic, sys: 'ovld', mode: 'ovld' };
+}
+
+// ================================================================
+// COPY
+// ================================================================
 function copyResult() {
   if (!lastResult) return;
   var t;
   if (lastResult.mode === 'fwd') {
     t = 'C-17 PAVEMENT: ' + lastResult.desc + ' -- Max GW ' + lastResult.gwK.toLocaleString() + 'K (' + lastResult.gwLbs.toLocaleString() + ' lbs). SUPPORTED.';
-  } else {
+  } else if (lastResult.mode === 'rev') {
     t = 'C-17 PAVEMENT: Min ' + lastResult.unit + ' ' + lastResult.val + '+ required ' + lastResult.desc + '.';
+  } else if (lastResult.mode === 'ovld') {
+    t = 'C-17 OVERLOAD ASSESSMENT: OF ' + lastResult.of.toFixed(3) + ', ' + lastResult.passes + ' passes, ' + lastResult.traffic.toUpperCase() + ' traffic -- ' + lastResult.pct.toFixed(1) + '% design life consumed. Airfield authority approval required.';
   }
-  if (tireCode) {
-    var ts = {W:'OK', X:'OK', Y:'MARGINAL (AFTTP)', Z:'NOT COMPATIBLE'};
+  if (tireCode && lastResult.mode !== 'ovld') {
+    var ts = { W: 'OK', X: 'OK', Y: 'MARGINAL (AFTTP)', Z: 'NOT COMPATIBLE' };
     t += ' Tire: ' + tireCode + ' (' + ts[tireCode] + ').';
   }
-  t += ' (Ref: AFTTP 3-3.C-17 Table 3.1)';
+  t += ' (Ref: TO 1C-17A-1-1 Ch 10 / AFTTP 3-3.C-17)';
   navigator.clipboard.writeText(t).then(function() {
     var b = document.getElementById('cpb');
     b.textContent = 'COPIED';
@@ -973,15 +1327,26 @@ function togACR() {
   document.getElementById('acrb').classList.toggle('open');
 }
 
+// Help toggle
+var helpVisible = false;
+function toggleHelp() {
+  helpVisible = !helpVisible;
+  document.body.classList.toggle('show-help', helpVisible);
+  var btn = document.getElementById('helpToggle');
+  btn.textContent = helpVisible ? 'HIDE HELP' : 'HELP';
+  btn.classList.toggle('active', helpVisible);
+}
+
+// PWA install
 var deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', function(e) {
   e.preventDefault();
   deferredPrompt = e;
   document.getElementById('installBanner').classList.add('show');
 });
-var installBtn = document.getElementById('installBtn');
-if (installBtn) {
-  installBtn.addEventListener('click', function() {
+var ib = document.getElementById('installBtn');
+if (ib) {
+  ib.addEventListener('click', function() {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(function() {
@@ -990,9 +1355,9 @@ if (installBtn) {
     });
   });
 }
-var dismissBtn = document.getElementById('dismissBtn');
-if (dismissBtn) {
-  dismissBtn.addEventListener('click', function() {
+var db = document.getElementById('dismissBtn');
+if (db) {
+  db.addEventListener('click', function() {
     document.getElementById('installBanner').classList.remove('show');
   });
 }
